@@ -10,7 +10,7 @@
 	<packaging>jar</packaging>
 
 	<name>ONGvd</name>
-	<description>ONGvd - Voluntários(as) e doadores(ras) em busca de ONG's para ajudarem as pessoas.</description>
+	<description>ONGvd - Voluntários(as) e doadores(ras) em busca de ONGs para ajudarem as pessoas.</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -77,18 +77,6 @@
 			<version>1.9.3</version>
 		</dependency>
 
-		<!-- bootstrap and jquery -->
-		<dependency>
-			<groupId>org.webjars</groupId>
-			<artifactId>bootstrap</artifactId>
-			<version>3.3.7</version>
-		</dependency>
-		<dependency>
-			<groupId>org.webjars</groupId>
-			<artifactId>jquery</artifactId>
-			<version>3.2.1</version>
-		</dependency>
-
 		<!-- JDBC Connectors -->
 		<dependency>
 			<groupId>com.h2database</groupId>
@@ -119,11 +107,6 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<!-- <dependency> -->
-		<!-- <groupId>com.h2database</groupId> -->
-		<!-- <artifactId>h2</artifactId> -->
-		<!-- <scope>test</scope> -->
-		<!-- </dependency> -->
 	</dependencies>
 
 	<build>

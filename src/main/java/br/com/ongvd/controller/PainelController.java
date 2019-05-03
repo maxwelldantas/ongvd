@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class PainelController {
 
-    @RequestMapping(method = RequestMethod.GET, path = "/painel/entidade")
-    public String painel() {
-        return "painel/entidade";
+    @RequestMapping(method = RequestMethod.GET, path = "/painel/ong")
+    public String painelOng() {
+        return "painel/ong";
     }
 }

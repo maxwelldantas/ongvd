@@ -35,12 +35,12 @@ public class OngController {
 		return new EnderecoDTO();
 	}
 
-	@RequestMapping(method = RequestMethod.GET, path = "/entidade/registration")
+	@RequestMapping(method = RequestMethod.GET, path = "/ong/registro")
 	public String showRegistrationForm(Model model) {
-		return "entidade/registration";
+		return "ong/registro";
 	}
 
-	@RequestMapping(method = RequestMethod.POST, path = "/entidade/registration")
+	@RequestMapping(method = RequestMethod.POST, path = "/ong/registro")
 	public String registerOngAccount(
 		@ModelAttribute("ong") @Valid OngDTO ongDTO, BindingResult resultOng,
 		@ModelAttribute("endereco") @Valid EnderecoDTO enderecoDTO, BindingResult resultEndereco) {
@@ -48,15 +48,17 @@ public class OngController {
 		Ong existing = ongService.findByEmail(ongDTO.getEmail());
 		if (existing != null) {
 			resultOng.rejectValue(
-					"email", null, "Já existe uma entidade registrada com este e-mail");
+					"email", null, "Este endereço de e-mail já está sendo usado");
 		}
 
 		if (resultOng.hasErrors() || resultEndereco.hasErrors()) {
-			return "entidade/registration";
+			resultOng.getFieldError("Teste de erro");
+			return "ong/registro";
 		}
+		
 		ongService.save(ongDTO);
 		enderecoService.save(enderecoDTO);
-		return "redirect:/entidade/registration?success";
+		return "redirect:/ong/registro?success";
 	}
 
 }

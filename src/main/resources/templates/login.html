@@ -1,62 +1,52 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{layout/main}">
-<head>
-    <title>ONGvd - Acessar conta</title>
-</head>
-<body>
-<div layout:fragment="content">
-<div class="container">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/main}">
 
-    <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-            <h1>Acessar conta</h1>
-            <form th:action="@{/login}" method="post">
-                <div th:if="${param.error}">
-                    <div class="alert alert-danger">
-                        E-mail ou senha inválidos.
-                    </div>
-                </div>
-                <div th:if="${param.logout}">
-                    <div class="alert alert-info">
-                        Você foi desconectado.
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="username">E-mail</label>:
-                    <input type="text"
-                           id="username"
-                           name="username"
-                           class="form-control"
-                           autofocus="autofocus"
-                           placeholder="E-mail"/>
-                </div>
-                <div class="form-group">
-                    <label for="password">Senha</label>:
-                    <input type="password"
-                           id="password"
-                           name="password"
-                           class="form-control"
-                           placeholder="Senha"/>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-sm-6 col-sm-offset-3">
-                        	<button type="submit"
-                        			class="btn form-control btn-outline-primary"
-                        			>Acessar conta</button>
+<head>
+    <title>ONGvd - Acessar Sistema</title>
+</head>
+
+<body>
+    <div layout:fragment="content">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3">
+                    <h1>Acessar Sistema ONGvd</h1>
+                    <form th:action="@{/login}" method="post">
+                        <div th:if="${param.error}">
+                            <div class="alert alert-danger">
+                                E-mail ou senha inválidos.
+                            </div>
                         </div>
-                    </div>
+                        <div th:if="${param.logout}">
+                            <div class="alert alert-info">
+                                Você foi desconectado.
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="username">E-mail</label>:
+                            <input type="text" id="username" name="username" class="form-control" autofocus="autofocus" placeholder="E-mail" />
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Senha</label>:
+                            <input type="password" id="password" name="password" class="form-control" placeholder="Senha" />
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-6 col-sm-offset-3">
+                                    <button type="submit" class="btn form-control btn-outline-primary">Acessar conta</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <span>Sem registro? <a th:href="@{/ong/registro}">Registre-se aqui</a></span>
+                        </div>
+                    </form>
                 </div>
-                <div class="form-group">
-                    <span>Sem registro? <a th:href="@{/entidade/registration}">Registre-se aqui</a></span>
-                </div>
-            </form>
+            </div>
+
         </div>
     </div>
-
-</div>
-</div>
 </body>
+
 </html>
