@@ -21,7 +21,7 @@ public class OngController {
 
 	@Autowired
 	private OngService ongService;
-
+	
 	@ModelAttribute("ong")
 	public OngDTO ongDTO() {
 		return new OngDTO();
@@ -31,7 +31,7 @@ public class OngController {
 	public EnderecoDTO enderecoDTO() {
 		return new EnderecoDTO();
 	}
-	
+
 	@GetMapping("/ong/conceito")
 	public String ong(Model model) {
 		return "ong/conceito";
@@ -52,16 +52,15 @@ public class OngController {
 		}
 
 		if (resultOng.hasErrors() || resultEndereco.hasErrors()) {
-			resultOng.getFieldError("Teste de erro");
 			return "ong/registro";
 		}
 
 		ongService.save(ongDTO, enderecoDTO);
 		return "redirect:/ong/registro?success";
 	}
-	
+
 	@RequestMapping(method = RequestMethod.GET, path = "/painel/ong/main")
-    public String painelOng() {
-        return "painel/ong/main";
-    }
+	public String painelOng() {
+		return "painel/ong/main";
+	}
 }

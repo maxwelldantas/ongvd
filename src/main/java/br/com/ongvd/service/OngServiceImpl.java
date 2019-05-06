@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.ongvd.dto.EnderecoDTO;
 import br.com.ongvd.dto.OngDTO;
+import br.com.ongvd.model.Endereco;
 import br.com.ongvd.model.Ong;
 import br.com.ongvd.model.Role;
 import br.com.ongvd.repository.OngRepository;
@@ -23,7 +24,7 @@ public class OngServiceImpl implements OngService {
 
 	@Autowired
 	private OngRepository ongRepository;
-	
+
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 
@@ -58,6 +59,9 @@ public class OngServiceImpl implements OngService {
 		ong.setEmail(ongDTO.getEmail());
 		ong.setSenha(passwordEncoder.encode(ongDTO.getSenha()));
 		ong.setAtivo(new Boolean(true));
+		ong.setEnderecos(Arrays.asList(new Endereco(enderecoDTO.getCep(), enderecoDTO.getLogradouro(),
+				enderecoDTO.getNumero(), enderecoDTO.getComplemento(), enderecoDTO.getBairro(), enderecoDTO.getCidade(),
+				enderecoDTO.getUf())));
 		ong.setRoles(Arrays.asList(new Role("ROLE_USER")));
 		ongRepository.save(ong);
 	}

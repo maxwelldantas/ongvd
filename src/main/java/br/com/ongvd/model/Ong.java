@@ -13,11 +13,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = "email"))
@@ -39,9 +39,10 @@ public class Ong {
 	private String senha;
 	private Boolean ativo;
 
-	@OneToOne(mappedBy = "ong")
-	@JsonIgnore
-	private Endereco endereco;
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@Fetch(FetchMode.SUBSELECT)
+	@JoinTable(name = "users_enderecos", joinColumns = @JoinColumn(name = "ong_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "endereco_id", referencedColumnName = "id"))
+	private List<Endereco> enderecos;
 
 	@OneToMany(mappedBy = "ong")
 	private List<Evento> eventos;
@@ -53,7 +54,8 @@ public class Ong {
 	private List<ServicoVoluntario> servicos;
 
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+	@Fetch(FetchMode.SUBSELECT)
+	@JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "ong_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
 	private Collection<Role> roles;
 
 	public Ong() {
@@ -61,8 +63,8 @@ public class Ong {
 
 	public Ong(String razaoSocial, String nomeFantasia, String cnpj, String ramoAtividade, String website,
 			String descricao, String nomeContato, String telefone, String email, String senha, Boolean ativo,
-			Endereco endereco, List<Evento> eventos, List<PedidoDoacao> doacoes, List<ServicoVoluntario> servicos,
-			Collection<Role> roles) {
+			List<Endereco> enderecos, List<Evento> eventos, List<PedidoDoacao> doacoes,
+			List<ServicoVoluntario> servicos, Collection<Role> roles) {
 		super();
 		this.razaoSocial = razaoSocial;
 		this.nomeFantasia = nomeFantasia;
@@ -75,7 +77,7 @@ public class Ong {
 		this.email = email;
 		this.senha = senha;
 		this.ativo = ativo;
-		this.endereco = endereco;
+		this.enderecos = enderecos;
 		this.eventos = eventos;
 		this.doacoes = doacoes;
 		this.servicos = servicos;
@@ -178,13 +180,12 @@ public class Ong {
 		this.ativo = ativo;
 	}
 
-	public Endereco getEndereco() {
-		endereco.getId();
-		return endereco;
+	public List<Endereco> getEnderecos() {
+		return enderecos;
 	}
 
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
+	public void setEnderecos(List<Endereco> enderecos) {
+		this.enderecos = enderecos;
 	}
 
 	public List<Evento> getEventos() {
@@ -249,7 +250,7 @@ public class Ong {
 		return "Ong [id=" + id + ", razaoSocial=" + razaoSocial + ", nomeFantasia=" + nomeFantasia + ", cnpj=" + cnpj
 				+ ", ramoAtividade=" + ramoAtividade + ", website=" + website + ", descricao=" + descricao
 				+ ", nomeContato=" + nomeContato + ", telefone=" + telefone + ", email=" + email + ", senha=" + senha
-				+ ", ativo=" + ativo + ", endereco=" + endereco + ", eventos=" + eventos + ", doacoes=" + doacoes
+				+ ", ativo=" + ativo + ", enderecos=" + enderecos + ", eventos=" + eventos + ", doacoes=" + doacoes
 				+ ", servicos=" + servicos + ", roles=" + roles + "]";
 	}
 

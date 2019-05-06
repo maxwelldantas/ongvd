@@ -1,11 +1,10 @@
 package br.com.ongvd.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 
 @Entity
 public class Endereco {
@@ -13,7 +12,8 @@ public class Endereco {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
+	
+	@Column(nullable = false)
 	private String cep;
 	private String logradouro;
 	private Integer numero;
@@ -22,22 +22,11 @@ public class Endereco {
 	private String cidade;
 	private String uf;
 
-	@OneToOne
-	@JoinColumn(name = "ong_id")
-	private Ong ong;
-
-	@OneToOne(mappedBy = "ong")
-	private Endereco endereco;
-
 	public Endereco() {
 	}
 
-	public Endereco(Ong ong) {
-		this.ong = ong;
-	}
-
 	public Endereco(String cep, String logradouro, Integer numero, String complemento, String bairro, String cidade,
-			String uf, Ong ong) {
+			String uf) {
 		this.cep = cep;
 		this.logradouro = logradouro;
 		this.numero = numero;
@@ -45,7 +34,6 @@ public class Endereco {
 		this.bairro = bairro;
 		this.cidade = cidade;
 		this.uf = uf;
-		this.ong = ong;
 	}
 
 	public Long getId() {
@@ -112,14 +100,6 @@ public class Endereco {
 		this.uf = uf;
 	}
 
-	public Ong getOng() {
-		return ong;
-	}
-
-	public void setOng(Ong ong) {
-		this.ong = ong;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -148,8 +128,7 @@ public class Endereco {
 	@Override
 	public String toString() {
 		return "Endereco [id=" + id + ", cep=" + cep + ", logradouro=" + logradouro + ", numero=" + numero
-				+ ", complemento=" + complemento + ", bairro=" + bairro + ", cidade=" + cidade + ", uf=" + uf + ", ong="
-				+ ong + "]";
+				+ ", complemento=" + complemento + ", bairro=" + bairro + ", cidade=" + cidade + ", uf=" + uf + "]";
 	}
 
 }
