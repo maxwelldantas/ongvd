@@ -1,5 +1,7 @@
 package br.com.ongvd.service;
 
+import javax.persistence.EntityManager;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,11 +11,13 @@ import br.com.ongvd.repository.EnderecoRepository;
 
 @Service
 public class EnderecoServiceImpl implements EnderecoService {
-
+	
+	protected EntityManager em;
+	
 	@Autowired
 	private EnderecoRepository enderecoRepository;
-
-	public Endereco save(EnderecoDTO enderecoDTO) {
+	
+	public void save(EnderecoDTO enderecoDTO) {
 		Endereco endereco = new Endereco();
 		endereco.setCep(enderecoDTO.getCep());
 		endereco.setLogradouro(enderecoDTO.getLogradouro());
@@ -22,7 +26,7 @@ public class EnderecoServiceImpl implements EnderecoService {
 		endereco.setBairro(enderecoDTO.getBairro());
 		endereco.setCidade(enderecoDTO.getCidade());
 		endereco.setUf(enderecoDTO.getUf());
-		return enderecoRepository.save(endereco);
+		enderecoRepository.save(endereco);
 	}
 
 }

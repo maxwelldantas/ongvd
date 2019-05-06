@@ -21,16 +21,23 @@ public class Endereco {
 	private String bairro;
 	private String cidade;
 	private String uf;
-	
+
 	@OneToOne
 	@JoinColumn(name = "ong_id")
 	private Ong ong;
 
+	@OneToOne(mappedBy = "ong")
+	private Endereco endereco;
+
 	public Endereco() {
 	}
 
+	public Endereco(Ong ong) {
+		this.ong = ong;
+	}
+
 	public Endereco(String cep, String logradouro, Integer numero, String complemento, String bairro, String cidade,
-			String uf) {
+			String uf, Ong ong) {
 		this.cep = cep;
 		this.logradouro = logradouro;
 		this.numero = numero;
@@ -38,6 +45,7 @@ public class Endereco {
 		this.bairro = bairro;
 		this.cidade = cidade;
 		this.uf = uf;
+		this.ong = ong;
 	}
 
 	public Long getId() {
@@ -140,7 +148,8 @@ public class Endereco {
 	@Override
 	public String toString() {
 		return "Endereco [id=" + id + ", cep=" + cep + ", logradouro=" + logradouro + ", numero=" + numero
-				+ ", complemento=" + complemento + ", bairro=" + bairro + ", cidade=" + cidade + ", uf=" + uf + "]";
+				+ ", complemento=" + complemento + ", bairro=" + bairro + ", cidade=" + cidade + ", uf=" + uf + ", ong="
+				+ ong + "]";
 	}
 
 }

@@ -72,8 +72,21 @@ $(document).ready(function () {
     $("#cpf").mask('000.000.000-00', {reverse: true});
     $("#cep").mask('00000-000');
     $("#cnpj").mask('00.000.000/0000-00', {reverse: true});
+    $("#telefone").mask('(00) 00000-0000');
 	/*$("#submitVoluntario").on("mousedown",function(){
 		$cpfMask.unmask();
 		$cpfMask.val().replace(".", "");
 	});*/
+});
+
+$(document).ready(function() {
+	$("#sidebar").mCustomScrollbar({
+		theme : "minimal"
+	});
+	
+	$('#sidebarCollapse').on('click', function() {
+		$('#sidebar, #content').toggleClass('active');
+		$('.collapse.in').toggleClass('in');
+		$('a[aria-expanded=true]').attr('aria-expanded', 'false');
+	});
 });

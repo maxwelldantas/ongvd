@@ -19,10 +19,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 
 		http.authorizeRequests().antMatchers("/painel/**").authenticated()
-				.antMatchers("/", "/css/**", "/js/**", "/favicon/**", "/fonts/**", "/img/**", "/home", "/doador",
-						"/voluntario", "/ong/**", "/h2-console/**")
+				.antMatchers("/", "/css/**", "/js/**", "/favicon/**", "/fonts/**", "/img/**", "/home", "/doador/**",
+						"/voluntario/**", "/ong/**", "/h2-console/**")
 				.permitAll().anyRequest().authenticated().and().formLogin().loginPage("/login")
-				.defaultSuccessUrl("/painel/ong", true).permitAll().and().logout().invalidateHttpSession(true)
+				.defaultSuccessUrl("/painel/ong/main", true).permitAll().and().logout().invalidateHttpSession(true)
 				.clearAuthentication(true).logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 				.logoutSuccessUrl("/login?logout").permitAll();
 		http.csrf().disable();

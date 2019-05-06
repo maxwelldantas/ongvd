@@ -6,8 +6,8 @@ import javax.validation.constraints.NotEmpty;
 import br.com.ongvd.constraint.FieldMatch;
 
 @FieldMatch.List({
-	@FieldMatch(first = "senha", second = "confirmarSenha", message = "Os campos de senha devem corresponder"),
-	@FieldMatch(first = "email", second = "confirmarEmail", message = "Os campos de e-mail devem corresponder") })
+		@FieldMatch(first = "senha", second = "confirmarSenha", message = "Os campos de senha devem corresponder"),
+		@FieldMatch(first = "email", second = "confirmarEmail", message = "Os campos de e-mail devem corresponder") })
 public class OngDTO {
 	
 	@NotEmpty
@@ -100,7 +100,7 @@ public class OngDTO {
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-	
+
 	public String getEmail() {
 		return email;
 	}

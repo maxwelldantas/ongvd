@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import br.com.ongvd.dto.EnderecoDTO;
 import br.com.ongvd.dto.OngDTO;
 import br.com.ongvd.model.Ong;
 import br.com.ongvd.model.Role;
@@ -22,7 +23,7 @@ public class OngServiceImpl implements OngService {
 
 	@Autowired
 	private OngRepository ongRepository;
-
+	
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 
@@ -43,8 +44,8 @@ public class OngServiceImpl implements OngService {
 	public Ong findByEmail(String email) {
 		return ongRepository.findByEmail(email);
 	}
-
-	public Ong save(OngDTO ongDTO) {
+	
+	public void save(OngDTO ongDTO, EnderecoDTO enderecoDTO) {
 		Ong ong = new Ong();
 		ong.setRazaoSocial(ongDTO.getRazaoSocial());
 		ong.setNomeFantasia(ongDTO.getNomeFantasia());
@@ -58,7 +59,7 @@ public class OngServiceImpl implements OngService {
 		ong.setSenha(passwordEncoder.encode(ongDTO.getSenha()));
 		ong.setAtivo(new Boolean(true));
 		ong.setRoles(Arrays.asList(new Role("ROLE_USER")));
-		return ongRepository.save(ong);
+		ongRepository.save(ong);
 	}
 
 }

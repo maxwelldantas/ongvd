@@ -6,14 +6,13 @@ Projeto de Trabalho de Conclusão de Curso (TCC) realizado no Centro Universitá
 
 Tecnologias utilizadas no desenvolvimento:
 
-    1. Java SE Development Kit 8 (Java JDK 1.8)
-    2. Apache Maven 3.6.0
-    3. Spring Boot 2.1.4
-    4. Thymeleaf
-    5. Bootstrap
-    6. PostgreSQL
-    7. H2
-    8. Flyway
+	1. Java SE Development Kit 8 (Java JDK 1.8)
+    2. Spring Boot 2.1.4
+    3. Thymeleaf
+    4. Bootstrap
+    5. PostgreSQL
+    6. H2
+    7. Flyway
 
 O projeto utiliza o banco de dados PostgreSQL para produção e o banco de dados H2 para testes.
 
@@ -38,6 +37,22 @@ Após o comando anterior, para iniciar o projeto, dentro da pasta raiz do projet
 
 ```sh
 $ mvn spring-boot:run
+```
+
+Ou pode executar os seguintes comandos, sem a necessidade de instalação do Apache Maven 3.6.0:
+
+Para sistemas operacionais baseados em Unix, execute os seguintes comandos no Terminal:
+
+```sh
+$ ./mvnw clean install
+$ ./mvnw spring-boot:run
+```
+	
+Para o sistema operacional Windows, execute os seguintes comandos no Prompt de Comando:
+
+```sh
+$ ./mvnw.cmd clean install
+$ ./mvnw.cmd spring-boot:run
 ```
 
 Por fim o link para acessar o projeto em um navegador será `http://localhost:8080`
