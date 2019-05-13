@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 import br.com.ongvd.model.ServicoVoluntario;
 
 @Repository
-public interface ServicoVoluntarioRepository extends JpaRepository<ServicoVoluntario, Long> {}
+public interface ServicoVoluntarioRepository extends JpaRepository<ServicoVoluntario, Long> {
+	ServicoVoluntario findByNome(String nome);
+}

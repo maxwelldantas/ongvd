@@ -2,15 +2,22 @@ package br.com.ongvd.service;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import br.com.ongvd.dto.EnderecoDTO;
 import br.com.ongvd.dto.OngDTO;
@@ -21,10 +28,10 @@ import br.com.ongvd.repository.OngRepository;
 
 @Service
 public class OngServiceImpl implements OngService {
-
+	
 	@Autowired
 	private OngRepository ongRepository;
-
+	
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 
@@ -65,5 +72,42 @@ public class OngServiceImpl implements OngService {
 		ong.setRoles(Arrays.asList(new Role("ROLE_USER")));
 		ongRepository.save(ong);
 	}
+	
+    public List<Ong> getAll() {
+        return ongRepository.findAll();
+    }
+
+    public Ong findByRazaoSocial(String razaoSocial) {
+        return ongRepository.findByRazaoSocial(razaoSocial);
+    }
+    
+    public Optional<Ong> findById(@PathVariable Long id) {
+        Optional<Ong> ong = ongRepository.findById(id);
+        if (!ong.isPresent()) {
+            ResponseEntity.badRequest().build();
+        }
+        ResponseEntity.ok().build();
+        return findById(id);
+    }
+
+    public void update(@PathVariable Long id, @Valid @RequestBody Ong ong) {
+        if (!ongRepository.findById(id).isPresent()) {
+            ResponseEntity.badRequest().build();
+        }
+        ongRepository.save(ong);
+        ResponseEntity.ok().build();
+    }
+
+    public void delete(@PathVariable Long id) {
+        if (!ongRepository.findById(id).isPresent()) {
+            ResponseEntity.badRequest().build();
+        }
+        ongRepository.deleteById(id);
+        ResponseEntity.ok().build();
+    }
+
+    public boolean exists(Ong ong) {
+        return findByRazaoSocial(ong.getRazaoSocial()) != null;
+    }
 
 }

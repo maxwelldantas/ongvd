@@ -1,6 +1,6 @@
 package br.com.ongvd.model;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.Size;
 
 @Entity
 public class ServicoVoluntario {
@@ -17,9 +18,10 @@ public class ServicoVoluntario {
 	private Long id;
 
 	private String nome;
+	@Size(min = 10, max = 5000)
 	private String descricao;
-	private Date dataInclusao;
-	private Date dataEncerramento;
+	private Timestamp dataInclusao;
+	private Timestamp dataEncerramento;
 	private Boolean habilitado;
 	
 	@ManyToOne
@@ -29,7 +31,7 @@ public class ServicoVoluntario {
 	public ServicoVoluntario() {
 	}
 
-	public ServicoVoluntario(String nome, String descricao, Date dataInclusao, Date dataEncerramento,
+	public ServicoVoluntario(String nome, String descricao, Timestamp dataInclusao, Timestamp dataEncerramento,
 			Boolean habilitado) {
 		this.nome = nome;
 		this.descricao = descricao;
@@ -62,19 +64,19 @@ public class ServicoVoluntario {
 		this.descricao = descricao;
 	}
 
-	public Date getDataInclusao() {
+	public Timestamp getDataInclusao() {
 		return dataInclusao;
 	}
 
-	public void setDataInclusao(Date dataInclusao) {
+	public void setDataInclusao(Timestamp dataInclusao) {
 		this.dataInclusao = dataInclusao;
 	}
 
-	public Date getDataEncerramento() {
+	public Timestamp getDataEncerramento() {
 		return dataEncerramento;
 	}
 
-	public void setDataEncerramento(Date dataEncerramento) {
+	public void setDataEncerramento(Timestamp dataEncerramento) {
 		this.dataEncerramento = dataEncerramento;
 	}
 
