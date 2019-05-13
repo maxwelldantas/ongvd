@@ -21,23 +21,26 @@ public class ServicoVoluntario {
 	@Size(min = 10, max = 5000)
 	private String descricao;
 	private Timestamp dataInclusao;
-	private Timestamp dataEncerramento;
+	private Timestamp dataAtualizacao;
+	private Timestamp dataDesabilitado;
 	private Boolean habilitado;
 	
 	@ManyToOne
 	@JoinColumn(name = "ong_id")
 	private Ong ong;
 
-	public ServicoVoluntario() {
-	}
+	public ServicoVoluntario() {}
 
-	public ServicoVoluntario(String nome, String descricao, Timestamp dataInclusao, Timestamp dataEncerramento,
-			Boolean habilitado) {
+	public ServicoVoluntario(String nome, @Size(min = 10, max = 5000) String descricao, Timestamp dataInclusao,
+			Timestamp dataAtualizacao, Timestamp dataDesabilitado, Boolean habilitado, Ong ong) {
+		super();
 		this.nome = nome;
 		this.descricao = descricao;
 		this.dataInclusao = dataInclusao;
-		this.dataEncerramento = dataEncerramento;
+		this.dataAtualizacao = dataAtualizacao;
+		this.dataDesabilitado = dataDesabilitado;
 		this.habilitado = habilitado;
+		this.ong = ong;
 	}
 
 	public Long getId() {
@@ -72,12 +75,20 @@ public class ServicoVoluntario {
 		this.dataInclusao = dataInclusao;
 	}
 
-	public Timestamp getDataEncerramento() {
-		return dataEncerramento;
+	public Timestamp getDataAtualizacao() {
+		return dataAtualizacao;
 	}
 
-	public void setDataEncerramento(Timestamp dataEncerramento) {
-		this.dataEncerramento = dataEncerramento;
+	public void setDataAtualizacao(Timestamp dataAtualizacao) {
+		this.dataAtualizacao = dataAtualizacao;
+	}
+
+	public Timestamp getDataDesabilitado() {
+		return dataDesabilitado;
+	}
+
+	public void setDataDesabilitado(Timestamp dataDesabilitado) {
+		this.dataDesabilitado = dataDesabilitado;
 	}
 
 	public Boolean getHabilitado() {
@@ -124,7 +135,8 @@ public class ServicoVoluntario {
 	@Override
 	public String toString() {
 		return "ServicoVoluntario [id=" + id + ", nome=" + nome + ", descricao=" + descricao + ", dataInclusao="
-				+ dataInclusao + ", dataEncerramento=" + dataEncerramento + ", habilitado=" + habilitado + "]";
+				+ dataInclusao + ", dataAtualizacao=" + dataAtualizacao + ", dataDesabilitado=" + dataDesabilitado
+				+ ", habilitado=" + habilitado + ", ong=" + ong + "]";
 	}
 
 }
