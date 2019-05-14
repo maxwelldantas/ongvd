@@ -24,16 +24,16 @@ public class ServicoVoluntario {
 	private Timestamp dataAtualizacao;
 	private Timestamp dataDesabilitado;
 	private Boolean habilitado;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "ong_id")
 	private Ong ong;
 
-	public ServicoVoluntario() {}
+	public ServicoVoluntario() {
+	}
 
 	public ServicoVoluntario(String nome, @Size(min = 10, max = 5000) String descricao, Timestamp dataInclusao,
 			Timestamp dataAtualizacao, Timestamp dataDesabilitado, Boolean habilitado, Ong ong) {
-		super();
 		this.nome = nome;
 		this.descricao = descricao;
 		this.dataInclusao = dataInclusao;

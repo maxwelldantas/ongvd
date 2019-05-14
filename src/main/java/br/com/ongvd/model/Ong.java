@@ -65,7 +65,6 @@ public class Ong {
 			String descricao, String nomeContato, String telefone, String email, String senha, Boolean ativo,
 			List<Endereco> enderecos, List<Evento> eventos, List<PedidoDoacao> doacoes,
 			List<ServicoVoluntario> servicos, Collection<Role> roles) {
-		super();
 		this.razaoSocial = razaoSocial;
 		this.nomeFantasia = nomeFantasia;
 		this.cnpj = cnpj;
@@ -223,7 +222,7 @@ public class Ong {
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = super.hashCode();
+		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
@@ -232,7 +231,7 @@ public class Ong {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (!super.equals(obj))
+		if (obj == null)
 			return false;
 		if (getClass() != obj.getClass())
 			return false;

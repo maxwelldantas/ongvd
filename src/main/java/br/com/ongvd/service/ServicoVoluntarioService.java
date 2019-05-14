@@ -1,21 +1,22 @@
 package br.com.ongvd.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-import br.com.ongvd.dto.ServicoVoluntarioDTO;
 import br.com.ongvd.model.ServicoVoluntario;
 
 @Service
 public interface ServicoVoluntarioService {
-	void save(ServicoVoluntarioDTO dto, UserDetails currentUser);
+	
+	ServicoVoluntario novo(ServicoVoluntario servicoVoluntario, UserDetails currentUser);
+	
+	void save(ServicoVoluntario servico);
 
 	List<ServicoVoluntario> getAll();
 
-	Optional<ServicoVoluntario> update(Long id);
+	ServicoVoluntario get(Long id);
 
 	void delete(Long id);
 	

@@ -1,5 +1,8 @@
 package br.com.ongvd.controller;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,19 +15,17 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import br.com.ongvd.dto.ServicoVoluntarioDTO;
-import br.com.ongvd.repository.ServicoVoluntarioRepository;
-import br.com.ongvd.service.ServicoVoluntarioService;
+import br.com.ongvd.model.ServicoVoluntario;
+import br.com.ongvd.service.ServicoVoluntarioServiceImpl;
 
 @Controller
 public class VoluntarioController {
 
 	@Autowired
-	private ServicoVoluntarioService servicoVoluntarioService;
-
-	@Autowired
-	private ServicoVoluntarioRepository servicoVoluntarioRepository;
+	private ServicoVoluntarioServiceImpl servicoImpl;
 
 	@ModelAttribute("servico")
 	public ServicoVoluntarioDTO servicoVoluntarioDTO() {
@@ -36,43 +37,49 @@ public class VoluntarioController {
 		return "voluntario/conceito";
 	}
 
-	@RequestMapping(method = RequestMethod.GET, path = "/painel/ong/servico-voluntario/cadastro")
-	public String showRegistrationForm(Model model) {
+	@RequestMapping(method = RequestMethod.GET, path = "/painel/ong/servico-voluntario/novo-cadastro")
+	public String mostraFormularioCadastro(Model model) {
+//		ServicoVoluntario servico = new ServicoVoluntario();
+		model.addAttribute("servico");
 		return "painel/ong/servico-voluntario/cadastro";
 	}
 
-	@RequestMapping(method = RequestMethod.POST, value = { "/painel/ong/servico-voluntario/cadastro",
-			"/painel/ong/servico-voluntario/cadastro/{id}" })
+	@RequestMapping(method = RequestMethod.POST, path = "/painel/ong/servico-voluntario/cadastro")
 	public String registrarServicoVoluntario(
 			@ModelAttribute("servico") @Valid ServicoVoluntarioDTO servicoVoluntarioDTO, BindingResult resultServico,
-			@AuthenticationPrincipal UserDetails currentUser) {
-
-//		ServicoVoluntario existing = servicoVoluntarioService.findByNome(servicoVoluntarioDTO.getNome());
-//		if (existing != null) {
-//			resultServico.rejectValue("nome", null, "Este serviço voluntário já está cadastrado");
-//		}
+			ServicoVoluntario servico, @AuthenticationPrincipal UserDetails currentUser) {
+		
+		
+		ServicoVoluntario existing = servicoImpl.findByNome(servicoVoluntarioDTO.getNome());
+		if (existing != null) {
+			resultServico.rejectValue("nome", null, "Este serviço voluntário já está cadastrado!");
+		}
 		if (resultServico.hasErrors()) {
 			return "painel/ong/servico-voluntario/cadastro";
 		}
-		servicoVoluntarioService.save(servicoVoluntarioDTO, currentUser);
-		return "redirect:/painel/ong/servico-voluntario/cadastro?success";
+		servicoImpl.novo(servico, currentUser);
+		servicoImpl.save(servico);
+		return "redirect:/painel/ong/servico-voluntario/novo-cadastro?success";
 	}
 
 	@RequestMapping(method = RequestMethod.GET, path = "/painel/ong/servico-voluntario/listagem")
 	public String getAll(Model model) {
-		model.addAttribute("servicos", servicoVoluntarioService.getAll());
+		List<ServicoVoluntario> servicos = servicoImpl.getAll();
+		model.addAttribute("servicos", servicos);
 		return "painel/ong/servico-voluntario/listagem";
 	}
 
-	@RequestMapping(method = RequestMethod.PUT, path = "/painel/ong/servico-voluntario/atualiza-cadastro/{id}")
-	public String update(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("servico", servicoVoluntarioRepository.findById(id));
-		return "painel/ong/servico-voluntario/cadastro";
+	@RequestMapping(method = RequestMethod.GET, path = "/painel/ong/servico-voluntario/edita-cadastro/{id}")
+	public ModelAndView update(@PathVariable(name = "id") Long id) {
+		ModelAndView mav = new ModelAndView("painel/ong/servico-voluntario/edita-cadastro");
+		ServicoVoluntario servico = servicoImpl.get(id);
+		mav.addObject("servico", servico);
+		return mav;
 	}
 
 	@RequestMapping(method = RequestMethod.GET, path = "/painel/ong/servico-voluntario/{id}/delete")
-	public String delete(@PathVariable Long id) {
-		servicoVoluntarioService.delete(id);
+	public String delete(@PathVariable("id") Long id) {
+		servicoImpl.delete(id);
 		return "redirect:/painel/ong/servico-voluntario/listagem";
 	}
 
