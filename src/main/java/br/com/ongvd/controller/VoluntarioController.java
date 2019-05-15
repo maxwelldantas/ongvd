@@ -2,7 +2,6 @@ package br.com.ongvd.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,17 +14,16 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 import br.com.ongvd.dto.ServicoVoluntarioDTO;
 import br.com.ongvd.model.ServicoVoluntario;
-import br.com.ongvd.service.ServicoVoluntarioServiceImpl;
+import br.com.ongvd.service.ServicoVoluntarioService;
 
 @Controller
 public class VoluntarioController {
 
 	@Autowired
-	private ServicoVoluntarioServiceImpl servicoImpl;
+	private ServicoVoluntarioService service;
 
 	@ModelAttribute("servico")
 	public ServicoVoluntarioDTO servicoVoluntarioDTO() {
@@ -39,7 +37,6 @@ public class VoluntarioController {
 
 	@RequestMapping(method = RequestMethod.GET, path = "/painel/ong/servico-voluntario/novo-cadastro")
 	public String mostraFormularioCadastro(Model model) {
-//		ServicoVoluntario servico = new ServicoVoluntario();
 		model.addAttribute("servico");
 		return "painel/ong/servico-voluntario/cadastro";
 	}
@@ -48,38 +45,44 @@ public class VoluntarioController {
 	public String registrarServicoVoluntario(
 			@ModelAttribute("servico") @Valid ServicoVoluntarioDTO servicoVoluntarioDTO, BindingResult resultServico,
 			ServicoVoluntario servico, @AuthenticationPrincipal UserDetails currentUser) {
-		
-		
-		ServicoVoluntario existing = servicoImpl.findByNome(servicoVoluntarioDTO.getNome());
-		if (existing != null) {
-			resultServico.rejectValue("nome", null, "Este serviço voluntário já está cadastrado!");
-		}
+
+//		ServicoVoluntario existing = service.getByNome(servicoVoluntarioDTO.getNome());
+//		if (existing != null) {
+//			resultServico.rejectValue("nome", null, "Este serviço voluntário já está cadastrado!");
+//		}
 		if (resultServico.hasErrors()) {
 			return "painel/ong/servico-voluntario/cadastro";
 		}
-		servicoImpl.novo(servico, currentUser);
-		servicoImpl.save(servico);
+		service.novo(servico, currentUser);
+		service.save(servico);
 		return "redirect:/painel/ong/servico-voluntario/novo-cadastro?success";
 	}
 
 	@RequestMapping(method = RequestMethod.GET, path = "/painel/ong/servico-voluntario/listagem")
-	public String getAll(Model model) {
-		List<ServicoVoluntario> servicos = servicoImpl.getAll();
+	public String getAll(Model model, @AuthenticationPrincipal UserDetails currentUser) {
+		List<ServicoVoluntario> servicos = service.getAllByOngByEmail(currentUser);
 		model.addAttribute("servicos", servicos);
 		return "painel/ong/servico-voluntario/listagem";
 	}
 
-	@RequestMapping(method = RequestMethod.GET, path = "/painel/ong/servico-voluntario/edita-cadastro/{id}")
-	public ModelAndView update(@PathVariable(name = "id") Long id) {
-		ModelAndView mav = new ModelAndView("painel/ong/servico-voluntario/edita-cadastro");
-		ServicoVoluntario servico = servicoImpl.get(id);
-		mav.addObject("servico", servico);
-		return mav;
+	@RequestMapping(method = RequestMethod.GET, path = "/painel/ong/servico-voluntario/view-update/{id}")
+	public String listToUpdate(@PathVariable(name = "id") Long id, Model model) {
+		ServicoVoluntario servico = service.get(id);
+		model.addAttribute("servico", servico);
+		return "painel/ong/servico-voluntario/edita-cadastro";
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/painel/ong/servico-voluntario/edita-cadastro/{id}")
+	public String update(@PathVariable(name = "id") Long id, ServicoVoluntarioDTO servicoVoluntarioDTO) {
+		ServicoVoluntario servico = service.get(id);
+		service.edita(servico, servicoVoluntarioDTO);
+		service.save(servico);
+		return "redirect:/painel/ong/servico-voluntario/listagem?success";
 	}
 
 	@RequestMapping(method = RequestMethod.GET, path = "/painel/ong/servico-voluntario/{id}/delete")
 	public String delete(@PathVariable("id") Long id) {
-		servicoImpl.delete(id);
+		service.delete(id);
 		return "redirect:/painel/ong/servico-voluntario/listagem";
 	}
 

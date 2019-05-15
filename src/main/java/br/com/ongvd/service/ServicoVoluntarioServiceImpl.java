@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.ongvd.dto.ServicoVoluntarioDTO;
 import br.com.ongvd.model.Ong;
 import br.com.ongvd.model.ServicoVoluntario;
 import br.com.ongvd.repository.OngRepository;
@@ -28,20 +29,43 @@ public class ServicoVoluntarioServiceImpl implements ServicoVoluntarioService {
 	public ServicoVoluntario novo(ServicoVoluntario servicoVoluntario, @AuthenticationPrincipal UserDetails currentUser) {
 		Ong ong = (Ong) ongRepository.findByEmail(currentUser.getUsername());
 		servicoVoluntario.setDataInclusao(new Timestamp(new Date().getTime()));
+		if (servicoVoluntario.getHabilitado() == false) {
+			servicoVoluntario.setDataDesabilitado(new Timestamp(new Date().getTime()));
+		} else {
+			servicoVoluntario.setDataDesabilitado(null);
+		}
 		servicoVoluntario.setOng(ong);
-		save(servicoVoluntario);
+//		save(servicoVoluntario);
 		return servicoVoluntario;
+	}
+	
+	public ServicoVoluntario edita(ServicoVoluntario servico, ServicoVoluntarioDTO servicoVoluntarioDTO) {
+		servico.setNome(servicoVoluntarioDTO.getNome());
+		servico.setDescricao(servicoVoluntarioDTO.getDescricao());
+		servico.setHabilitado(servicoVoluntarioDTO.getHabilitado());
+		servico.setDataAtualizacao(new Timestamp(new Date().getTime()));
+		if (servico.getHabilitado() == false) {
+			servico.setDataDesabilitado(new Timestamp(new Date().getTime()));
+		} else {
+			servico.setDataDesabilitado(null);
+		}
+		return servico;
 	}
 
 	public void save(ServicoVoluntario servico) {
 		servicoVoluntarioRepository.save(servico);
+	}
+	
+	public List<ServicoVoluntario> getAllByOngByEmail(UserDetails currentUser) {
+		Ong ong = (Ong) ongRepository.findByEmail(currentUser.getUsername());
+		return servicoVoluntarioRepository.findAllByOng(ong);
 	}
 
 	public List<ServicoVoluntario> getAll() {
 		return servicoVoluntarioRepository.findAll();
 	}
 
-	public ServicoVoluntario findByNome(String nome) {
+	public ServicoVoluntario getByNome(String nome) {
 		return servicoVoluntarioRepository.findByNome(nome);
 	}
 
@@ -54,7 +78,7 @@ public class ServicoVoluntarioServiceImpl implements ServicoVoluntarioService {
 	}
 
 	public boolean exists(ServicoVoluntario servicoVoluntario) {
-		return findByNome(servicoVoluntario.getNome()) != null;
+		return getByNome(servicoVoluntario.getNome()) != null;
 	}
 
 }
