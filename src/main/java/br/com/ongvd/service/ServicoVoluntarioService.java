@@ -19,13 +19,15 @@ public interface ServicoVoluntarioService {
 
 	List<ServicoVoluntario> getAll();
 	
-	List<ServicoVoluntario> getAllByOngByEmail(UserDetails currentUser);
+	List<ServicoVoluntario> getAllByOng(UserDetails currentUser);
 
 	ServicoVoluntario get(Long id);
 
 	void delete(Long id);
 	
 	ServicoVoluntario getByNome(String nome);
+	
+	List<ServicoVoluntario> getNomeByOng(UserDetails currentUser);
 	
 	boolean exists(ServicoVoluntario servicoVoluntario);
 }

@@ -35,7 +35,6 @@ public class ServicoVoluntarioServiceImpl implements ServicoVoluntarioService {
 			servicoVoluntario.setDataDesabilitado(null);
 		}
 		servicoVoluntario.setOng(ong);
-//		save(servicoVoluntario);
 		return servicoVoluntario;
 	}
 	
@@ -56,7 +55,7 @@ public class ServicoVoluntarioServiceImpl implements ServicoVoluntarioService {
 		servicoVoluntarioRepository.save(servico);
 	}
 	
-	public List<ServicoVoluntario> getAllByOngByEmail(UserDetails currentUser) {
+	public List<ServicoVoluntario> getAllByOng(UserDetails currentUser) {
 		Ong ong = (Ong) ongRepository.findByEmail(currentUser.getUsername());
 		return servicoVoluntarioRepository.findAllByOng(ong);
 	}
@@ -68,7 +67,12 @@ public class ServicoVoluntarioServiceImpl implements ServicoVoluntarioService {
 	public ServicoVoluntario getByNome(String nome) {
 		return servicoVoluntarioRepository.findByNome(nome);
 	}
-
+	
+	public List<ServicoVoluntario> getNomeByOng(UserDetails currentUser) {
+		Ong ong = (Ong) ongRepository.findByEmail(currentUser.getUsername());
+		return servicoVoluntarioRepository.findNomeByOng(ong);
+	}
+	
 	public ServicoVoluntario get(Long id) {
 		return servicoVoluntarioRepository.findById(id).get();
 	}

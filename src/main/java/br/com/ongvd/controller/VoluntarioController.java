@@ -24,7 +24,7 @@ public class VoluntarioController {
 
 	@Autowired
 	private ServicoVoluntarioService service;
-
+	
 	@ModelAttribute("servico")
 	public ServicoVoluntarioDTO servicoVoluntarioDTO() {
 		return new ServicoVoluntarioDTO();
@@ -35,7 +35,7 @@ public class VoluntarioController {
 		return "voluntario/conceito";
 	}
 
-	@RequestMapping(method = RequestMethod.GET, path = "/painel/ong/servico-voluntario/novo-cadastro")
+	@RequestMapping(method = RequestMethod.GET, path = "/painel/ong/servico-voluntario/cadastro")
 	public String mostraFormularioCadastro(Model model) {
 		model.addAttribute("servico");
 		return "painel/ong/servico-voluntario/cadastro";
@@ -45,22 +45,23 @@ public class VoluntarioController {
 	public String registrarServicoVoluntario(
 			@ModelAttribute("servico") @Valid ServicoVoluntarioDTO servicoVoluntarioDTO, BindingResult resultServico,
 			ServicoVoluntario servico, @AuthenticationPrincipal UserDetails currentUser) {
-
-//		ServicoVoluntario existing = service.getByNome(servicoVoluntarioDTO.getNome());
-//		if (existing != null) {
-//			resultServico.rejectValue("nome", null, "Este serviço voluntário já está cadastrado!");
-//		}
+		
+		ServicoVoluntario nome = service.getByNome(servicoVoluntarioDTO.getNome());
+		List<ServicoVoluntario> ong = service.getNomeByOng(currentUser);
+		if (ong.contains(nome)) {
+			resultServico.rejectValue("nome", null, "Este serviço voluntário já está cadastrado!");
+		}
 		if (resultServico.hasErrors()) {
 			return "painel/ong/servico-voluntario/cadastro";
 		}
 		service.novo(servico, currentUser);
 		service.save(servico);
-		return "redirect:/painel/ong/servico-voluntario/novo-cadastro?success";
+		return "redirect:/painel/ong/servico-voluntario/cadastro?success";
 	}
 
 	@RequestMapping(method = RequestMethod.GET, path = "/painel/ong/servico-voluntario/listagem")
 	public String getAll(Model model, @AuthenticationPrincipal UserDetails currentUser) {
-		List<ServicoVoluntario> servicos = service.getAllByOngByEmail(currentUser);
+		List<ServicoVoluntario> servicos = service.getAllByOng(currentUser);
 		model.addAttribute("servicos", servicos);
 		return "painel/ong/servico-voluntario/listagem";
 	}
