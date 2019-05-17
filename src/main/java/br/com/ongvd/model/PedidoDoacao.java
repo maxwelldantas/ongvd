@@ -1,6 +1,6 @@
 package br.com.ongvd.model;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class PedidoDoacao {
@@ -18,8 +20,12 @@ public class PedidoDoacao {
 
 	private String nome;
 	private String descricao;
-	private Date dataInclusao;
-	private Date dataEncerramento;
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
+	private Timestamp dataInclusao;
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
+	private Timestamp dataAtualizacao;
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
+	private Timestamp dataDesabilitado;
 	private String valorPedido;
 	private String itemPedido;
 	private Boolean habilitado;
@@ -31,15 +37,18 @@ public class PedidoDoacao {
 	public PedidoDoacao() {
 	}
 
-	public PedidoDoacao(String nome, String descricao, Date dataInclusao, Date dataEncerramento, String valorPedido,
-			String itemPedido, Boolean habilitado) {
+	public PedidoDoacao(String nome, String descricao, Timestamp dataInclusao, Timestamp dataAtualizacao,
+			Timestamp dataDesabilitado, String valorPedido, String itemPedido, Boolean habilitado, Ong ong) {
+		super();
 		this.nome = nome;
 		this.descricao = descricao;
 		this.dataInclusao = dataInclusao;
-		this.dataEncerramento = dataEncerramento;
+		this.dataAtualizacao = dataAtualizacao;
+		this.dataDesabilitado = dataDesabilitado;
 		this.valorPedido = valorPedido;
 		this.itemPedido = itemPedido;
 		this.habilitado = habilitado;
+		this.ong = ong;
 	}
 
 	public Long getId() {
@@ -66,20 +75,28 @@ public class PedidoDoacao {
 		this.descricao = descricao;
 	}
 
-	public Date getDataInclusao() {
+	public Timestamp getDataInclusao() {
 		return dataInclusao;
 	}
 
-	public void setDataInclusao(Date dataInclusao) {
+	public void setDataInclusao(Timestamp dataInclusao) {
 		this.dataInclusao = dataInclusao;
 	}
 
-	public Date getDataEncerramento() {
-		return dataEncerramento;
+	public Timestamp getDataAtualizacao() {
+		return dataAtualizacao;
 	}
 
-	public void setDataEncerramento(Date dataEncerramento) {
-		this.dataEncerramento = dataEncerramento;
+	public void setDataAtualizacao(Timestamp dataAtualizacao) {
+		this.dataAtualizacao = dataAtualizacao;
+	}
+
+	public Timestamp getDataDesabilitado() {
+		return dataDesabilitado;
+	}
+
+	public void setDataDesabilitado(Timestamp dataDesabilitado) {
+		this.dataDesabilitado = dataDesabilitado;
 	}
 
 	public String getValorPedido() {
@@ -142,8 +159,9 @@ public class PedidoDoacao {
 	@Override
 	public String toString() {
 		return "PedidoDoacao [id=" + id + ", nome=" + nome + ", descricao=" + descricao + ", dataInclusao="
-				+ dataInclusao + ", dataEncerramento=" + dataEncerramento + ", valorPedido=" + valorPedido
-				+ ", itemPedido=" + itemPedido + ", habilitado=" + habilitado + "]";
+				+ dataInclusao + ", dataAtualizacao=" + dataAtualizacao + ", dataDesabilitado=" + dataDesabilitado
+				+ ", valorPedido=" + valorPedido + ", itemPedido=" + itemPedido + ", habilitado=" + habilitado
+				+ ", ong=" + ong + "]";
 	}
 
 }

@@ -36,9 +36,9 @@
 									<td th:text="${servico.getNome()}"></td>
 									<td th:text="${servico.getDescricao()}"></td>
 									<td th:text="${servico.getHabilitado()}"></td>
-									<td th:text="${servico.getDataInclusao()}"></td>
-									<td th:text="${servico.getDataAtualizacao()}"></td>
-									<td th:text="${servico.getDataDesabilitado()}"></td>
+									<td th:text="${#dates.format(servico.getDataInclusao(),'dd/MMMM/yyyy HH:mm:ss')}"></td>
+									<td th:text="${#dates.format(servico.getDataAtualizacao(),'dd/MMMM/yyyy HH:mm:ss')}"></td>
+									<td th:text="${#dates.format(servico.getDataDesabilitado(),'dd/MMMM/yyyy HH:mm:ss')}"></td>
 									<td class="d-inline-flex"><a
 										class="btn btn-primary btn-group mr-2"
 										th:href="@{/painel/ong/servico-voluntario/view-update/{id}(id=${servico.getId()})}">editar</a>

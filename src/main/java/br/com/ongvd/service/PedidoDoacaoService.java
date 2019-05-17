@@ -1,31 +1,33 @@
 package br.com.ongvd.service;
 
 import java.util.List;
-import java.util.Optional;
 
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-import br.com.ongvd.dto.EnderecoDTO;
-import br.com.ongvd.dto.OngDTO;
-import br.com.ongvd.model.Ong;
+import br.com.ongvd.dto.PedidoDoacaoDTO;
+import br.com.ongvd.model.PedidoDoacao;
 
 @Service
-public interface PedidoDoacaoService extends UserDetailsService {
-	Ong findByEmail(String email);
+public interface PedidoDoacaoService {
+	
+	PedidoDoacao novo(PedidoDoacao pedidoDoacao, UserDetails currentUser);
 
-	void save(OngDTO ongDTO, EnderecoDTO enderecoDTO);
+	PedidoDoacao edita(PedidoDoacao pedido, PedidoDoacaoDTO pedidoDoacaoDTO);
 
-	ResponseEntity<List<Ong>> getAll();
+	void save(PedidoDoacao pedido);
 
-	Optional<Ong> findById(Long id);
+	List<PedidoDoacao> getAll();
 
-	ResponseEntity<Ong> findByRazaoSocial(String razaoSocial);
+	List<PedidoDoacao> getAllByOng(UserDetails currentUser);
 
-	void update(Long id, Ong ong);
+	PedidoDoacao get(Long id);
 
 	void delete(Long id);
 
-	boolean exists(Ong ong);
+	PedidoDoacao getByNome(String nome);
+
+	List<PedidoDoacao> getNomeByOng(UserDetails currentUser);
+
+	boolean exists(PedidoDoacao pedidoDoacao);
 }

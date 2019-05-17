@@ -1,31 +1,33 @@
 package br.com.ongvd.service;
 
 import java.util.List;
-import java.util.Optional;
 
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-import br.com.ongvd.dto.EnderecoDTO;
-import br.com.ongvd.dto.OngDTO;
-import br.com.ongvd.model.Ong;
+import br.com.ongvd.dto.EventoDTO;
+import br.com.ongvd.model.Evento;
 
 @Service
-public interface EventoService extends UserDetailsService {
-	Ong findByEmail(String email);
+public interface EventoService {
+	
+	Evento novo(Evento evento, UserDetails currentUser);
 
-	void save(OngDTO ongDTO, EnderecoDTO enderecoDTO);
+	Evento edita(Evento servico, EventoDTO eventoDTO);
 
-	ResponseEntity<List<Ong>> getAll();
+	void save(Evento servico);
 
-	Optional<Ong> findById(Long id);
+	List<Evento> getAll();
 
-	ResponseEntity<Ong> findByRazaoSocial(String razaoSocial);
+	List<Evento> getAllByOng(UserDetails currentUser);
 
-	void update(Long id, Ong ong);
+	Evento get(Long id);
 
 	void delete(Long id);
 
-	boolean exists(Ong ong);
+	Evento getByNome(String nome);
+
+	List<Evento> getNomeByOng(UserDetails currentUser);
+
+	boolean exists(Evento evento);
 }

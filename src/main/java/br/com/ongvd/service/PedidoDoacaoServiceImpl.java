@@ -1,112 +1,91 @@
-//package br.com.ongvd.service;
-//
-//import java.util.Arrays;
-//import java.util.Collection;
-//import java.util.List;
-//import java.util.Optional;
-//import java.util.stream.Collectors;
-//
-//import javax.validation.Valid;
-//
-//import org.slf4j.Logger;
-//import org.slf4j.LoggerFactory;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.http.ResponseEntity;
-//import org.springframework.security.core.GrantedAuthority;
-//import org.springframework.security.core.authority.SimpleGrantedAuthority;
-//import org.springframework.security.core.userdetails.UserDetails;
-//import org.springframework.security.core.userdetails.UsernameNotFoundException;
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-//import org.springframework.stereotype.Service;
-//import org.springframework.web.bind.annotation.PathVariable;
-//import org.springframework.web.bind.annotation.RequestBody;
-//
-//import br.com.ongvd.dto.EnderecoDTO;
-//import br.com.ongvd.dto.OngDTO;
-//import br.com.ongvd.model.Endereco;
-//import br.com.ongvd.model.Ong;
-//import br.com.ongvd.model.Role;
-//import br.com.ongvd.repository.OngRepository;
-//
-//@Service
-//public class PedidoDoacaoServiceImpl implements OngService {
-//	
-//	private final Logger LOG = LoggerFactory.getLogger(PedidoDoacaoServiceImpl.class);
-//
-//	@Override
-//	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-//		Ong ong = ongRepository.findByEmail(email);
-//		if (ong == null) {
-//			throw new UsernameNotFoundException("E-mail ou senha inválidos.");
-//		}
-//		return new org.springframework.security.core.userdetails.User(ong.getEmail(), ong.getSenha(),
-//				mapRolesToAuthorities(ong.getRoles()));
-//	}
-//
-//	private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
-//		return roles.stream().map(role -> new SimpleGrantedAuthority(role.getNome())).collect(Collectors.toList());
-//	}
-//
-//	public Ong findByEmail(String email) {
-//		return ongRepository.findByEmail(email);
-//	}
-//	
-//	public void save(OngDTO ongDTO, EnderecoDTO enderecoDTO) {
-//		Ong ong = new Ong();
-//		ong.setRazaoSocial(ongDTO.getRazaoSocial());
-//		ong.setNomeFantasia(ongDTO.getNomeFantasia());
-//		ong.setCnpj(ongDTO.getCnpj());
-//		ong.setRamoAtividade(ongDTO.getRamoAtividade());
-//		ong.setWebsite(ongDTO.getWebsite());
-//		ong.setDescricao(ongDTO.getDescricao());
-//		ong.setNomeContato(ongDTO.getNomeContato());
-//		ong.setTelefone(ongDTO.getTelefone());
-//		ong.setEmail(ongDTO.getEmail());
-//		ong.setSenha(passwordEncoder.encode(ongDTO.getSenha()));
-//		ong.setAtivo(new Boolean(true));
-//		ong.setEnderecos(Arrays.asList(new Endereco(enderecoDTO.getCep(), enderecoDTO.getLogradouro(),
-//				enderecoDTO.getNumero(), enderecoDTO.getComplemento(), enderecoDTO.getBairro(), enderecoDTO.getCidade(),
-//				enderecoDTO.getUf())));
-//		ong.setRoles(Arrays.asList(new Role("ROLE_USER")));
-//		ongRepository.save(ong);
-//	}
-//	
-//    public ResponseEntity<List<Ong>> getAll() {
-//        return ResponseEntity.ok(ongRepository.findAll());
-//    }
-//
-//    public ResponseEntity<Ong> findByRazaoSocial(String razaoSocial) {
-//        return ResponseEntity.ok(ongRepository.findByRazaoSocial(razaoSocial));
-//    }
-//    
-//    public Optional<Ong> findById(@PathVariable Long id) {
-//        Optional<Ong> ong = ongRepository.findById(id);
-//        if (!ong.isPresent()) {
-//            LOG.error("Id " + id + " is not existed");
-//            ResponseEntity.badRequest().build();
-//        }
-//        return findById(id);
-//    }
-//
-//    public void update(@PathVariable Long id, @Valid @RequestBody Ong ong) {
-//        if (!ongRepository.findById(id).isPresent()) {
-//            LOG.error("Id " + id + " is not existed");
-//            ResponseEntity.badRequest().build();
-//        }
-//        ongRepository.save(ong);
-//    }
-//
-//    public void delete(@PathVariable Long id) {
-//        if (!ongRepository.findById(id).isPresent()) {
-//            LOG.error("Id " + id + " is not existed");
-//            ResponseEntity.badRequest().build();
-//        }
-//        ongRepository.deleteById(id);
-//        ResponseEntity.ok().build();
-//    }
-//
-//    public boolean exists(Ong ong) {
-//        return findByRazaoSocial(ong.getRazaoSocial()) != null;
-//    }
-//
-//}
+package br.com.ongvd.service;
+
+import java.sql.Timestamp;
+import java.util.Date;
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Service;
+
+import br.com.ongvd.dto.PedidoDoacaoDTO;
+import br.com.ongvd.model.Ong;
+import br.com.ongvd.model.PedidoDoacao;
+import br.com.ongvd.repository.OngRepository;
+import br.com.ongvd.repository.PedidoDoacaoRepository;
+
+@Service
+public class PedidoDoacaoServiceImpl implements PedidoDoacaoService {
+	
+	private final Logger LOG = LoggerFactory.getLogger(PedidoDoacaoServiceImpl.class);
+
+	@Autowired
+	private PedidoDoacaoRepository pedidoDoacaoRepository;
+
+	@Autowired
+	private OngRepository ongRepository;
+	
+	public PedidoDoacao novo(PedidoDoacao pedidoDoacao, @AuthenticationPrincipal UserDetails currentUser) {
+		Ong ong = (Ong) ongRepository.findByEmail(currentUser.getUsername());
+		pedidoDoacao.setDataInclusao(new Timestamp(new Date().getTime()));
+		if (pedidoDoacao.getHabilitado() == false) {
+			pedidoDoacao.setDataDesabilitado(new Timestamp(new Date().getTime()));
+		} else {
+			pedidoDoacao.setDataDesabilitado(null);
+		}
+		pedidoDoacao.setOng(ong);
+		LOG.info("Pedido de Doação cadastrado com sucesso!");
+		return pedidoDoacao;
+	}
+	
+	public PedidoDoacao edita(PedidoDoacao servico, PedidoDoacaoDTO pedidoDoacaoDTO) {
+		servico.setNome(pedidoDoacaoDTO.getNome());
+		servico.setDescricao(pedidoDoacaoDTO.getDescricao());
+		servico.setHabilitado(pedidoDoacaoDTO.getHabilitado());
+		servico.setDataAtualizacao(new Timestamp(new Date().getTime()));
+		if (servico.getHabilitado() == false) {
+			servico.setDataDesabilitado(new Timestamp(new Date().getTime()));
+		} else {
+			servico.setDataDesabilitado(null);
+		}
+		return servico;
+	}
+
+	public void save(PedidoDoacao servico) {
+		pedidoDoacaoRepository.save(servico);
+	}
+	
+	public List<PedidoDoacao> getAllByOng(UserDetails currentUser) {
+		Ong ong = (Ong) ongRepository.findByEmail(currentUser.getUsername());
+		return pedidoDoacaoRepository.findAllByOng(ong);
+	}
+
+	public List<PedidoDoacao> getAll() {
+		return pedidoDoacaoRepository.findAll();
+	}
+
+	public PedidoDoacao getByNome(String nome) {
+		return pedidoDoacaoRepository.findByNome(nome);
+	}
+	
+	public List<PedidoDoacao> getNomeByOng(UserDetails currentUser) {
+		Ong ong = (Ong) ongRepository.findByEmail(currentUser.getUsername());
+		return pedidoDoacaoRepository.findNomeByOng(ong);
+	}
+	
+	public PedidoDoacao get(Long id) {
+		return pedidoDoacaoRepository.findById(id).get();
+	}
+	
+	public void delete(Long id) {
+		pedidoDoacaoRepository.deleteById(id);
+	}
+
+	public boolean exists(PedidoDoacao pedidoDoacao) {
+		return getByNome(pedidoDoacao.getNome()) != null;
+	}
+
+}

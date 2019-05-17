@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.Size;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 public class ServicoVoluntario {
 
@@ -20,8 +22,11 @@ public class ServicoVoluntario {
 	private String nome;
 	@Size(min = 10, max = 5000)
 	private String descricao;
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
 	private Timestamp dataInclusao;
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
 	private Timestamp dataAtualizacao;
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
 	private Timestamp dataDesabilitado;
 	private Boolean habilitado;
 

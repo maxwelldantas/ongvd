@@ -15,6 +15,7 @@ public class PedidoDoacaoDTO {
 	private String valorPedido;
 	@NotEmpty
 	private String itemPedido;
+	private Boolean habilitado;
 
 	public String getNome() {
 		return nome;
@@ -54,5 +55,13 @@ public class PedidoDoacaoDTO {
 
 	public void setItemPedido(String itemPedido) {
 		this.itemPedido = itemPedido;
+	}
+
+	public Boolean getHabilitado() {
+		return habilitado;
+	}
+
+	public void setHabilitado(Boolean habilitado) {
+		this.habilitado = habilitado;
 	}
 }

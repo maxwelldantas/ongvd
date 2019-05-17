@@ -17,6 +17,7 @@ public class EventoDTO {
 	private String contribuicaoParaEvento;
 	@NotEmpty
 	private String duracaoEvento;
+	private Boolean habilitado;
 
 	public String getNome() {
 		return nome;
@@ -64,6 +65,14 @@ public class EventoDTO {
 
 	public void setDuracaoEvento(String duracaoEvento) {
 		this.duracaoEvento = duracaoEvento;
+	}
+
+	public Boolean getHabilitado() {
+		return habilitado;
+	}
+
+	public void setHabilitado(Boolean habilitado) {
+		this.habilitado = habilitado;
 	}
 
 }

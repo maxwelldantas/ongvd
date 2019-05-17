@@ -1,7 +1,6 @@
 package br.com.ongvd.dto;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class ServicoVoluntarioDTO {
@@ -11,7 +10,6 @@ public class ServicoVoluntarioDTO {
 	@NotBlank(message = "Este campo deve ser preenchido")
 	@Size(min = 10, max = 5000, message = "Tamanho deve estar entre 10 e 5000")
 	private String descricao;
-	@NotNull
 	private Boolean habilitado;
 	
 	public String getNome() {
