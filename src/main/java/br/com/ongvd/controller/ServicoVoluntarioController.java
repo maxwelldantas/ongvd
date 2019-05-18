@@ -9,6 +9,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -62,10 +63,9 @@ public class ServicoVoluntarioController {
 		return "painel/ong/servico-voluntario/listagem";
 	}
 
-	@RequestMapping(method = RequestMethod.GET, path = "/view-update/{id}")
-	public String listToUpdate(@PathVariable(name = "id") Long id, Model model) {
-		ServicoVoluntario servico = service.get(id);
-		model.addAttribute("servico", servico);
+	@RequestMapping(method = RequestMethod.GET, path = "/edita-cadastro/{id}")
+	public String listToUpdate(@PathVariable(name = "id") Long id, ModelMap model) {
+		model.put("servico", service.get(id));
 		return "painel/ong/servico-voluntario/edita-cadastro";
 	}
 	
@@ -80,10 +80,9 @@ public class ServicoVoluntarioController {
 		List<ServicoVoluntario> ong = service.getNomeByOng(currentUser);
 		if (ong.contains(nome)) {
 			resultServico.rejectValue("nome", null, "Este serviço voluntário já está cadastrado!");
-		}
-		if (resultServico.hasErrors()) {
-			resultServico.getAllErrors();
-			return "redirect:/painel/ong/servico-voluntario/view-update/{id}";
+		} 
+		if (resultServico.hasErrors() && !ong.contains(servico)) {
+			return "redirect:/painel/ong/servico-voluntario/edita-cadastro/{id}";
 		}
 		service.edita(servico, servicoVoluntarioDTO);
 		service.save(servico);
@@ -93,7 +92,7 @@ public class ServicoVoluntarioController {
 	@RequestMapping(method = RequestMethod.GET, path = "/{id}/delete")
 	public String delete(@PathVariable("id") Long id) {
 		service.delete(id);
-		return "redirect:/painel/ong/servico-voluntario/listagem";
+		return "redirect:/painel/ong/servico-voluntario/listagem?delete";
 	}
 
 }
