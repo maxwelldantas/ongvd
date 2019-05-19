@@ -1,6 +1,8 @@
 package br.com.ongvd.model;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,8 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
-import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class PedidoDoacao {
@@ -20,12 +20,9 @@ public class PedidoDoacao {
 
 	private String nome;
 	private String descricao;
-	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
-	private Timestamp dataInclusao;
-	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
-	private Timestamp dataAtualizacao;
-	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
-	private Timestamp dataDesabilitado;
+	private Timestamp dataInclusao = Timestamp.valueOf(LocalDateTime.now(ZoneId.of("America/Sao_Paulo")));
+	private Timestamp dataAtualizacao = Timestamp.valueOf(LocalDateTime.now(ZoneId.of("America/Sao_Paulo")));
+	private Timestamp dataDesabilitado = Timestamp.valueOf(LocalDateTime.now(ZoneId.of("America/Sao_Paulo")));
 	private String valorPedido;
 	private String itemPedido;
 	private Boolean habilitado;

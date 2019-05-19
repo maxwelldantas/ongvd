@@ -81,7 +81,7 @@ public class ServicoVoluntarioController {
 		if (ong.contains(nome)) {
 			resultServico.rejectValue("nome", null, "Este serviço voluntário já está cadastrado!");
 		} 
-		if (resultServico.hasErrors() && !ong.contains(servico)) {
+		if (resultServico.hasErrors() && !nome.equals(servico)) {
 			return "redirect:/painel/ong/servico-voluntario/edita-cadastro/{id}";
 		}
 		service.edita(servico, servicoVoluntarioDTO);

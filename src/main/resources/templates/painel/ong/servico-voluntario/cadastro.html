@@ -15,7 +15,7 @@
 				<div class="col-md-12">
 
 					<div th:if="${param.success}">
-						<div class="alert alert-info">Serviço Voluntário cadastrado
+						<div class="alert alert-info d-inline-flex">Serviço Voluntário cadastrado
 							com sucesso!</div>
 					</div>
 					
@@ -45,7 +45,7 @@
 										<div class="input-group-prepend">
 											<div class="input-group-text">
 												<input type="checkbox" id="habilitado"
-													th:field="*{habilitado}" checked="checked">
+													th:field="*{habilitado}" th:checked="${servico.getHabilitado()}">
 											</div>
 										</div>
 									</div>
