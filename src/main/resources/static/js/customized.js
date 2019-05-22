@@ -66,17 +66,21 @@ $(document).ready(function() {
 
 $(function tooltip() {
   $('[data-toggle="tooltip"]').tooltip();
-})
+});
+
+$(function () {
+    $('[data-toggle="popover"]').popover();
+});
 
 $(document).ready(function () {
-    $("#cpf").mask('000.000.000-00', {reverse: true});
     $("#cep").mask('00000-000');
     $("#cnpj").mask('00.000.000/0000-00', {reverse: true});
-    $("#telefone").mask('(00) 00000-0000');
-	/*$("#submitVoluntario").on("mousedown",function(){
-		$cpfMask.unmask();
-		$cpfMask.val().replace(".", "");
-	});*/
+    $('#telefone').mask('(00) 0000-00000');
+    $("#whatsapp").mask('(00) 00000-0000');
+	$("#registrarOng").on("mousedown",function(){
+		$("#cnpj").unmask();
+		$("#cnpj").val().replace("./", "");
+	});
 });
 
 $(document).ready(function() {
@@ -89,4 +93,22 @@ $(document).ready(function() {
 		$('.collapse.in').toggleClass('in');
 		$('a[aria-expanded=true]').attr('aria-expanded', 'false');
 	});
+});
+
+/* Gmail Login Input Field Style! */
+
+$(function () {
+	 
+    $(".field-wrapper .field-placeholder").on("click", function () {
+        $(this).closest(".field-wrapper").find("input").focus();
+    });
+    $(".field-wrapper input").on("keyup", function () {
+        var value = $.trim($(this).val());
+        if (value) {
+            $(this).closest(".field-wrapper").addClass("hasValue");
+        } else {
+            $(this).closest(".field-wrapper").removeClass("hasValue");
+        }
+    });
+
 });

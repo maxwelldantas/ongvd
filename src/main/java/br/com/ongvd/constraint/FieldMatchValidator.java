@@ -2,12 +2,15 @@ package br.com.ongvd.constraint;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
+import javax.validation.constraints.Size;
 
 import org.apache.commons.beanutils.BeanUtils;
 
 public class FieldMatchValidator implements ConstraintValidator<FieldMatch, Object> {
-
+	
+	@Size(min = 6, max = 20, message = "Tamanho da senha entre 6 a 20 caracteres")
     private String firstFieldName;
+	@Size(min = 6, max = 20, message = "Tamanho da senha entre 6 a 20 caracteres")
     private String secondFieldName;
 
     @Override

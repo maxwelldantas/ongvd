@@ -194,92 +194,137 @@ a.article, a.article:hover {
 	box-shadow: none;
 }
 
-.error-message{
+.error-message {
 	color: red;
 }
 
 .dropdown-menu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    z-index: 1000;
-    display: none;
-    float: left;
-    min-width: 10rem;
-    padding: .5rem 0;
-    margin: .125rem 0 0;
-    font-size: 1rem;
-    color: #343a40;
-    text-align: left;
-    list-style: none;
-    background-color: #343a40;
-    background-clip: padding-box;
+	position: absolute;
+	top: 100%;
+	left: 0;
+	z-index: 1000;
+	display: none;
+	float: left;
+	min-width: 10rem;
+	padding: .5rem 0;
+	margin: .125rem 0 0;
+	font-size: 1rem;
+	color: #343a40;
+	text-align: left;
+	list-style: none;
+	background-color: #343a40;
+	background-clip: padding-box;
 }
 
 .dropdown-divider {
-    height: 0;
-    margin: .5rem 0;
-    overflow: hidden;
-    border-top: transparent;
+	height: 0;
+	margin: .5rem 0;
+	overflow: hidden;
+	border-top: transparent;
 }
 
 .dropdown-item {
-    display: block;
+	display: block;
+	width: 100%;
+	padding: .25rem 1.5rem;
+	clear: both;
+	font-weight: 400;
+	color: rgba(255, 255, 255, .5);
+	text-align: inherit;
+	white-space: nowrap;
+	background-color: transparent;
+	border: 0;
+}
+
+/* Gmail Login Input Field Style! */
+
+.form-wrapper-outer{
+    padding: 40px;
+    border-radius: 8px;
+    margin: auto;
+    width: 460px;
+    border: 1px solid #DADCE0;
+    margin-top: 7%;
+}
+
+.form-wrapper-outer .form-logo{
+    margin: 0px auto 15px;
+    width: 100px;
+}
+.form-wrapper-outer .form-logo img{
     width: 100%;
-    padding: .25rem 1.5rem;
-    clear: both;
-    font-weight: 400;
-    color: rgba(255,255,255,.5);
-    text-align: inherit;
-    white-space: nowrap;
-    background-color: transparent;
-    border: 0;
 }
-
-/* Button toggle On Off */
-
-.onoffswitch {
-    position: relative; width: 80px;
-    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+.form-greeting{
+    text-align: center;
+    font-size: 25px;
+    margin-bottom: 15px;
 }
-.onoffswitch-checkbox {
-    display: none;
-}
-.onoffswitch-label {
-    display: block; overflow: hidden; cursor: pointer;
-    border: 2px solid #999999; border-radius: 20px;
-}
-.onoffswitch-inner {
-    display: block; width: 200%; margin-left: -100%;
-    transition: margin 0.3s ease-in 0s;
-}
-.onoffswitch-inner:before, .onoffswitch-inner:after {
-    display: block; float: left; width: 50%; height: 30px; padding: 0; line-height: 30px;
-    font-size: 14px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
-    box-sizing: border-box;
-}
-.onoffswitch-inner:before {
-    content: "SIM";
-    padding-left: 10px;
-    background-color: #34A7C1; color: #FFFFFF;
-}
-.onoffswitch-inner:after {
-    content: "NÃO";
-    padding-right: 10px;
-    background-color: #EEEEEE; color: #999999;
+.form-button{
     text-align: right;
 }
-.onoffswitch-switch {
-    display: block; width: 18px; margin: 6px;
-    background: #FFFFFF;
-    position: absolute; top: 0; bottom: 0;
-    right: 46px;
-    border: 2px solid #999999; border-radius: 20px;
-    transition: all 0.3s ease-in 0s; 
+
+.field-wrapper{
+    position: relative;
+    margin-bottom: 15px;
 }
-.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
-    margin-left: 0;
+
+.field-wrapper input{
+    border: 1px solid #DADCE0;
+    padding: 15px;
+    border-radius: 4px;
+    width: 100%;
 }
-.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
-    right: 0px; 
+
+.field-wrapper input:focus{
+    border:1px solid #1A73E8;
+}
+
+.field-wrapper .field-placeholder{
+    font-size: 16px;
+    position: absolute;
+    /* background: #fff; */
+    bottom: 17px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    color: #80868b;
+    left: 8px;
+    padding: 0 8px;
+    -webkit-transition: transform 150ms cubic-bezier(0.4,0,0.2,1),opacity 150ms cubic-bezier(0.4,0,0.2,1);
+    transition: transform 150ms cubic-bezier(0.4,0,0.2,1),opacity 150ms cubic-bezier(0.4,0,0.2,1);
+    z-index: 1;
+
+    text-align: left;
+    width: 100%;
+}        
+
+.field-wrapper .field-placeholder span{
+    background: #ffffff;
+    padding: 0px 8px;
+}
+
+.field-wrapper input:not([disabled]):focus~.field-placeholder
+{
+    color:#1A73E8;
+}
+.field-wrapper input:not([disabled]):focus~.field-placeholder,
+.field-wrapper.hasValue input:not([disabled])~.field-placeholder
+{
+    -webkit-transform: scale(.75) translateY(-39px) translateX(-60px);
+    transform: scale(.75) translateY(-39px) translateX(-60px);
+    
+}
+
+ @keyframes fa-exclamation-circle {
+     0% { opacity: 1; }
+     50% { opacity: 0.5; }
+     100% { opacity: 0; }
+ }
+ 
+.fa-exclamation-circle {
+   -webkit-animation: fa-exclamation-circle 1000ms linear infinite;
+   -moz-animation: fa-exclamation-circle 1000ms linear infinite;
+   -ms-animation: fa-exclamation-circle 1000ms linear infinite;
+   -o-animation: fa-exclamation-circle 1000ms linear infinite;
+   animation: fa-exclamation-circle 1000ms linear infinite;
+   color: red;
 }

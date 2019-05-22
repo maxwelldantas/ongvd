@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -20,22 +21,34 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 @Entity
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = "email"))
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"email", "cnpj"}))
 public class Ong {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@Column(nullable = false)
 	private String razaoSocial;
+	@Column(nullable = false)
 	private String nomeFantasia;
+	@Column(nullable = false)
 	private String cnpj;
-	private String ramoAtividade;
+	@Column(nullable = false)
+	private String areaDeAtuacao;
 	private String website;
-	private String descricao;
-	private String nomeContato;
+	@Column(nullable = false)
+	private String responsavel;
+	@Column(nullable = false)
+	private String fundacao;
+	@Column(nullable = false)
+	private String contato;
+	private String whatsapp;
+	@Column(nullable = false)
 	private String telefone;
+	@Column(nullable = false)
 	private String email;
+	@Column(nullable = false)
 	private String senha;
 	private Boolean ativo;
 
@@ -59,28 +72,6 @@ public class Ong {
 	private Collection<Role> roles;
 
 	public Ong() {
-	}
-
-	public Ong(String razaoSocial, String nomeFantasia, String cnpj, String ramoAtividade, String website,
-			String descricao, String nomeContato, String telefone, String email, String senha, Boolean ativo,
-			List<Endereco> enderecos, List<Evento> eventos, List<PedidoDoacao> doacoes,
-			List<ServicoVoluntario> servicos, Collection<Role> roles) {
-		this.razaoSocial = razaoSocial;
-		this.nomeFantasia = nomeFantasia;
-		this.cnpj = cnpj;
-		this.ramoAtividade = ramoAtividade;
-		this.website = website;
-		this.descricao = descricao;
-		this.nomeContato = nomeContato;
-		this.telefone = telefone;
-		this.email = email;
-		this.senha = senha;
-		this.ativo = ativo;
-		this.enderecos = enderecos;
-		this.eventos = eventos;
-		this.doacoes = doacoes;
-		this.servicos = servicos;
-		this.roles = roles;
 	}
 
 	public Long getId() {
@@ -115,12 +106,12 @@ public class Ong {
 		this.cnpj = cnpj;
 	}
 
-	public String getRamoAtividade() {
-		return ramoAtividade;
+	public String getAreaDeAtuacao() {
+		return areaDeAtuacao;
 	}
 
-	public void setRamoAtividade(String ramoAtividade) {
-		this.ramoAtividade = ramoAtividade;
+	public void setAreaDeAtuacao(String areaDeAtuacao) {
+		this.areaDeAtuacao = areaDeAtuacao;
 	}
 
 	public String getWebsite() {
@@ -131,20 +122,36 @@ public class Ong {
 		this.website = website;
 	}
 
-	public String getDescricao() {
-		return descricao;
+	public String getResponsavel() {
+		return responsavel;
 	}
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public void setResponsavel(String responsavel) {
+		this.responsavel = responsavel;
 	}
 
-	public String getNomeContato() {
-		return nomeContato;
+	public String getFundacao() {
+		return fundacao;
 	}
 
-	public void setNomeContato(String nomeContato) {
-		this.nomeContato = nomeContato;
+	public void setFundacao(String fundacao) {
+		this.fundacao = fundacao;
+	}
+
+	public String getContato() {
+		return contato;
+	}
+
+	public void setContato(String contato) {
+		this.contato = contato;
+	}
+
+	public String getWhatsapp() {
+		return whatsapp;
+	}
+
+	public void setWhatsapp(String whatsapp) {
+		this.whatsapp = whatsapp;
 	}
 
 	public String getTelefone() {
@@ -247,10 +254,10 @@ public class Ong {
 	@Override
 	public String toString() {
 		return "Ong [id=" + id + ", razaoSocial=" + razaoSocial + ", nomeFantasia=" + nomeFantasia + ", cnpj=" + cnpj
-				+ ", ramoAtividade=" + ramoAtividade + ", website=" + website + ", descricao=" + descricao
-				+ ", nomeContato=" + nomeContato + ", telefone=" + telefone + ", email=" + email + ", senha=" + senha
-				+ ", ativo=" + ativo + ", enderecos=" + enderecos + ", eventos=" + eventos + ", doacoes=" + doacoes
-				+ ", servicos=" + servicos + ", roles=" + roles + "]";
+				+ ", areaDeAtuacao=" + areaDeAtuacao + ", website=" + website + ", responsavel=" + responsavel
+				+ ", fundacao=" + fundacao + ", contato=" + contato + ", whatsapp=" + whatsapp + ", telefone="
+				+ telefone + ", email=" + email + ", senha=" + senha + ", ativo=" + ativo + ", enderecos=" + enderecos
+				+ ", eventos=" + eventos + ", doacoes=" + doacoes + ", servicos=" + servicos + ", roles=" + roles + "]";
 	}
 
 }

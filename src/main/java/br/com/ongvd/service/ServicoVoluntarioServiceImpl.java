@@ -1,7 +1,8 @@
 package br.com.ongvd.service;
 
 import java.sql.Timestamp;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +29,9 @@ public class ServicoVoluntarioServiceImpl implements ServicoVoluntarioService {
 	
 	public ServicoVoluntario novo(ServicoVoluntario servicoVoluntario, @AuthenticationPrincipal UserDetails currentUser) {
 		Ong ong = (Ong) ongRepository.findByEmail(currentUser.getUsername());
-		servicoVoluntario.setDataInclusao(new Timestamp(new Date().getTime()));
+		servicoVoluntario.setDataInclusao(Timestamp.valueOf(LocalDateTime.now(ZoneId.of("America/Sao_Paulo"))));
 		if (servicoVoluntario.getHabilitado() == false) {
-			servicoVoluntario.setDataDesabilitado(new Timestamp(new Date().getTime()));
+			servicoVoluntario.setDataDesabilitado(Timestamp.valueOf(LocalDateTime.now(ZoneId.of("America/Sao_Paulo"))));
 		} else {
 			servicoVoluntario.setDataDesabilitado(null);
 		}
@@ -42,9 +43,9 @@ public class ServicoVoluntarioServiceImpl implements ServicoVoluntarioService {
 		servico.setNome(servicoVoluntarioDTO.getNome());
 		servico.setDescricao(servicoVoluntarioDTO.getDescricao());
 		servico.setHabilitado(servicoVoluntarioDTO.getHabilitado());
-		servico.setDataAtualizacao(new Timestamp(new Date().getTime()));
+		servico.setDataAtualizacao(Timestamp.valueOf(LocalDateTime.now(ZoneId.of("America/Sao_Paulo"))));
 		if (servico.getHabilitado() == false) {
-			servico.setDataDesabilitado(new Timestamp(new Date().getTime()));
+			servico.setDataDesabilitado(Timestamp.valueOf(LocalDateTime.now(ZoneId.of("America/Sao_Paulo"))));
 		} else {
 			servico.setDataDesabilitado(null);
 		}

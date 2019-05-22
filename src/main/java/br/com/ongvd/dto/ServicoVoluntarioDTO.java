@@ -5,10 +5,10 @@ import javax.validation.constraints.Size;
 
 public class ServicoVoluntarioDTO {
 
-	@NotBlank(message = "Este campo deve ser preenchido")
+	@NotBlank(message = "Por favor preencha este campo")
 	private String nome;
-	@NotBlank(message = "Este campo deve ser preenchido")
-	@Size(min = 10, max = 5000, message = "Tamanho deve estar entre 10 e 5000")
+	@NotBlank(message = "Por favor preencha este campo")
+	@Size(min = 10, max = 5000, message = "Tamanho do texto entre 10 a 5000 caracteres")
 	private String descricao;
 	private Boolean habilitado;
 	

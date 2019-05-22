@@ -15,11 +15,15 @@ public class Endereco {
 	
 	@Column(nullable = false)
 	private String cep;
+	@Column(nullable = false)
 	private String logradouro;
 	private Integer numero;
 	private String complemento;
+	@Column(nullable = false)
 	private String bairro;
+	@Column(nullable = false)
 	private String cidade;
+	@Column(nullable = false)
 	private String uf;
 
 	public Endereco() {

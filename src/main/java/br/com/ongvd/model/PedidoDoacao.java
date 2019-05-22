@@ -1,15 +1,15 @@
 package br.com.ongvd.model;
 
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.Size;
 
 @Entity
 public class PedidoDoacao {
@@ -17,13 +17,19 @@ public class PedidoDoacao {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
+	
+	@Column(nullable = false)
 	private String nome;
+	@Column(nullable = false)
+	@Size(max = 5000)
 	private String descricao;
-	private Timestamp dataInclusao = Timestamp.valueOf(LocalDateTime.now(ZoneId.of("America/Sao_Paulo")));
-	private Timestamp dataAtualizacao = Timestamp.valueOf(LocalDateTime.now(ZoneId.of("America/Sao_Paulo")));
-	private Timestamp dataDesabilitado = Timestamp.valueOf(LocalDateTime.now(ZoneId.of("America/Sao_Paulo")));
+	@Column(nullable = false)
+	private Timestamp dataInclusao;
+	private Timestamp dataAtualizacao;
+	private Timestamp dataDesabilitado;
+	@Column(nullable = false)
 	private String valorPedido;
+	@Column(nullable = false)
 	private String itemPedido;
 	private Boolean habilitado;
 	

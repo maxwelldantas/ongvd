@@ -58,10 +58,12 @@ public class OngServiceImpl implements OngService {
 		ong.setRazaoSocial(ongDTO.getRazaoSocial());
 		ong.setNomeFantasia(ongDTO.getNomeFantasia());
 		ong.setCnpj(ongDTO.getCnpj());
-		ong.setRamoAtividade(ongDTO.getRamoAtividade());
+		ong.setAreaDeAtuacao(ongDTO.getAreaDeAtuacao());
 		ong.setWebsite(ongDTO.getWebsite());
-		ong.setDescricao(ongDTO.getDescricao());
-		ong.setNomeContato(ongDTO.getNomeContato());
+		ong.setResponsavel(ongDTO.getResponsavel());
+		ong.setFundacao(ongDTO.getFundacao());
+		ong.setContato(ongDTO.getContato());
+		ong.setWhatsapp(ongDTO.getWhatsapp());
 		ong.setTelefone(ongDTO.getTelefone());
 		ong.setEmail(ongDTO.getEmail());
 		ong.setSenha(passwordEncoder.encode(ongDTO.getSenha()));
