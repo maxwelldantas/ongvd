@@ -55,9 +55,13 @@ public class OngController {
 	public String registerOngAccount(@ModelAttribute("ong") @Valid OngDTO ongDTO, BindingResult resultOng,
 			@ModelAttribute("endereco") @Valid EnderecoDTO enderecoDTO, BindingResult resultEndereco) {
 
-		Ong existing = ongService.findByEmail(ongDTO.getEmail());
-		if (existing != null) {
+		Ong existeEmail = ongService.findByEmail(ongDTO.getEmail());
+		Ong existeCnpj = ongService.findByCnpj(ongDTO.getCnpj());
+		if (existeEmail != null) {
 			resultOng.rejectValue("email", null, "Este endereço de e-mail já está sendo usado");
+		}
+		if (existeCnpj != null) {
+			resultOng.rejectValue("cnpj", null, "Este CNPJ já está sendo usado");
 		}
 		if (resultOng.hasErrors() || resultEndereco.hasErrors()) {
 			return "ong/registro";

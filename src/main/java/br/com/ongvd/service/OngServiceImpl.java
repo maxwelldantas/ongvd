@@ -49,10 +49,6 @@ public class OngServiceImpl implements OngService {
 		return roles.stream().map(role -> new SimpleGrantedAuthority(role.getNome())).collect(Collectors.toList());
 	}
 
-	public Ong findByEmail(String email) {
-		return ongRepository.findByEmail(email);
-	}
-	
 	public void save(OngDTO ongDTO, EnderecoDTO enderecoDTO) {
 		Ong ong = new Ong();
 		ong.setRazaoSocial(ongDTO.getRazaoSocial());
@@ -77,6 +73,14 @@ public class OngServiceImpl implements OngService {
 	
     public List<Ong> getAll() {
         return ongRepository.findAll();
+    }
+    
+    public Ong findByEmail(String email) {
+		return ongRepository.findByEmail(email);
+	}
+    
+    public Ong findByCnpj(String cnpj) {
+    	return ongRepository.findByCnpj(cnpj);
     }
 
     public Ong findByRazaoSocial(String razaoSocial) {

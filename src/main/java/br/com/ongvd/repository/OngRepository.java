@@ -9,4 +9,5 @@ import br.com.ongvd.model.Ong;
 public interface OngRepository extends JpaRepository<Ong, Long> {
 	Ong findByEmail(String email);
 	Ong findByRazaoSocial(String razaoSocial);
+	Ong findByCnpj(String cnpj);
 }

@@ -36,7 +36,7 @@
 							        <div class="input-group-prepend">
 							          <div class="input-group-text">Razão Social</div>
 							        </div>
-							        <input type="text" th:field="*{razaoSocial}" class="form-control" id="razaoSocial" placeholder="digite a Razão Social">
+							        <input type="text" th:field="*{razaoSocial}" class="form-control" id="razaoSocial">
 							      </div>
 							      <p class="error-message" th:each="error: ${#fields.errors('razaoSocial')}" th:text="${error}"></p>
 							    </div>
@@ -46,7 +46,7 @@
 							        <div class="input-group-prepend">
 							          <div class="input-group-text">Nome Fantasia</div>
 							        </div>
-							        <input type="text" th:field="*{nomeFantasia}" class="form-control" id="nomeFantasia" placeholder="digite o Nome Fantasia">
+							        <input type="text" th:field="*{nomeFantasia}" class="form-control" id="nomeFantasia">
 							      </div>
 							      <p class="error-message" th:each="error: ${#fields.errors('nomeFantasia')}" th:text="${error}"></p>
 							    </div>
@@ -56,7 +56,7 @@
 							        <div class="input-group-prepend">
 							          <div class="input-group-text">CNPJ</div>
 							        </div>
-							        <input type="text" th:field="*{cnpj}" class="form-control" id="cnpj" placeholder="digite o CNPJ">
+							        <input type="text" th:field="*{cnpj}" class="form-control" id="cnpj">
 							      </div>
 							      <p class="error-message" th:each="error: ${#fields.errors('cnpj')}" th:text="${error}"></p>
 							    </div>
@@ -66,7 +66,7 @@
 							        <div class="input-group-prepend">
 							          <div class="input-group-text">Data da Fundação da ONG</div>
 							        </div>
-							        <input type="date" th:field="*{fundacao}" class="form-control" id="fundacao" placeholder="digite a data da Fundação da ONG">
+							        <input type="date" th:field="*{fundacao}" class="form-control" id="fundacao">
 							      </div>
 							      <p class="error-message" th:each="error: ${#fields.errors('fundacao')}" th:text="${error}"></p>
 							    </div>
@@ -76,7 +76,7 @@
 							        <div class="input-group-prepend">
 							          <div class="input-group-text">Área de Atuação</div>
 							        </div>
-							        <input type="text" th:field="*{areaDeAtuacao}" class="form-control" id="areaDeAtuacao" placeholder="digite a Área de Atuação">
+							        <input type="text" th:field="*{areaDeAtuacao}" class="form-control" id="areaDeAtuacao">
 							      </div>
 							      <p class="error-message" th:each="error: ${#fields.errors('areaDeAtuacao')}" th:text="${error}"></p>
 							    </div>
@@ -86,7 +86,7 @@
 							        <div class="input-group-prepend">
 							          <div class="input-group-text">Responsável</div>
 							        </div>
-							        <input type="text" th:field="*{responsavel}" class="form-control" id="responsavel" placeholder="digite o nome do Responsável">
+							        <input type="text" th:field="*{responsavel}" class="form-control" id="responsavel">
 							      </div>
 							      <p class="error-message" th:each="error: ${#fields.errors('responsavel')}" th:text="${error}"></p>
 							    </div>
@@ -96,7 +96,7 @@
 							        <div class="input-group-prepend">
 							          <div class="input-group-text">Contato</div>
 							        </div>
-							        <input type="text" th:field="*{contato}" class="form-control" id="contato" placeholder="digite o nome do Contato">
+							        <input type="text" th:field="*{contato}" class="form-control" id="contato">
 							      </div>
 							      <p class="error-message" th:each="error: ${#fields.errors('contato')}" th:text="${error}"></p>
 							    </div>
@@ -112,7 +112,7 @@
 							          diretamente com a ONG por e-mail dentro do sistema ONGvd."></i>
 							          </div>
 							        </div>
-							        <input type="tel" th:field="*{whatsapp}" class="form-control" id="whatsapp" placeholder="digite o número de WhatsApp da ONG">
+							        <input type="tel" th:field="*{whatsapp}" pattern="\([0-9]{2}\) [0-9]{5}-[0-9]{4}$" class="form-control" id="whatsapp">
 							      </div>
 							      <p class="error-message" th:each="error: ${#fields.errors('whatsapp')}" th:text="${error}"></p>
 							    </div>
@@ -122,7 +122,7 @@
 							        <div class="input-group-prepend">
 							          <div class="input-group-text">Telefone</div>
 							        </div>
-							        <input type="tel" th:field="*{telefone}" class="form-control" id="telefone" placeholder="digite o Telefone">
+							        <input type="tel" th:field="*{telefone}" class="form-control" id="telefone">
 							      </div>
 							      <p class="error-message" th:each="error: ${#fields.errors('telefone')}" th:text="${error}"></p>
 							    </div>
@@ -132,7 +132,7 @@
 							        <div class="input-group-prepend">
 							          <div class="input-group-text">Website</div>
 							        </div>
-							        <input type="text" th:field="*{website}" class="form-control" id="website" placeholder="digite o website">
+							        <input type="text" th:field="*{website}" class="form-control" id="website">
 							      </div>
 							      <p class="error-message" th:each="error: ${#fields.errors('website')}" th:text="${error}"></p>
 							    </div>
@@ -142,7 +142,7 @@
 							        <div class="input-group-prepend">
 							          <div class="input-group-text">E-mail</div>
 							        </div>
-							        <input type="text" th:field="*{email}" class="form-control" id="email" placeholder="digite o e-mail">
+							        <input type="text" th:field="*{email}" class="form-control" id="email">
 							      </div>
 							      <p class="error-message" th:each="error: ${#fields.errors('email')}" th:text="${error}"></p>
 							    </div>
@@ -152,7 +152,7 @@
 							        <div class="input-group-prepend">
 							          <div class="input-group-text">Confirmar e-mail</div>
 							        </div>
-							        <input type="text" th:field="*{confirmarEmail}" class="form-control" id="confirmarEmail" placeholder="digite novamente o e-mail">
+							        <input type="text" th:field="*{confirmarEmail}" class="form-control" id="confirmarEmail">
 							      </div>
 							      <p class="error-message" th:each="error: ${#fields.errors('confirmarEmail')}" th:text="${error}"></p>
 							    </div>
@@ -162,7 +162,7 @@
 							        <div class="input-group-prepend">
 							          <div class="input-group-text">Senha</div>
 							        </div>
-							        <input type="text" th:field="*{senha}" class="form-control" id="senha" placeholder="digite a senha">
+							        <input type="password" th:field="*{senha}" class="form-control" id="senha">
 							      </div>
 							      <p class="error-message" th:each="error: ${#fields.errors('senha')}" th:text="${error}"></p>
 							    </div>
@@ -172,7 +172,7 @@
 							        <div class="input-group-prepend">
 							          <div class="input-group-text">Confirmar senha</div>
 							        </div>
-							        <input type="text" th:field="*{confirmarSenha}" class="form-control" id="confirmarSenha" placeholder="digite novamente a senha">
+							        <input type="password" th:field="*{confirmarSenha}" class="form-control" id="confirmarSenha">
 							      </div>
 							      <p class="error-message" th:each="error: ${#fields.errors('confirmarSenha')}" th:text="${error}"></p>
 							    </div>
@@ -183,13 +183,13 @@
 						
                         <div th:object="${endereco}">
                             <div class="form-row">
-                                <div class="form-group col-sm-6" th:classappend="${#fields.hasErrors('cep')}? 'has-error':''">
+                                <div class="form-group col-sm-3" th:classappend="${#fields.hasErrors('cep')}? 'has-error':''">
 							      <label class="sr-only" for="cep">CEP</label>
 							      <div class="input-group">
 							        <div class="input-group-prepend">
 							          <div class="input-group-text">CEP</div>
 							        </div>
-							        <input type="text" th:field="*{cep}" class="form-control" id="cep" placeholder="digite novamente a senha">
+							        <input type="text" th:field="*{cep}" class="form-control" id="cep">
 							      </div>
 							      <p class="error-message" th:each="error: ${#fields.errors('cep')}" th:text="${error}"></p>
 							    </div>
@@ -199,57 +199,57 @@
 							        <div class="input-group-prepend">
 							          <div class="input-group-text">Logradouro</div>
 							        </div>
-							        <input type="text" th:field="*{logradouro}" class="form-control" id="logradouro" placeholder="digite novamente a senha">
+							        <input type="text" th:field="*{logradouro}" class="form-control" id="logradouro">
 							      </div>
 							      <p class="error-message" th:each="error: ${#fields.errors('logradouro')}" th:text="${error}"></p>
 							    </div>
-                                <div class="form-group col-sm-6" th:classappend="${#fields.hasErrors('numero')}? 'has-error':''">
+                                <div class="form-group col-sm-3" th:classappend="${#fields.hasErrors('numero')}? 'has-error':''">
 							      <label class="sr-only" for="numero">Número</label>
 							      <div class="input-group">
 							        <div class="input-group-prepend">
 							          <div class="input-group-text">Número</div>
 							        </div>
-							        <input type="text" th:field="*{numero}" class="form-control" id="numero" placeholder="digite novamente a senha">
+							        <input type="number" th:field="*{numero}" class="form-control" id="numero">
 							      </div>
 							      <p class="error-message" th:each="error: ${#fields.errors('numero')}" th:text="${error}"></p>
 							    </div>
-                                <div class="form-group col-sm-6" th:classappend="${#fields.hasErrors('complemento')}? 'has-error':''">
+                                <div class="form-group col-sm-4" th:classappend="${#fields.hasErrors('complemento')}? 'has-error':''">
 							      <label class="sr-only" for="complemento">Complemento</label>
 							      <div class="input-group">
 							        <div class="input-group-prepend">
 							          <div class="input-group-text">Complemento</div>
 							        </div>
-							        <input type="text" th:field="*{complemento}" class="form-control" id="complemento" placeholder="digite novamente a senha">
+							        <input type="text" th:field="*{complemento}" class="form-control" id="complemento">
 							      </div>
 							      <p class="error-message" th:each="error: ${#fields.errors('complemento')}" th:text="${error}"></p>
 							    </div>
-                                <div class="form-group col-sm-6" th:classappend="${#fields.hasErrors('bairro')}? 'has-error':''">
+                                <div class="form-group col-sm-4" th:classappend="${#fields.hasErrors('bairro')}? 'has-error':''">
 							      <label class="sr-only" for="bairro">Bairro</label>
 							      <div class="input-group">
 							        <div class="input-group-prepend">
 							          <div class="input-group-text">Bairro</div>
 							        </div>
-							        <input type="text" th:field="*{bairro}" class="form-control" id="bairro" placeholder="digite novamente a senha">
+							        <input type="text" th:field="*{bairro}" class="form-control" id="bairro">
 							      </div>
 							      <p class="error-message" th:each="error: ${#fields.errors('bairro')}" th:text="${error}"></p>
 							    </div>
-                                <div class="form-group col-sm-6" th:classappend="${#fields.hasErrors('cidade')}? 'has-error':''">
+                                <div class="form-group col-sm-4" th:classappend="${#fields.hasErrors('cidade')}? 'has-error':''">
 							      <label class="sr-only" for="cidade">Cidade</label>
 							      <div class="input-group">
 							        <div class="input-group-prepend">
 							          <div class="input-group-text">Cidade</div>
 							        </div>
-							        <input type="text" th:field="*{cidade}" class="form-control" id="cidade" placeholder="digite novamente a senha">
+							        <input type="text" th:field="*{cidade}" class="form-control" id="cidade">
 							      </div>
 							      <p class="error-message" th:each="error: ${#fields.errors('cidade')}" th:text="${error}"></p>
 							    </div>
-                                <div class="form-group col-sm-6" th:classappend="${#fields.hasErrors('uf')}? 'has-error':''">
+                                <div class="form-group col-sm-3" th:classappend="${#fields.hasErrors('uf')}? 'has-error':''">
 							      <label class="sr-only" for="uf">UF</label>
 							      <div class="input-group">
 							        <div class="input-group-prepend">
 							          <div class="input-group-text">UF</div>
 							        </div>
-							        <input type="text" th:field="*{uf}" class="form-control" id="uf" placeholder="digite novamente a senha">
+							        <input type="text" th:field="*{uf}" class="form-control" id="uf">
 							      </div>
 							      <p class="error-message" th:each="error: ${#fields.errors('uf')}" th:text="${error}"></p>
 							    </div>

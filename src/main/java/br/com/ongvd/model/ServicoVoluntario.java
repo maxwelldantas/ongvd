@@ -20,8 +20,7 @@ public class ServicoVoluntario {
 	
 	@Column(nullable = false)
 	private String nome;
-	@Column(nullable = false)
-	@Size(max = 5000)
+	@Column(nullable = false, length = 5000)
 	private String descricao;
 	@Column(nullable = false)
 	private Timestamp dataInclusao;

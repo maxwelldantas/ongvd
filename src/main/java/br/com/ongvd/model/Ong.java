@@ -1,6 +1,7 @@
 package br.com.ongvd.model;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -21,7 +22,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 @Entity
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"email", "cnpj"}))
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = { "email", "cnpj" }))
 public class Ong {
 
 	@Id
@@ -40,7 +41,7 @@ public class Ong {
 	@Column(nullable = false)
 	private String responsavel;
 	@Column(nullable = false)
-	private String fundacao;
+	private Date fundacao;
 	@Column(nullable = false)
 	private String contato;
 	private String whatsapp;
@@ -130,11 +131,11 @@ public class Ong {
 		this.responsavel = responsavel;
 	}
 
-	public String getFundacao() {
+	public Date getFundacao() {
 		return fundacao;
 	}
 
-	public void setFundacao(String fundacao) {
+	public void setFundacao(Date fundacao) {
 		this.fundacao = fundacao;
 	}
 

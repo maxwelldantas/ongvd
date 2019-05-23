@@ -1,7 +1,10 @@
 package br.com.ongvd.dto;
 
+import java.util.Date;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -26,19 +29,18 @@ public class OngDTO {
 	private String website;
 	@NotBlank(message = "Por favor preencha este campo")
 	private String responsavel;
-	@NotBlank(message = "Por favor preencha este campo")
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	private String fundacao;
+	@NotNull(message = "Por favor preencha este campo")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date fundacao;
 	@NotBlank(message = "Por favor preencha este campo")
 	private String contato;
-	@Pattern(regexp = "^\\([1-9]{2}\\) (?:[2-8]|9[1-9])[0-9]{3}\\-[0-9]{4}$", message = "Por favor preencha este campo corretamente")
 	private String whatsapp;
-	@Pattern(regexp = "^\\([1-9]{2}\\) (?:[2-8]|9[1-9])[0-9]{2}\\-([0-9]{4}|[0-9]{5})$", message = "Por favor preencha este campo corretamente")
+	@Pattern(regexp = "^\\([1-9]{2}\\) ([0-9]{4}|[0-9]{5})\\-[0-9]{4}$", message = "Por favor preencha este campo corretamente")
 	private String telefone;
-	@Email
+	@Email(message = "Não é um endereço de e-mail válido")
 	@NotBlank(message = "Por favor preencha este campo")
 	private String email;
-	@Email
+	@Email(message = "Não é um endereço de e-mail válido")
 	@NotBlank(message = "Por favor preencha este campo")
 	private String confirmarEmail;
 	@Size(min = 6, max = 20, message = "Tamanho da senha entre 6 a 20 caracteres")
@@ -94,11 +96,11 @@ public class OngDTO {
 		this.responsavel = responsavel;
 	}
 
-	public String getFundacao() {
+	public Date getFundacao() {
 		return fundacao;
 	}
 
-	public void setFundacao(String fundacao) {
+	public void setFundacao(Date fundacao) {
 		this.fundacao = fundacao;
 	}
 

@@ -321,10 +321,10 @@ a.article, a.article:hover {
  }
  
 .fa-exclamation-circle {
-   -webkit-animation: fa-exclamation-circle 1000ms linear infinite;
-   -moz-animation: fa-exclamation-circle 1000ms linear infinite;
-   -ms-animation: fa-exclamation-circle 1000ms linear infinite;
-   -o-animation: fa-exclamation-circle 1000ms linear infinite;
-   animation: fa-exclamation-circle 1000ms linear infinite;
+   -webkit-animation: fa-exclamation-circle 2000ms linear infinite;
+   -moz-animation: fa-exclamation-circle 2000ms linear infinite;
+   -ms-animation: fa-exclamation-circle 2000ms linear infinite;
+   -o-animation: fa-exclamation-circle 2000ms linear infinite;
+   animation: fa-exclamation-circle 2000ms linear infinite;
    color: red;
 }

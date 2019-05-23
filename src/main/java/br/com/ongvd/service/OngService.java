@@ -13,6 +13,8 @@ import br.com.ongvd.model.Ong;
 @Service
 public interface OngService extends UserDetailsService {
 	Ong findByEmail(String email);
+	
+	Ong findByCnpj(String cnpj);
 
 	void save(OngDTO ongDTO, EnderecoDTO enderecoDTO);
 

@@ -1,3 +1,4 @@
+/* Busca CEP através da API do ViaCEP */
 $(document).ready(function() {
 
             function limpa_formulário_cep() {
@@ -60,10 +61,6 @@ $(document).ready(function() {
             });
         });
 
-//$(function() {
-//	$(".pop-me-over").popover();
-//});
-
 $(function tooltip() {
   $('[data-toggle="tooltip"]').tooltip();
 });
@@ -72,15 +69,18 @@ $(function () {
     $('[data-toggle="popover"]').popover();
 });
 
+/* Máscaras para os campos */
 $(document).ready(function () {
     $("#cep").mask('00000-000');
     $("#cnpj").mask('00.000.000/0000-00', {reverse: true});
-    $('#telefone').mask('(00) 0000-00000');
-    $("#whatsapp").mask('(00) 00000-0000');
-	$("#registrarOng").on("mousedown",function(){
-		$("#cnpj").unmask();
-		$("#cnpj").val().replace("./", "");
-	});
+    $('#telefone').inputmask({
+    	  mask: ['(99) 9999-9999', '(99) 99999-9999'],
+    	  keepStatic: true
+    });
+    $("#whatsapp").inputmask({
+  	  mask: ['(99) 99999-9999'],
+	  keepStatic: true
+    });
 });
 
 $(document).ready(function() {

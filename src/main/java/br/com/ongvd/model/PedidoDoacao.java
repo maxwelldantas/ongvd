@@ -9,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.validation.constraints.Size;
 
 @Entity
 public class PedidoDoacao {
@@ -20,8 +19,7 @@ public class PedidoDoacao {
 	
 	@Column(nullable = false)
 	private String nome;
-	@Column(nullable = false)
-	@Size(max = 5000)
+	@Column(nullable = false, length = 5000)
 	private String descricao;
 	@Column(nullable = false)
 	private Timestamp dataInclusao;
