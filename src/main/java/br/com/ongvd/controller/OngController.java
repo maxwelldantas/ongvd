@@ -1,7 +1,5 @@
 package br.com.ongvd.controller;
 
-import java.util.Optional;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,25 +76,19 @@ public class OngController {
 
 	@RequestMapping(method = RequestMethod.GET, path = "/ong/{id}")
 	public String findById(@PathVariable Long id) {
-		Optional<Ong> ong = ongService.findById(id);
-		if (!ong.isPresent()) {
-		}
+		ongService.findById(id);
 		return "ong/listagem";
 	}
 
 	@RequestMapping(method = RequestMethod.PUT, path = "/ong/registro/{id}")
 	public String update(@PathVariable Long id, @Valid @RequestBody OngDTO ongDTO,
 			@Valid @RequestBody EnderecoDTO enderecoDTO) {
-		if (!ongService.findById(id).isPresent()) {
-		}
 		ongService.save(ongDTO, enderecoDTO);
 		return "ong/registro";
 	}
 
 	@RequestMapping(method = RequestMethod.DELETE, path = "/ong/registro/{id}/delete")
 	public String delete(@PathVariable Long id) {
-		if (!ongService.findById(id).isPresent()) {
-		}
 		ongService.delete(id);
 		return "redirect:/home";
 	}

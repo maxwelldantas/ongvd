@@ -78,7 +78,7 @@ $(document).ready(function () {
     	  keepStatic: true
     });
     $("#whatsapp").inputmask({
-  	  mask: ['(99) 99999-9999'],
+  	  mask: ['+99 (99) 9999-9999'],
 	  keepStatic: true
     });
 });

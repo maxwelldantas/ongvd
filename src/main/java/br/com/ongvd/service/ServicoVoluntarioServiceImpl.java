@@ -74,6 +74,10 @@ public class ServicoVoluntarioServiceImpl implements ServicoVoluntarioService {
 		return servicoVoluntarioRepository.findNomeByOng(ong);
 	}
 	
+	public List<ServicoVoluntario> getAllByHabilitado(Boolean habilitado){
+		return servicoVoluntarioRepository.findAllByHabilitado(habilitado);
+	}
+	
 	public ServicoVoluntario get(Long id) {
 		return servicoVoluntarioRepository.findById(id).get();
 	}

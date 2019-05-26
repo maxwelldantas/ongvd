@@ -3,13 +3,11 @@ package br.com.ongvd.service;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -87,29 +85,16 @@ public class OngServiceImpl implements OngService {
         return ongRepository.findByRazaoSocial(razaoSocial);
     }
     
-    public Optional<Ong> findById(@PathVariable Long id) {
-        Optional<Ong> ong = ongRepository.findById(id);
-        if (!ong.isPresent()) {
-            ResponseEntity.badRequest().build();
-        }
-        ResponseEntity.ok().build();
-        return findById(id);
+    public Ong findById(@PathVariable Long id) {
+        return ongRepository.findById(id).get();
     }
 
     public void update(@PathVariable Long id, @Valid @RequestBody Ong ong) {
-        if (!ongRepository.findById(id).isPresent()) {
-            ResponseEntity.badRequest().build();
-        }
         ongRepository.save(ong);
-        ResponseEntity.ok().build();
     }
 
     public void delete(@PathVariable Long id) {
-        if (!ongRepository.findById(id).isPresent()) {
-            ResponseEntity.badRequest().build();
-        }
         ongRepository.deleteById(id);
-        ResponseEntity.ok().build();
     }
 
     public boolean exists(Ong ong) {

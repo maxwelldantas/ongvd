@@ -94,8 +94,8 @@
 				<li class="nav-item" sec:authorize="isAnonymous()"
 					th:classappend="${#httpServletRequest.getRequestURI().startsWith('/login') ? 'active':''}">
 					<a class="nav-link btn btn-outline-success" th:href="@{/login}"
-					role="button">Acessar&nbsp;&nbsp;<i class="fas fa-sign-in-alt"></i><span
-						class="sr-only">(current)</span></a>
+					role="button" title="Acessar">Acessar&nbsp;&nbsp;<i
+						class="fas fa-sign-in-alt"></i><span class="sr-only">(current)</span></a>
 				</li>
 				<li class="nav-item" sec:authorize="isAuthenticated()"
 					th:classappend="${#httpServletRequest.getRequestURI().startsWith('/login') ? 'active':''}">
@@ -103,8 +103,10 @@
 					sec:authentication="name"><span class="sr-only">(current)</span></span>
 				</li>
 				<li class="nav-item" sec:authorize="isAuthenticated()">
-					<form action="/logout" method="post" class="navbar-form">
-						<button type="submit" class="btn btn-outline-danger" title="Sair">
+					<form action="/logout" method="post" class="navbar-form"
+						th:classappend="${#httpServletRequest.getRequestURI().startsWith('/painel') ? 'active':''}">
+						<button type="submit" class="nav-link btn btn-outline-danger"
+							role="button" title="Sair">
 							Sair&nbsp;&nbsp;<i class="fas fa-sign-out-alt"></i>
 						</button>
 					</form>

@@ -18,12 +18,28 @@ body {
 	background: #fafafa;
 }
 
-p {
+.cinza {
 	font-family: 'Poppins', sans-serif;
 	font-size: 1.1em;
-	font-weight: 300;
+	font-weight: bold;
 	line-height: 1.7em;
 	color: #999;
+}
+
+.whatsapp {
+	color: #007bff;
+}
+
+.whatsapp:link { 
+	color: #0000EE;
+}
+
+.whatsapp:visited {
+	color: #551A8B;
+}
+
+.labelnomb {
+	margin-bottom: 0em;
 }
 
 a, a:hover, a:focus {

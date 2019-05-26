@@ -1,7 +1,6 @@
 package br.com.ongvd.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
@@ -20,7 +19,7 @@ public interface OngService extends UserDetailsService {
 
 	List<Ong> getAll();
 
-	Optional<Ong> findById(Long id);
+	Ong findById(Long id);
 
 	Ong findByRazaoSocial(String razaoSocial);
 

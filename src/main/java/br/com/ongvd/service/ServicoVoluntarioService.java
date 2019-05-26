@@ -20,6 +20,8 @@ public interface ServicoVoluntarioService {
 	List<ServicoVoluntario> getAll();
 	
 	List<ServicoVoluntario> getAllByOng(UserDetails currentUser);
+	
+	List<ServicoVoluntario> getAllByHabilitado(Boolean habilitado);
 
 	ServicoVoluntario get(Long id);
 

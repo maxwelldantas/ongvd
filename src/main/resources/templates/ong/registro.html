@@ -106,13 +106,14 @@
 							        <div class="input-group-prepend">
 							          <div class="input-group-text">WhatsApp<i tabindex="0" 
 							          class="fas fa-exclamation-circle" data-toggle="popover" data-trigger="focus" 
-							          title="WhatsApp da Ong" data-content="Digite o número de WhatsApp da ONG neste campo, para
-							          o voluntário e doador entrar em contato diretamente com a ONG. Caso não digite, o
-							          voluntário ou doador não poderá ter contato direto com a ONG e terá que contatar
-							          diretamente com a ONG por e-mail dentro do sistema ONGvd."></i>
+							          title="WhatsApp da Ong" data-content="Digite o número de WhatsApp da ONG neste campo (exemplo: +55 (34) 9999-9999,
+							          onde +55 é o código do país (no caso +55 é o código do Brasil), (34) é o DDD sem o digito 0 e 9999-9999 é o número do chip do celular
+							          sem o nono (9) digito), para o(a) voluntário(a) e doador(a) entrar em contato com a ONG pelo WhatsApp.
+							          Caso não digite, o(a) voluntário(a) ou doador(a) não será direcionado para conversar a ONG pelo WhatsApp e terá que contatar
+							          a ONG por e-mail ou telefone cadastrados no sistema."></i>
 							          </div>
 							        </div>
-							        <input type="tel" th:field="*{whatsapp}" pattern="\([0-9]{2}\) [0-9]{5}-[0-9]{4}$" class="form-control" id="whatsapp">
+							        <input type="tel" th:field="*{whatsapp}" pattern="\+[0-9]{2} ([0-9]{2}\) [0-9]{4}-[0-9]{4}$" class="form-control" id="whatsapp">
 							      </div>
 							      <p class="error-message" th:each="error: ${#fields.errors('whatsapp')}" th:text="${error}"></p>
 							    </div>
