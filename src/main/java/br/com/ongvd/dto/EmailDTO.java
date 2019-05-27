@@ -6,7 +6,6 @@ public class EmailDTO {
 
 	@NotBlank(message = "Por favor preencha este campo")
 	private String emailDe;
-	@NotBlank(message = "Por favor preencha este campo")
 	private String emailPara;
 	@NotBlank(message = "Por favor preencha este campo")
 	private String assunto;

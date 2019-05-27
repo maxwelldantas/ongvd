@@ -52,19 +52,19 @@ public class Ong {
 	@Column(nullable = false)
 	private String senha;
 	private Boolean ativo;
-
+	
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@Fetch(FetchMode.SUBSELECT)
 	@JoinTable(name = "users_enderecos", joinColumns = @JoinColumn(name = "ong_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "endereco_id", referencedColumnName = "id"))
 	private List<Endereco> enderecos;
 
-	@OneToMany(mappedBy = "ong")
+	@OneToMany(mappedBy = "ong", cascade = CascadeType.ALL)
 	private List<Evento> eventos;
 
-	@OneToMany(mappedBy = "ong")
+	@OneToMany(mappedBy = "ong", cascade = CascadeType.ALL)
 	private List<PedidoDoacao> doacoes;
 
-	@OneToMany(mappedBy = "ong")
+	@OneToMany(mappedBy = "ong", cascade = CascadeType.ALL)
 	private List<ServicoVoluntario> servicos;
 
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

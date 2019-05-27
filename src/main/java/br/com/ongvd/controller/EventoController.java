@@ -31,26 +31,26 @@ public class EventoController {
 		return new EventoDTO();
 	}
 
-	@RequestMapping(method = RequestMethod.GET, path = "/cadastro")
+	@RequestMapping(method = RequestMethod.GET, value = "/cadastro")
 	public String mostraFormularioCadastro(Model model) {
 		model.addAttribute("evento");
 		return "painel/ong/evento/cadastro";
 	}
 
-	@RequestMapping(method = RequestMethod.POST, path = "/cadastro")
+	@RequestMapping(method = RequestMethod.POST, value = "/cadastro")
 	public String cadastrarEvento(
-			@ModelAttribute("evento") @Valid EventoDTO eventoDTO, BindingResult result,
+			@ModelAttribute("evento") @Valid EventoDTO dto, BindingResult result,
 			Evento evento, @AuthenticationPrincipal UserDetails currentUser) {
 
-		Evento nome = service.getByNome(eventoDTO.getNome());
-		List<Evento> ong = service.getNomeByOng(currentUser);
-		if (ong.contains(nome)) {
+		Evento nome = service.getByNome(dto.getNome());
+		List<Evento> eventos = service.getNomeByOng(currentUser);
+		if (eventos.contains(nome)) {
 			result.rejectValue("nome", null, "Este evento já está cadastrado!");
 		}
 		if (result.hasErrors()) {
 			return "painel/ong/evento/cadastro";
 		}
-		service.novo(evento, currentUser);
+		service.novo(dto, currentUser);
 		service.save(evento);
 		return "redirect:/painel/ong/evento/cadastro?success";
 	}

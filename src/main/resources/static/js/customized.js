@@ -61,12 +61,21 @@ $(document).ready(function() {
             });
         });
 
+/* Tooltip */
 $(function tooltip() {
   $('[data-toggle="tooltip"]').tooltip();
 });
 
 $(function () {
     $('[data-toggle="popover"]').popover();
+});
+
+/* Pegar elementos do Serviço Voluntário */
+$(document).ready(function () {
+	var emailOng = $("#emailOngDetalhesServicoVoluntario").text();
+    $("#emailParaDetalhesServicoVoluntario").val(emailOng);
+    var nome = $("#nomeDetalhesServicoVoluntario").text();
+    $("#assuntoDetalhesServicoVoluntario").val("Serviço Voluntário: "+nome);
 });
 
 /* Máscaras para os campos */
@@ -83,6 +92,7 @@ $(document).ready(function () {
     });
 });
 
+/* Sidebar Vertival */
 $(document).ready(function() {
 	$("#sidebar").mCustomScrollbar({
 		theme : "minimal"
@@ -95,20 +105,3 @@ $(document).ready(function() {
 	});
 });
 
-/* Gmail Login Input Field Style! */
-
-$(function () {
-	 
-    $(".field-wrapper .field-placeholder").on("click", function () {
-        $(this).closest(".field-wrapper").find("input").focus();
-    });
-    $(".field-wrapper input").on("keyup", function () {
-        var value = $.trim($(this).val());
-        if (value) {
-            $(this).closest(".field-wrapper").addClass("hasValue");
-        } else {
-            $(this).closest(".field-wrapper").removeClass("hasValue");
-        }
-    });
-
-});

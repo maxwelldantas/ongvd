@@ -1,6 +1,8 @@
 package br.com.ongvd.service;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 
@@ -28,11 +30,18 @@ public class EventoServiceImpl implements EventoService {
 	@Autowired
 	private OngRepository ongRepository;
 	
-	public Evento novo(Evento evento, @AuthenticationPrincipal UserDetails currentUser) {
+	public Evento novo(EventoDTO dto, @AuthenticationPrincipal UserDetails currentUser) {
 		Ong ong = (Ong) ongRepository.findByEmail(currentUser.getUsername());
-		evento.setDataInclusao(new Timestamp(new Date().getTime()));
+		Evento evento = new Evento();
+		evento.setNome(dto.getNome());
+		evento.setDescricao(dto.getDescricao());
+		evento.setContribuicaoParaEvento(dto.getContribuicaoParaEvento());
+		evento.setDuracaoEvento(dto.getDuracaoEvento());
+		evento.setOrcamento(dto.getOrcamento());
+		evento.setHabilitado(dto.getHabilitado());
+		evento.setDataInclusao(Timestamp.valueOf(LocalDateTime.now(ZoneId.of("America/Sao_Paulo"))));
 		if (evento.getHabilitado() == false) {
-			evento.setDataDesabilitado(new Timestamp(new Date().getTime()));
+			evento.setDataDesabilitado(Timestamp.valueOf(LocalDateTime.now(ZoneId.of("America/Sao_Paulo"))));
 		} else {
 			evento.setDataDesabilitado(null);
 		}
@@ -41,21 +50,21 @@ public class EventoServiceImpl implements EventoService {
 		return evento;
 	}
 	
-	public Evento edita(Evento servico, EventoDTO eventoDTO) {
-		servico.setNome(eventoDTO.getNome());
-		servico.setDescricao(eventoDTO.getDescricao());
-		servico.setHabilitado(eventoDTO.getHabilitado());
-		servico.setDataAtualizacao(new Timestamp(new Date().getTime()));
-		if (servico.getHabilitado() == false) {
-			servico.setDataDesabilitado(new Timestamp(new Date().getTime()));
+	public Evento edita(Evento evento, EventoDTO eventoDTO) {
+		evento.setNome(eventoDTO.getNome());
+		evento.setDescricao(eventoDTO.getDescricao());
+		evento.setHabilitado(eventoDTO.getHabilitado());
+		evento.setDataAtualizacao(new Timestamp(new Date().getTime()));
+		if (evento.getHabilitado() == false) {
+			evento.setDataDesabilitado(new Timestamp(new Date().getTime()));
 		} else {
-			servico.setDataDesabilitado(null);
+			evento.setDataDesabilitado(null);
 		}
-		return servico;
+		return evento;
 	}
 
-	public void save(Evento servico) {
-		eventoRepository.save(servico);
+	public void save(Evento evento) {
+		eventoRepository.save(evento);
 	}
 	
 	public List<Evento> getAllByOng(UserDetails currentUser) {
@@ -74,6 +83,10 @@ public class EventoServiceImpl implements EventoService {
 	public List<Evento> getNomeByOng(UserDetails currentUser) {
 		Ong ong = (Ong) ongRepository.findByEmail(currentUser.getUsername());
 		return eventoRepository.findNomeByOng(ong);
+	}
+	
+	public List<Evento> getAllByHabilitado(Boolean habilitado){
+		return eventoRepository.findAllByHabilitado(habilitado);
 	}
 	
 	public Evento get(Long id) {

@@ -12,8 +12,10 @@ import br.com.ongvd.model.Ong;
 public interface EventoRepository extends JpaRepository<Evento, Long> {
 
 	Evento findByNome(String nome);
-
+	
 	List<Evento> findAllByOng(Ong ong);
-
+	
+	List<Evento> findAllByHabilitado(Boolean habilitado);
+	
 	List<Evento> findNomeByOng(Ong ong);
 }

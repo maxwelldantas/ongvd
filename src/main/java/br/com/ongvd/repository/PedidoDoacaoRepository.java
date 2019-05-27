@@ -15,5 +15,7 @@ public interface PedidoDoacaoRepository extends JpaRepository<PedidoDoacao, Long
 
 	List<PedidoDoacao> findAllByOng(Ong ong);
 
+	List<PedidoDoacao> findAllByHabilitado(Boolean habilitado);
+
 	List<PedidoDoacao> findNomeByOng(Ong ong);
 }

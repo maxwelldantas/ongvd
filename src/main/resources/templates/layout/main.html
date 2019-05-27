@@ -103,10 +103,9 @@
 					sec:authentication="name"><span class="sr-only">(current)</span></span>
 				</li>
 				<li class="nav-item" sec:authorize="isAuthenticated()">
-					<form action="/logout" method="post" class="navbar-form"
+					<form th:action="@{/logout}" method="post" class="navbar-form"
 						th:classappend="${#httpServletRequest.getRequestURI().startsWith('/painel') ? 'active':''}">
-						<button type="submit" class="nav-link btn btn-outline-danger"
-							role="button" title="Sair">
+						<button type="submit" class="btn btn-outline-danger" title="Sair">
 							Sair&nbsp;&nbsp;<i class="fas fa-sign-out-alt"></i>
 						</button>
 					</form>
@@ -123,23 +122,28 @@
 			</div>
 
 			<ul class="list-unstyled components">
-				<li><a href="#homeSubmenu" data-toggle="collapse"
+				<li><a href="#submenuCadastrar" data-toggle="collapse"
 					aria-expanded="false" class="dropdown-toggle lateral">Cadastrar</a>
-					<ul class="collapse list-unstyled" id="homeSubmenu">
+					<ul class="collapse list-unstyled" id="submenuCadastrar">
 						<li><a th:href="@{/painel/ong/servico-voluntario/cadastro}">Serviço
 								Voluntário</a></li>
 						<li><a th:href="@{/painel/ong/pedido-doacao/cadastro}">Pedido
 								de Doação</a></li>
 						<li><a th:href="@{/painel/ong/evento/cadastro}">Evento</a></li>
 					</ul></li>
-				<li><a href="#pageSubmenu" data-toggle="collapse"
+				<li><a href="#submenuListar" data-toggle="collapse"
 					aria-expanded="false" class="dropdown-toggle lateral">Listar</a>
-					<ul class="collapse list-unstyled" id="pageSubmenu">
+					<ul class="collapse list-unstyled" id="submenuListar">
 						<li><a th:href="@{/painel/ong/servico-voluntario/listagem}">Serviço
 								Voluntário</a></li>
 						<li><a th:href="@{/painel/ong/pedido-doacao/listagem}">Pedido
 								de Doação</a></li>
 						<li><a th:href="@{/painel/ong/evento/listagem}">Evento</a></li>
+					</ul></li>
+				<li><a href="#submenuConfiguracoes" data-toggle="collapse"
+					aria-expanded="false" class="dropdown-toggle lateral">Configurações da ONG</a>
+					<ul class="collapse list-unstyled" id="submenuConfiguracoes">
+						<li><a th:href="@{/painel/ong/main}">Configurações</a></li>
 					</ul></li>
 			</ul>
 		</nav>

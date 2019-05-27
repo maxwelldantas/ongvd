@@ -5,8 +5,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -14,8 +12,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import br.com.ongvd.dto.EnderecoDTO;
 import br.com.ongvd.dto.OngDTO;
@@ -47,7 +43,7 @@ public class OngServiceImpl implements OngService {
 		return roles.stream().map(role -> new SimpleGrantedAuthority(role.getNome())).collect(Collectors.toList());
 	}
 
-	public void save(OngDTO ongDTO, EnderecoDTO enderecoDTO) {
+	public void novo(OngDTO ongDTO, EnderecoDTO enderecoDTO) {
 		Ong ong = new Ong();
 		ong.setRazaoSocial(ongDTO.getRazaoSocial());
 		ong.setNomeFantasia(ongDTO.getNomeFantasia());
@@ -69,8 +65,36 @@ public class OngServiceImpl implements OngService {
 		ongRepository.save(ong);
 	}
 	
+	public Ong edita(Ong ong, OngDTO ongDTO, Endereco endereco, EnderecoDTO enderecoDTO) {
+		ong.setRazaoSocial(ongDTO.getRazaoSocial());
+		ong.setNomeFantasia(ongDTO.getNomeFantasia());
+		ong.setCnpj(ongDTO.getCnpj());
+		ong.setAreaDeAtuacao(ongDTO.getAreaDeAtuacao());
+		ong.setWebsite(ongDTO.getWebsite());
+		ong.setResponsavel(ongDTO.getResponsavel());
+		ong.setFundacao(ongDTO.getFundacao());
+		ong.setContato(ongDTO.getContato());
+		ong.setWhatsapp(ongDTO.getWhatsapp());
+		ong.setTelefone(ongDTO.getTelefone());
+		ong.setEmail(ongDTO.getEmail());
+		ong.setSenha(ongDTO.getSenha());
+		endereco.setCep(enderecoDTO.getCep());
+		endereco.setLogradouro(enderecoDTO.getLogradouro());
+		endereco.setNumero(enderecoDTO.getNumero());
+		endereco.setComplemento(enderecoDTO.getComplemento());
+		endereco.setBairro(enderecoDTO.getBairro());
+		endereco.setCidade(enderecoDTO.getCidade());
+		endereco.setUf(enderecoDTO.getUf());
+		ong.setEnderecos(Arrays.asList(endereco));
+		return ong;
+	}
+	
     public List<Ong> getAll() {
         return ongRepository.findAll();
+    }
+    
+    public void save(Ong ong) {
+    	ongRepository.save(ong);
     }
     
     public Ong findByEmail(String email) {
@@ -85,15 +109,11 @@ public class OngServiceImpl implements OngService {
         return ongRepository.findByRazaoSocial(razaoSocial);
     }
     
-    public Ong findById(@PathVariable Long id) {
+    public Ong findById(Long id) {
         return ongRepository.findById(id).get();
     }
-
-    public void update(@PathVariable Long id, @Valid @RequestBody Ong ong) {
-        ongRepository.save(ong);
-    }
-
-    public void delete(@PathVariable Long id) {
+    
+    public void delete(Long id) {
         ongRepository.deleteById(id);
     }
 

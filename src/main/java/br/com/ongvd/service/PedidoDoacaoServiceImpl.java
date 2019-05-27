@@ -76,6 +76,10 @@ public class PedidoDoacaoServiceImpl implements PedidoDoacaoService {
 		return pedidoDoacaoRepository.findNomeByOng(ong);
 	}
 	
+	public List<PedidoDoacao> getAllByHabilitado(Boolean habilitado){
+		return pedidoDoacaoRepository.findAllByHabilitado(habilitado);
+	}
+	
 	public PedidoDoacao get(Long id) {
 		return pedidoDoacaoRepository.findById(id).get();
 	}

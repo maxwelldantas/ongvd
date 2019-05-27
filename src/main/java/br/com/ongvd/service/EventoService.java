@@ -11,15 +11,17 @@ import br.com.ongvd.model.Evento;
 @Service
 public interface EventoService {
 	
-	Evento novo(Evento evento, UserDetails currentUser);
+	Evento novo(EventoDTO eventoDTO, UserDetails currentUser);
 
-	Evento edita(Evento servico, EventoDTO eventoDTO);
+	Evento edita(Evento evento, EventoDTO eventoDTO);
 
-	void save(Evento servico);
+	void save(Evento evento);
 
 	List<Evento> getAll();
 
 	List<Evento> getAllByOng(UserDetails currentUser);
+	
+	List<Evento> getAllByHabilitado(Boolean habilitado);
 
 	Evento get(Long id);
 

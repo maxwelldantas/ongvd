@@ -20,6 +20,8 @@ public interface PedidoDoacaoService {
 	List<PedidoDoacao> getAll();
 
 	List<PedidoDoacao> getAllByOng(UserDetails currentUser);
+	
+	List<PedidoDoacao> getAllByHabilitado(Boolean habilitado);
 
 	PedidoDoacao get(Long id);
 

@@ -9,7 +9,6 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -64,8 +63,8 @@ public class ServicoVoluntarioController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET, path = "/edita-cadastro/{id}")
-	public String listToUpdate(@PathVariable(name = "id") Long id, ModelMap model) {
-		model.put("servico", service.get(id));
+	public String listToUpdate(@PathVariable(name = "id") Long id, Model model) {
+		model.addAttribute("servico", service.get(id));
 		return "painel/ong/servico-voluntario/edita-cadastro";
 	}
 	
