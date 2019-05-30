@@ -2,26 +2,23 @@
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
 <head>
+
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" type="text/css" th:href="@{/css/main.css}" />
 
-<!-- <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"/> -->
-<!-- <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/> -->
-
-<!-- Bootstrap core CSS -->
-<link href="/css/bootstrap.min.css" rel="stylesheet" />
-
-<!-- Custom styles for this template -->
-<link href="/css/starter-template.css" rel="stylesheet" />
-
-<!-- Font Awesome Free CSS v5.3.1 -->
-<link href="/css/all.css" rel="stylesheet" />
-
+<!-- Bootstrap 4.3.1 -->
+<link rel="stylesheet" href="/css/bootstrap.min.css" />
+<link rel="stylesheet" href="/css/bootstrap-grid.min.css" />
+<link rel="stylesheet" href="/css/bootstrap-reboot.min.css" />
+<!-- Scrollbar Custom CSS -->
+<link rel="stylesheet" href="/css/jquery.mCustomScrollbar.min.css" />
+<!-- Font Awesome Free CSS v5.8.1 -->
+<link rel="stylesheet" href="/fonts/font-awesome-all.5.8.1.css" />
 <!-- Customized CSS -->
-<link href="/css/customized.css" rel="stylesheet" />
+<link rel="stylesheet" href="/css/customized.css" />
 
 </head>
 
@@ -44,71 +41,144 @@
 						class="sr-only">(current)</span>
 				</a>
 				</li>
-				<li class="nav-item"
-					th:classappend="${#httpServletRequest.getRequestURI().startsWith('/voluntario') ? 'active':''}">
-					<a class="nav-link" th:href="@{/voluntario}">Voluntário <span
-						class="sr-only">(current)</span>
-				</a>
-				</li>
-				<li class="nav-item"
-					th:classappend="${#httpServletRequest.getRequestURI().startsWith('/doador') ? 'active':''}">
-					<a class="nav-link" th:href="@{/doador}">Doador <span
-						class="sr-only">(current)</span>
-				</a>
-				</li>
 				<li class="nav-item dropdown"
-					th:classappend="${#httpServletRequest.getRequestURI().startsWith('/entidade') ? 'active':''}">
+					th:classappend="${#httpServletRequest.getRequestURI().startsWith('/voluntario') ? 'active':''}">
 					<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
-					role="button" aria-haspopup="true" aria-expanded="false">Entidade<span
+					role="button" aria-haspopup="true" aria-expanded="false">Voluntário(a)<span
 						class="sr-only">(current)</span>
 				</a>
 					<div class="dropdown-menu">
-						<a class="dropdown-item" th:href="@{/entidade}">Entidade o que
-							é?</a>
+						<a class="dropdown-item" th:href="@{/voluntario/conceito}">O
+							que é ser um(a) Voluntário(a)</a>
 						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" th:href="@{/entidade/registration}">Registrar
-							Entidade</a>
+						<a class="dropdown-item"
+							th:href="@{/voluntario/servicos-voluntarios}">Listagem de
+							Serviços Voluntários</a>
 					</div>
 				</li>
-				<li class="nav-item"
-					th:classappend="${#httpServletRequest.getRequestURI().startsWith('/painel') ? 'active':''}">
-					<a class="nav-link" th:href="@{/painel/entidade}">Painel<span
+				<li class="nav-item dropdown"
+					th:classappend="${#httpServletRequest.getRequestURI().startsWith('/doador') ? 'active':''}">
+					<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
+					role="button" aria-haspopup="true" aria-expanded="false">Doador(ra)<span
 						class="sr-only">(current)</span>
 				</a>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" th:href="@{/doador/conceito}">O que é
+							ser um(a) Doador(a)</a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" th:href="@{/ong/pedidos-doacao}">Listagem
+							de Pedidos de Doação</a>
+					</div>
+				</li>
+				<li class="nav-item dropdown"
+					th:classappend="${#httpServletRequest.getRequestURI().startsWith('/ong') ? 'active':''}">
+					<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
+					role="button" aria-haspopup="true" aria-expanded="false">ONG<span
+						class="sr-only">(current)</span>
+				</a>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" th:href="@{/ong/conceito}">O que é
+							uma ONG?</a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" th:href="@{/ong/registro}">Registrar
+							ONG</a>
+					</div>
+				</li>
+				<li class="nav-item" sec:authorize="isAuthenticated()"
+					th:classappend="${#httpServletRequest.getRequestURI().startsWith('/painel') ? 'active':''}">
+					<span class="nav-link">Painel<span class="sr-only">(current)</span>
+				</span>
 				</li>
 			</ul>
 			<ul class="navbar-nav">
 				<li class="nav-item" sec:authorize="isAnonymous()"
 					th:classappend="${#httpServletRequest.getRequestURI().startsWith('/login') ? 'active':''}">
-					<a class="nav-link" th:href="@{/login}">Login <span
-						class="sr-only">(current)</span></a>
+					<a class="nav-link btn btn-outline-success" th:href="@{/login}"
+					role="button" title="Acessar">Acessar&nbsp;&nbsp;<i
+						class="fas fa-sign-in-alt"></i><span class="sr-only">(current)</span></a>
 				</li>
 				<li class="nav-item" sec:authorize="isAuthenticated()"
 					th:classappend="${#httpServletRequest.getRequestURI().startsWith('/login') ? 'active':''}">
-					<span class="nav-link" th:href="@{/login}" sec:authentication="name"><span
-						class="sr-only">(current)</span></span>
+					<span class="nav-link" th:href="@{/login}"
+					sec:authentication="name"><span class="sr-only">(current)</span></span>
 				</li>
 				<li class="nav-item" sec:authorize="isAuthenticated()">
-					<form action="/logout" method="post" class="navbar-form">
-						<button type="submit" class="btn btn-default" title="Sair">Sair</button>
+					<form th:action="@{/logout}" method="post" class="navbar-form"
+						th:classappend="${#httpServletRequest.getRequestURI().startsWith('/painel') ? 'active':''}">
+						<button type="submit" class="btn btn-outline-danger" title="Sair">
+							Sair&nbsp;&nbsp;<i class="fas fa-sign-out-alt"></i>
+						</button>
 					</form>
 				</li>
 			</ul>
 		</div>
 	</nav>
-	<script src="/js/jquery-3.3.1.min.js"></script>
+
+	<div class="wrapper" sec:authorize="isAuthenticated()">
+		<!-- Sidebar  -->
+		<nav id="sidebar">
+			<div class="sidebar-header">
+				<h3>Painel ONG</h3>
+			</div>
+
+			<ul class="list-unstyled components">
+				<li><a href="#submenuCadastrar" data-toggle="collapse"
+					aria-expanded="false" class="dropdown-toggle lateral">Cadastrar</a>
+					<ul class="collapse list-unstyled" id="submenuCadastrar">
+						<li><a th:href="@{/painel/ong/servico-voluntario/cadastro}">Serviço
+								Voluntário</a></li>
+						<li><a th:href="@{/painel/ong/pedido-doacao/cadastro}">Pedido
+								de Doação</a></li>
+						<li><a th:href="@{/painel/ong/evento/cadastro}">Evento</a></li>
+					</ul></li>
+				<li><a href="#submenuListar" data-toggle="collapse"
+					aria-expanded="false" class="dropdown-toggle lateral">Listar</a>
+					<ul class="collapse list-unstyled" id="submenuListar">
+						<li><a th:href="@{/painel/ong/servico-voluntario/listagem}">Serviço
+								Voluntário</a></li>
+						<li><a th:href="@{/painel/ong/pedido-doacao/listagem}">Pedido
+								de Doação</a></li>
+						<li><a th:href="@{/painel/ong/evento/listagem}">Evento</a></li>
+					</ul></li>
+				<li><a href="#submenuConfiguracoes" data-toggle="collapse"
+					aria-expanded="false" class="dropdown-toggle lateral">Configurações da ONG</a>
+					<ul class="collapse list-unstyled" id="submenuConfiguracoes">
+						<li><a th:href="@{/painel/ong/main}">Configurações</a></li>
+					</ul></li>
+			</ul>
+		</nav>
+
+		<!-- Page Content  -->
+		<div id="content">
+
+			<nav class="navbar navbar-expand-lg navbar-light bg-light noshadow">
+				<div class="container-fluid">
+					<button type="button" id="sidebarCollapse" class="btn btn-info">
+						<i class="fas fa-align-left"></i> <span>Mostrar/Esconder
+							Painel</span>
+					</button>
+				</div>
+			</nav>
+
+			<div layout:fragment="content"></div>
+
+		</div>
+	</div>
+
+	<script src="/js/jquery-3.4.1.min.js"></script>
 	<script src="/js/jquery.mask.min.js"></script>
+	<script src="/js/jquery.inputmask.bundle.min.js"></script>
 	<script src="/js/popper.min.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="/js/customized.js"></script>
-	<script type="text/javascript" th:src="@{/webjars/jquery/3.2.1/jquery.min.js/}"></script>
-	<script type="text/javascript" th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
-	
-	<!-- Font Awesome Free JS 5.3.1 -->
-	<script src="/js/all.js"></script>
-	
-	<div class="container">
-		<div layout:fragment="content"></div>
-	</div>
+	<script src="/js/bootstrap.bundle.min.js"></script>
+	<!-- jQuery Custom Scroller CDN -->
+	<script src="/js/jquery.mCustomScrollbar.concat.min.js"></script>
+	<!-- Font Awesome Free JS 5.8.1 -->
+	<script src="/fonts/font-awesome-all.5.8.1.js"></script>
+	<script src="/js/customized.js"></script>
+
+	<div layout:fragment="content" sec:authorize="isAnonymous()"></div>
+
 </body>
+
 </html>

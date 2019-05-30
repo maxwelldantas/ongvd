@@ -1,11 +1,10 @@
 package br.com.ongvd.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 
 @Entity
 public class Endereco {
@@ -13,18 +12,19 @@ public class Endereco {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
+	
+	@Column(nullable = false)
 	private String cep;
+	@Column(nullable = false)
 	private String logradouro;
 	private Integer numero;
 	private String complemento;
+	@Column(nullable = false)
 	private String bairro;
+	@Column(nullable = false)
 	private String cidade;
+	@Column(nullable = false)
 	private String uf;
-	
-	@OneToOne
-	@JoinColumn(name = "ong_id")
-	private Ong ong;
 
 	public Endereco() {
 	}
@@ -102,14 +102,6 @@ public class Endereco {
 
 	public void setUf(String uf) {
 		this.uf = uf;
-	}
-
-	public Ong getOng() {
-		return ong;
-	}
-
-	public void setOng(Ong ong) {
-		this.ong = ong;
 	}
 
 	@Override

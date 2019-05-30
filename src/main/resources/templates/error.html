@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/main}">
+
+<head>
+<title>ONGvd - Página não encontra!</title>
+<style>
+table td {
+	vertical-align: top;
+	border: solid 1px #888;
+	padding: 10px;
+}
+</style>
+</head>
+<body>
+	<div layout:fragment="content">
+		<h1 class="text-center">Página solicitada não encontrada!</h1>
+		<div class="text-center ">
+			<a class="text-primary" href="/">Clique aqui para ir à Página
+				Inicial</a>
+		</div>
+	</div>
+</body>
+</html>

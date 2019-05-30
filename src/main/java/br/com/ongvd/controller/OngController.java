@@ -1,19 +1,26 @@
 package br.com.ongvd.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import br.com.ongvd.dto.EnderecoDTO;
 import br.com.ongvd.dto.OngDTO;
+import br.com.ongvd.model.Endereco;
 import br.com.ongvd.model.Ong;
-import br.com.ongvd.service.EnderecoService;
 import br.com.ongvd.service.OngService;
 
 @Controller
@@ -21,42 +28,109 @@ public class OngController {
 
 	@Autowired
 	private OngService ongService;
-	
-	@Autowired
-	private EnderecoService enderecoService;
-	
+
 	@ModelAttribute("ong")
 	public OngDTO ongDTO() {
 		return new OngDTO();
 	}
-	
+
 	@ModelAttribute("endereco")
 	public EnderecoDTO enderecoDTO() {
 		return new EnderecoDTO();
 	}
 
-	@RequestMapping(method = RequestMethod.GET, path = "/entidade/registration")
+	@GetMapping("/ong/conceito")
+	public String ong(Model model) {
+		return "ong/conceito";
+	}
+
+	@RequestMapping(method = RequestMethod.GET, path = "/ong/registro")
 	public String showRegistrationForm(Model model) {
-		return "entidade/registration";
+		return "ong/registro";
 	}
 
-	@RequestMapping(method = RequestMethod.POST, path = "/entidade/registration")
-	public String registerOngAccount(
-		@ModelAttribute("ong") @Valid OngDTO ongDTO, BindingResult resultOng,
-		@ModelAttribute("endereco") @Valid EnderecoDTO enderecoDTO, BindingResult resultEndereco) {
+	@RequestMapping(method = RequestMethod.POST, path = "/ong/registro")
+	public String registerOngAccount(@ModelAttribute("ong") @Valid OngDTO ongDTO, BindingResult resultOng,
+			@ModelAttribute("endereco") @Valid EnderecoDTO enderecoDTO, BindingResult resultEndereco) {
 
-		Ong existing = ongService.findByEmail(ongDTO.getEmail());
-		if (existing != null) {
-			resultOng.rejectValue(
-					"email", null, "Já existe uma entidade registrada com este e-mail");
+		Ong existeEmail = ongService.findByEmail(ongDTO.getEmail());
+		Ong existeCnpj = ongService.findByCnpj(ongDTO.getCnpj());
+		if (existeEmail != null) {
+			resultOng.rejectValue("email", null, "Este endereço de e-mail já está sendo usado");
 		}
-
+		if (existeCnpj != null) {
+			resultOng.rejectValue("cnpj", null, "Este CNPJ já está sendo usado");
+		}
 		if (resultOng.hasErrors() || resultEndereco.hasErrors()) {
-			return "entidade/registration";
+			return "ong/registro";
 		}
-		ongService.save(ongDTO);
-		enderecoService.save(enderecoDTO);
-		return "redirect:/entidade/registration?success";
+		ongService.novo(ongDTO, enderecoDTO);
+		return "redirect:/ong/registro?success";
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, path = "/painel/ong/alterar-registro/{id}")
+	public String paginaAlterarRegistro(@PathVariable(name = "id") Long id, ModelMap model) {
+		model.put("ong", ongService.findById(id));
+		return "painel/ong/alterar-registro";
+	}
+	
+	@RequestMapping(method = RequestMethod.POST, path = "/painel/ong/alterar-registro/{id}")
+	public String alterarRegistro(
+			@PathVariable(name = "id") Long id,
+			@ModelAttribute("ong") @Valid OngDTO ongDTO,
+			@ModelAttribute("endereco") @Valid EnderecoDTO enderecoDTO,
+			Endereco endereco, BindingResult result, @AuthenticationPrincipal UserDetails currentUser){
+
+		Ong ong = ongService.findById(id);
+		List<Ong> ongs = ongService.getAll();
+		if (ongs.contains(ong)) {
+			result.rejectValue("cnpj", null, "Este CNPJ já está cadastrado!");
+		} 
+		if (result.hasErrors()) {
+			return "redirect:/painel/ong/alterar-registro/{id}?error";
+		}
+		ongService.edita(ong, ongDTO, endereco, enderecoDTO);
+		ongService.novo(ongDTO, enderecoDTO);
+		return "redirect:/painel/ong/alterar-registro/{id}?success";
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, path = "/painel/ong/main")
+	public String painelOng(Model model) {
+		model.addAttribute("ongs", ongService.getAll());
+		return "painel/ong/main";
 	}
 
+	@RequestMapping(method = RequestMethod.GET, path = "/ong/listagem")
+	public String getAll(Model model) {
+		model.addAttribute("ongs", ongService.getAll());
+		return "ong/listagem";
+	}
+
+	@RequestMapping(method = RequestMethod.GET, path = "/ong/{id}")
+	public String findById(@PathVariable Long id) {
+		ongService.findById(id);
+		return "ong/listagem";
+	}
+
+	@RequestMapping(method = RequestMethod.GET, path = "/painel/ong/desativar-registro/{id}")
+	public String desativar(@PathVariable Long id) {
+		Ong ong = ongService.findById(id);
+		ong.setAtivo(false);
+		ongService.save(ong);
+		return "redirect:/painel/ong/main?deactive";
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, path = "/painel/ong/ativar-registro/{id}")
+	public String ativar(@PathVariable Long id) {
+		Ong ong = ongService.findById(id);
+		ong.setAtivo(true);
+		ongService.save(ong);
+		return "redirect:/painel/ong/main?active";
+	}
+
+	@RequestMapping(method = RequestMethod.GET, path = "/painel/ong/deletar-registro/{id}")
+	public String delete(@PathVariable("id") Long id) {
+		ongService.delete(id);
+		return "redirect:/logout?delete";
+	}
 }

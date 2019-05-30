@@ -1,22 +1,22 @@
 package br.com.ongvd.dto;
 
-import java.sql.Date;
-
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 public class EventoDTO {
 
-	@NotEmpty
+	@NotBlank(message = "Por favor preencha este campo")
 	private String nome;
-	@NotEmpty
+	@NotBlank(message = "Por favor preencha este campo")
+	@Size(min = 10, max = 5000, message = "Tamanho do texto entre 10 a 5000 caracteres")
 	private String descricao;
-	private Date dataInclusao;
-	@NotEmpty
+	@NotBlank(message = "Por favor preencha este campo")
 	private String orcamento;
-	@NotEmpty
+	@NotBlank(message = "Por favor preencha este campo")
 	private String contribuicaoParaEvento;
-	@NotEmpty
+	@NotBlank(message = "Por favor preencha este campo")
 	private String duracaoEvento;
+	private Boolean habilitado;
 
 	public String getNome() {
 		return nome;
@@ -32,14 +32,6 @@ public class EventoDTO {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
-	}
-
-	public Date getDataInclusao() {
-		return dataInclusao;
-	}
-
-	public void setDataInclusao(Date dataInclusao) {
-		this.dataInclusao = dataInclusao;
 	}
 
 	public String getOrcamento() {
@@ -64,6 +56,14 @@ public class EventoDTO {
 
 	public void setDuracaoEvento(String duracaoEvento) {
 		this.duracaoEvento = duracaoEvento;
+	}
+
+	public Boolean getHabilitado() {
+		return habilitado;
+	}
+
+	public void setHabilitado(Boolean habilitado) {
+		this.habilitado = habilitado;
 	}
 
 }

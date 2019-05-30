@@ -1,22 +1,20 @@
 package br.com.ongvd.dto;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 
 public class EnderecoDTO {
 
-	@NotEmpty
+	@NotBlank(message = "Por favor preencha este campo")
 	private String cep;
-	@NotEmpty
+	@NotBlank(message = "Por favor preencha este campo")
 	private String logradouro;
-	@NotNull
 	private Integer numero;
 	private String complemento;
-	@NotEmpty
+	@NotBlank(message = "Por favor preencha este campo")
 	private String bairro;
-	@NotEmpty
+	@NotBlank(message = "Por favor preencha este campo")
 	private String cidade;
-	@NotEmpty
+	@NotBlank(message = "Por favor preencha este campo")
 	private String uf;
 
 	public String getCep() {

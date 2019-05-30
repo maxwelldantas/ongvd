@@ -2,6 +2,7 @@ package br.com.ongvd.service;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,17 +13,19 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import br.com.ongvd.dto.EnderecoDTO;
 import br.com.ongvd.dto.OngDTO;
+import br.com.ongvd.model.Endereco;
 import br.com.ongvd.model.Ong;
 import br.com.ongvd.model.Role;
 import br.com.ongvd.repository.OngRepository;
 
 @Service
 public class OngServiceImpl implements OngService {
-
+	
 	@Autowired
 	private OngRepository ongRepository;
-
+	
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 
@@ -40,25 +43,82 @@ public class OngServiceImpl implements OngService {
 		return roles.stream().map(role -> new SimpleGrantedAuthority(role.getNome())).collect(Collectors.toList());
 	}
 
-	public Ong findByEmail(String email) {
-		return ongRepository.findByEmail(email);
-	}
-
-	public Ong save(OngDTO ongDTO) {
+	public void novo(OngDTO ongDTO, EnderecoDTO enderecoDTO) {
 		Ong ong = new Ong();
 		ong.setRazaoSocial(ongDTO.getRazaoSocial());
 		ong.setNomeFantasia(ongDTO.getNomeFantasia());
 		ong.setCnpj(ongDTO.getCnpj());
-		ong.setRamoAtividade(ongDTO.getRamoAtividade());
+		ong.setAreaDeAtuacao(ongDTO.getAreaDeAtuacao());
 		ong.setWebsite(ongDTO.getWebsite());
-		ong.setDescricao(ongDTO.getDescricao());
-		ong.setNomeContato(ongDTO.getNomeContato());
+		ong.setResponsavel(ongDTO.getResponsavel());
+		ong.setFundacao(ongDTO.getFundacao());
+		ong.setContato(ongDTO.getContato());
+		ong.setWhatsapp(ongDTO.getWhatsapp());
 		ong.setTelefone(ongDTO.getTelefone());
 		ong.setEmail(ongDTO.getEmail());
 		ong.setSenha(passwordEncoder.encode(ongDTO.getSenha()));
-		ong.setAtivo(new Boolean(true));
+		ong.setAtivo(Boolean.TRUE);
+		ong.setEnderecos(Arrays.asList(new Endereco(enderecoDTO.getCep(), enderecoDTO.getLogradouro(),
+				enderecoDTO.getNumero(), enderecoDTO.getComplemento(), enderecoDTO.getBairro(), enderecoDTO.getCidade(),
+				enderecoDTO.getUf())));
 		ong.setRoles(Arrays.asList(new Role("ROLE_USER")));
-		return ongRepository.save(ong);
+		ongRepository.save(ong);
 	}
+	
+	public Ong edita(Ong ong, OngDTO ongDTO, Endereco endereco, EnderecoDTO enderecoDTO) {
+		ong.setRazaoSocial(ongDTO.getRazaoSocial());
+		ong.setNomeFantasia(ongDTO.getNomeFantasia());
+		ong.setCnpj(ongDTO.getCnpj());
+		ong.setAreaDeAtuacao(ongDTO.getAreaDeAtuacao());
+		ong.setWebsite(ongDTO.getWebsite());
+		ong.setResponsavel(ongDTO.getResponsavel());
+		ong.setFundacao(ongDTO.getFundacao());
+		ong.setContato(ongDTO.getContato());
+		ong.setWhatsapp(ongDTO.getWhatsapp());
+		ong.setTelefone(ongDTO.getTelefone());
+		ong.setEmail(ongDTO.getEmail());
+		ong.setSenha(ongDTO.getSenha());
+		endereco.setCep(enderecoDTO.getCep());
+		endereco.setLogradouro(enderecoDTO.getLogradouro());
+		endereco.setNumero(enderecoDTO.getNumero());
+		endereco.setComplemento(enderecoDTO.getComplemento());
+		endereco.setBairro(enderecoDTO.getBairro());
+		endereco.setCidade(enderecoDTO.getCidade());
+		endereco.setUf(enderecoDTO.getUf());
+		ong.setEnderecos(Arrays.asList(endereco));
+		return ong;
+	}
+	
+    public List<Ong> getAll() {
+        return ongRepository.findAll();
+    }
+    
+    public void save(Ong ong) {
+    	ongRepository.save(ong);
+    }
+    
+    public Ong findByEmail(String email) {
+		return ongRepository.findByEmail(email);
+	}
+    
+    public Ong findByCnpj(String cnpj) {
+    	return ongRepository.findByCnpj(cnpj);
+    }
+
+    public Ong findByRazaoSocial(String razaoSocial) {
+        return ongRepository.findByRazaoSocial(razaoSocial);
+    }
+    
+    public Ong findById(Long id) {
+        return ongRepository.findById(id).get();
+    }
+    
+    public void delete(Long id) {
+        ongRepository.deleteById(id);
+    }
+
+    public boolean exists(Ong ong) {
+        return findByRazaoSocial(ong.getRazaoSocial()) != null;
+    }
 
 }

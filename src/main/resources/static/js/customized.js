@@ -1,3 +1,4 @@
+/* Busca CEP através da API do ViaCEP */
 $(document).ready(function() {
 
             function limpa_formulário_cep() {
@@ -60,20 +61,47 @@ $(document).ready(function() {
             });
         });
 
-//$(function() {
-//	$(".pop-me-over").popover();
-//});
-
+/* Tooltip */
 $(function tooltip() {
   $('[data-toggle="tooltip"]').tooltip();
-})
+});
 
+$(function () {
+    $('[data-toggle="popover"]').popover();
+});
+
+/* Pegar elementos do Serviço Voluntário */
 $(document).ready(function () {
-    $("#cpf").mask('000.000.000-00', {reverse: true});
+	var emailOng = $("#emailOngDetalhesServicoVoluntario").text();
+    $("#emailParaDetalhesServicoVoluntario").val(emailOng);
+    var nome = $("#nomeDetalhesServicoVoluntario").text();
+    $("#assuntoDetalhesServicoVoluntario").val("Serviço Voluntário: "+nome);
+});
+
+/* Máscaras para os campos */
+$(document).ready(function () {
     $("#cep").mask('00000-000');
     $("#cnpj").mask('00.000.000/0000-00', {reverse: true});
-	/*$("#submitVoluntario").on("mousedown",function(){
-		$cpfMask.unmask();
-		$cpfMask.val().replace(".", "");
-	});*/
+    $('#telefone').inputmask({
+    	  mask: ['(99) 9999-9999', '(99) 99999-9999'],
+    	  keepStatic: true
+    });
+    $("#whatsapp").inputmask({
+  	  mask: ['+99 (99) 9999-9999'],
+	  keepStatic: true
+    });
 });
+
+/* Sidebar Vertival */
+$(document).ready(function() {
+	$("#sidebar").mCustomScrollbar({
+		theme : "minimal"
+	});
+	
+	$('#sidebarCollapse').on('click', function() {
+		$('#sidebar, #content').toggleClass('active');
+		$('.collapse.in').toggleClass('in');
+		$('a[aria-expanded=true]').attr('aria-expanded', 'false');
+	});
+});
+

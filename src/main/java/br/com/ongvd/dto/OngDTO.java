@@ -1,40 +1,51 @@
 package br.com.ongvd.dto;
 
+import java.util.Date;
+
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.br.CNPJ;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import br.com.ongvd.constraint.FieldMatch;
 
 @FieldMatch.List({
-	@FieldMatch(first = "senha", second = "confirmarSenha", message = "Os campos de senha devem corresponder"),
-	@FieldMatch(first = "email", second = "confirmarEmail", message = "Os campos de e-mail devem corresponder") })
+		@FieldMatch(first = "senha", second = "confirmarSenha", message = "Os campos de senha devem corresponder"),
+		@FieldMatch(first = "email", second = "confirmarEmail", message = "Os campos de e-mail devem corresponder") })
 public class OngDTO {
-	
-	@NotEmpty
+
+	@NotBlank(message = "Por favor preencha este campo")
 	private String razaoSocial;
-	@NotEmpty
+	@NotBlank(message = "Por favor preencha este campo")
 	private String nomeFantasia;
-	@NotEmpty
+	@CNPJ(message = "Por favor preencha este campo com um CNPJ válido")
 	private String cnpj;
-	@NotEmpty
-	private String ramoAtividade;
-	@NotEmpty
+	@NotBlank(message = "Por favor preencha este campo")
+	private String areaDeAtuacao;
 	private String website;
-	@NotEmpty
-	private String descricao;
-	@NotEmpty
-	private String nomeContato;
-	@NotEmpty
+	@NotBlank(message = "Por favor preencha este campo")
+	private String responsavel;
+	@NotNull(message = "Por favor preencha este campo")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date fundacao;
+	@NotBlank(message = "Por favor preencha este campo")
+	private String contato;
+	private String whatsapp;
+	@Pattern(regexp = "^\\([1-9]{2}\\) ([0-9]{4}|[0-9]{5})\\-[0-9]{4}$", message = "Por favor preencha este campo corretamente")
 	private String telefone;
-	@Email
-	@NotEmpty
+	@Email(message = "Não é um endereço de e-mail válido")
+	@NotBlank(message = "Por favor preencha este campo")
 	private String email;
-	@Email
-	@NotEmpty
+	@Email(message = "Não é um endereço de e-mail válido")
+	@NotBlank(message = "Por favor preencha este campo")
 	private String confirmarEmail;
-	@NotEmpty
+	@Size(min = 6, max = 20, message = "Tamanho da senha entre 6 a 20 caracteres")
 	private String senha;
-	@NotEmpty
+	@Size(min = 6, max = 20, message = "Tamanho da senha entre 6 a 20 caracteres")
 	private String confirmarSenha;
 
 	public String getRazaoSocial() {
@@ -61,12 +72,12 @@ public class OngDTO {
 		this.cnpj = cnpj;
 	}
 
-	public String getRamoAtividade() {
-		return ramoAtividade;
+	public String getAreaDeAtuacao() {
+		return areaDeAtuacao;
 	}
 
-	public void setRamoAtividade(String ramoAtividade) {
-		this.ramoAtividade = ramoAtividade;
+	public void setAreaDeAtuacao(String areaDeAtuacao) {
+		this.areaDeAtuacao = areaDeAtuacao;
 	}
 
 	public String getWebsite() {
@@ -77,20 +88,36 @@ public class OngDTO {
 		this.website = website;
 	}
 
-	public String getDescricao() {
-		return descricao;
+	public String getResponsavel() {
+		return responsavel;
 	}
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public void setResponsavel(String responsavel) {
+		this.responsavel = responsavel;
 	}
 
-	public String getNomeContato() {
-		return nomeContato;
+	public Date getFundacao() {
+		return fundacao;
 	}
 
-	public void setNomeContato(String nomeContato) {
-		this.nomeContato = nomeContato;
+	public void setFundacao(Date fundacao) {
+		this.fundacao = fundacao;
+	}
+
+	public String getContato() {
+		return contato;
+	}
+
+	public void setContato(String contato) {
+		this.contato = contato;
+	}
+
+	public String getWhatsapp() {
+		return whatsapp;
+	}
+
+	public void setWhatsapp(String whatsapp) {
+		this.whatsapp = whatsapp;
 	}
 
 	public String getTelefone() {
@@ -100,7 +127,7 @@ public class OngDTO {
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-	
+
 	public String getEmail() {
 		return email;
 	}

@@ -1,17 +1,17 @@
 package br.com.ongvd.dto;
 
-import java.sql.Date;
-
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 public class ServicoVoluntarioDTO {
-	
-	@NotEmpty
-	private String nome;
-	@NotEmpty
-	private String descricao;
-	private Date dataInclusao;
 
+	@NotBlank(message = "Por favor preencha este campo")
+	private String nome;
+	@NotBlank(message = "Por favor preencha este campo")
+	@Size(min = 10, max = 5000, message = "Tamanho do texto entre 10 a 5000 caracteres")
+	private String descricao;
+	private Boolean habilitado;
+	
 	public String getNome() {
 		return nome;
 	}
@@ -28,11 +28,12 @@ public class ServicoVoluntarioDTO {
 		this.descricao = descricao;
 	}
 
-	public Date getDataInclusao() {
-		return dataInclusao;
+	public Boolean getHabilitado() {
+		return habilitado;
 	}
 
-	public void setDataInclusao(Date dataInclusao) {
-		this.dataInclusao = dataInclusao;
+	public void setHabilitado(Boolean habilitado) {
+		this.habilitado = habilitado;
 	}
+
 }

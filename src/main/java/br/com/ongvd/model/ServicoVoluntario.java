@@ -1,13 +1,16 @@
 package br.com.ongvd.model;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.Size;
 
 @Entity
 public class ServicoVoluntario {
@@ -15,27 +18,33 @@ public class ServicoVoluntario {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
+	
+	@Column(nullable = false)
 	private String nome;
+	@Column(nullable = false, length = 5000)
 	private String descricao;
-	private Date dataInclusao;
-	private Date dataEncerramento;
+	@Column(nullable = false)
+	private Timestamp dataInclusao;
+	private Timestamp dataAtualizacao;
+	private Timestamp dataDesabilitado;
 	private Boolean habilitado;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "ong_id")
 	private Ong ong;
 
 	public ServicoVoluntario() {
 	}
 
-	public ServicoVoluntario(String nome, String descricao, Date dataInclusao, Date dataEncerramento,
-			Boolean habilitado) {
+	public ServicoVoluntario(String nome, @Size(min = 10, max = 5000) String descricao, Timestamp dataInclusao,
+			Timestamp dataAtualizacao, Timestamp dataDesabilitado, Boolean habilitado, Ong ong) {
 		this.nome = nome;
 		this.descricao = descricao;
 		this.dataInclusao = dataInclusao;
-		this.dataEncerramento = dataEncerramento;
+		this.dataAtualizacao = dataAtualizacao;
+		this.dataDesabilitado = dataDesabilitado;
 		this.habilitado = habilitado;
+		this.ong = ong;
 	}
 
 	public Long getId() {
@@ -62,20 +71,28 @@ public class ServicoVoluntario {
 		this.descricao = descricao;
 	}
 
-	public Date getDataInclusao() {
+	public Timestamp getDataInclusao() {
 		return dataInclusao;
 	}
 
-	public void setDataInclusao(Date dataInclusao) {
+	public void setDataInclusao(Timestamp dataInclusao) {
 		this.dataInclusao = dataInclusao;
 	}
 
-	public Date getDataEncerramento() {
-		return dataEncerramento;
+	public Timestamp getDataAtualizacao() {
+		return dataAtualizacao;
 	}
 
-	public void setDataEncerramento(Date dataEncerramento) {
-		this.dataEncerramento = dataEncerramento;
+	public void setDataAtualizacao(Timestamp dataAtualizacao) {
+		this.dataAtualizacao = dataAtualizacao;
+	}
+
+	public Timestamp getDataDesabilitado() {
+		return dataDesabilitado;
+	}
+
+	public void setDataDesabilitado(Timestamp dataDesabilitado) {
+		this.dataDesabilitado = dataDesabilitado;
 	}
 
 	public Boolean getHabilitado() {
@@ -122,7 +139,8 @@ public class ServicoVoluntario {
 	@Override
 	public String toString() {
 		return "ServicoVoluntario [id=" + id + ", nome=" + nome + ", descricao=" + descricao + ", dataInclusao="
-				+ dataInclusao + ", dataEncerramento=" + dataEncerramento + ", habilitado=" + habilitado + "]";
+				+ dataInclusao + ", dataAtualizacao=" + dataAtualizacao + ", dataDesabilitado=" + dataDesabilitado
+				+ ", habilitado=" + habilitado + ", ong=" + ong + "]";
 	}
 
 }

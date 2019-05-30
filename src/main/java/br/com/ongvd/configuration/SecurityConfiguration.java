@@ -18,13 +18,38 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
-		http.authorizeRequests().antMatchers("/painel/entidade").authenticated()
-				.antMatchers("/js/**", "/css/**", "/webjars/**", "/home", "/doador", "/voluntario", "/entidade",
-						"/entidade/**", "/h2-console/**")
-				.permitAll().anyRequest().authenticated().and().formLogin().loginPage("/login")
-				.defaultSuccessUrl("/painel/entidade", true).permitAll().and().logout().invalidateHttpSession(true)
-				.clearAuthentication(true).logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-				.logoutSuccessUrl("/login?logout").permitAll();
+		http.authorizeRequests()
+				.antMatchers("/painel/**")
+					.authenticated()
+				.antMatchers(
+						"/",
+						"/css/**",
+						"/js/**",
+						"/favicon/**",
+						"/fonts/**",
+						"/img/**",
+						"/home",
+						"/doador/**",
+						"/voluntario/**",
+						"/ong/**",
+						"/h2-console/**")
+					.permitAll()
+						.anyRequest()
+							.authenticated()
+				.and()
+					.formLogin()
+						.loginPage("/login")
+							.defaultSuccessUrl("/painel/ong/main", true)
+								.permitAll()
+				.and()
+					.logout()
+						.invalidateHttpSession(true)
+						.clearAuthentication(true)
+						.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+						.logoutUrl("/logout")
+						.logoutSuccessUrl("/login?logout")
+				.permitAll();
+		
 		http.csrf().disable();
 		http.headers().frameOptions().disable();
 	}

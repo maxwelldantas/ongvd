@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/main}">
+
+<head>
+<title>ONGvd - Formulário para cadastro de Evento da ONG</title>
+</head>
+
+<body>
+	<div layout:fragment="content">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+
+					<div th:if="${param.success}">
+						<div class="alert alert-info d-inline-flex">Evento
+							cadastrado com sucesso!</div>
+					</div>
+
+					<h1>Cadastrar Evento</h1>
+					<form th:action="@{/painel/ong/evento/cadastro}" method="post">
+
+						<div th:object="${evento}">
+							<p class="error-message" th:if="${#fields.hasGlobalErrors()}"
+								th:each="error : ${#fields.errors('global')}" th:text="${error}">
+							</p>
+						</div>
+
+						<div th:object="${evento}">
+							<div class="form-row">
+								<div class="form-group col-md-4"
+									th:classappend="${#fields.hasErrors('nome')}? 'has-error':''">
+									<label for="nome" class="control-label">Nome</label> <input
+										id="nome" class="form-control" th:field="*{nome}" />
+									<p class="error-message"
+										th:each="error: ${#fields.errors('nome')}" th:text="${error}"></p>
+								</div>
+								<div class="form-group col-md-4"
+									th:classappend="${#fields.hasErrors('orcamento')}? 'has-error':''">
+									<label for="orcamento" class="control-label">Orçamento</label>
+									<input id="orcamento" class="form-control"
+										th:field="*{orcamento}" />
+									<p class="error-message"
+										th:each="error: ${#fields.errors('orcamento')}"
+										th:text="${error}"></p>
+								</div>
+								<div class="form-group col-md-4"
+									th:classappend="${#fields.hasErrors('contribuicaoParaEvento')}? 'has-error':''">
+									<label for="contribuicaoParaEvento" class="control-label">Contribuição
+										Financeira (R$)</label> <input id="contribuicaoParaEvento"
+										class="form-control" th:field="*{contribuicaoParaEvento}" />
+									<p class="error-message"
+										th:each="error: ${#fields.errors('contribuicaoParaEvento')}"
+										th:text="${error}"></p>
+								</div>
+								<div class="form-group col-md-4"
+									th:classappend="${#fields.hasErrors('duracaoEvento')}? 'has-error':''">
+									<label for="duracaoEvento" class="control-label">Duração
+										Estimada</label> <input id="duracaoEvento" class="form-control"
+										th:field="*{duracaoEvento}" />
+									<p class="error-message"
+										th:each="error: ${#fields.errors('duracaoEvento')}"
+										th:text="${error}"></p>
+								</div>
+								<div class="form-group col-md-4"
+									th:classappend="${#fields.hasErrors('habilitado')}? 'has-error':''">
+									<label class="control-label">Habilitado</label>
+									<div class="input-group mb-3">
+										<div class="input-group-prepend">
+											<div class="input-group-text">
+												<input type="checkbox" id="habilitado"
+													th:field="*{habilitado}"
+													th:checked="${evento.setHabilitado(true)}">
+											</div>
+										</div>
+									</div>
+									<p class="error-message"
+										th:each="error: ${#fields.errors('habilitado')}"
+										th:text="${error}"></p>
+								</div>
+							</div>
+							<div class="form-row">
+								<div class="form-group col-md-12"
+									th:classappend="${#fields.hasErrors('descricao')}? 'has-error':''">
+									<label for="descricao" class="control-label">Descrição</label>
+									<textarea id="descricao" class="form-control"
+										th:field="*{descricao}" rows=5></textarea>
+									<p class="error-message"
+										th:each="error: ${#fields.errors('descricao')}"
+										th:text="${error}"></p>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<button type="submit" class="btn btn-outline-success">Cadastrar</button>
+							<button type="reset" class="btn btn-outline-primary">Limpar
+								campos</button>
+						</div>
+
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
