@@ -21,8 +21,8 @@ public interface ServicoVoluntarioService {
 	
 	List<ServicoVoluntario> getAllByOng(UserDetails currentUser);
 	
-	List<ServicoVoluntario> getAllByHabilitado(Boolean habilitado);
-
+	List<ServicoVoluntario> getAllHabilitadoTrueAndOngAtivoTrue(List<ServicoVoluntario> servicosOld);
+	
 	ServicoVoluntario get(Long id);
 
 	void delete(Long id);

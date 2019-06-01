@@ -21,8 +21,6 @@ public interface EventoService {
 
 	List<Evento> getAllByOng(UserDetails currentUser);
 	
-	List<Evento> getAllByHabilitado(Boolean habilitado);
-
 	Evento get(Long id);
 
 	void delete(Long id);

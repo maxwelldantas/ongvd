@@ -15,7 +15,5 @@ public interface ServicoVoluntarioRepository extends JpaRepository<ServicoVolunt
 	
 	List<ServicoVoluntario> findAllByOng(Ong ong);
 	
-	List<ServicoVoluntario> findAllByHabilitado(Boolean habilitado);
-	
 	List<ServicoVoluntario> findNomeByOng(Ong ong);
 }

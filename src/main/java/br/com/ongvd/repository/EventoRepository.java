@@ -15,7 +15,5 @@ public interface EventoRepository extends JpaRepository<Evento, Long> {
 	
 	List<Evento> findAllByOng(Ong ong);
 	
-	List<Evento> findAllByHabilitado(Boolean habilitado);
-	
 	List<Evento> findNomeByOng(Ong ong);
 }

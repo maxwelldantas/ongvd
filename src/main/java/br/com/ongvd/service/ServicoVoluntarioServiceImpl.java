@@ -3,6 +3,7 @@ package br.com.ongvd.service;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,6 +65,16 @@ public class ServicoVoluntarioServiceImpl implements ServicoVoluntarioService {
 	public List<ServicoVoluntario> getAll() {
 		return servicoVoluntarioRepository.findAll();
 	}
+	
+	public List<ServicoVoluntario> getAllHabilitadoTrueAndOngAtivoTrue(List<ServicoVoluntario> servicosOld) {
+		List<ServicoVoluntario> servicosNew = new ArrayList<>();
+		for (ServicoVoluntario servico : servicosOld) {
+			if (servico.getHabilitado().equals(true) && servico.getOng().getAtivo().equals(true)) {
+				servicosNew.add(servico);
+			}
+		}
+		return servicosNew;
+	}
 
 	public ServicoVoluntario getByNome(String nome) {
 		return servicoVoluntarioRepository.findByNome(nome);
@@ -72,10 +83,6 @@ public class ServicoVoluntarioServiceImpl implements ServicoVoluntarioService {
 	public List<ServicoVoluntario> getNomeByOng(UserDetails currentUser) {
 		Ong ong = (Ong) ongRepository.findByEmail(currentUser.getUsername());
 		return servicoVoluntarioRepository.findNomeByOng(ong);
-	}
-	
-	public List<ServicoVoluntario> getAllByHabilitado(Boolean habilitado){
-		return servicoVoluntarioRepository.findAllByHabilitado(habilitado);
 	}
 	
 	public ServicoVoluntario get(Long id) {

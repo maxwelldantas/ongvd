@@ -85,10 +85,6 @@ public class EventoServiceImpl implements EventoService {
 		return eventoRepository.findNomeByOng(ong);
 	}
 	
-	public List<Evento> getAllByHabilitado(Boolean habilitado){
-		return eventoRepository.findAllByHabilitado(habilitado);
-	}
-	
 	public Evento get(Long id) {
 		return eventoRepository.findById(id).get();
 	}

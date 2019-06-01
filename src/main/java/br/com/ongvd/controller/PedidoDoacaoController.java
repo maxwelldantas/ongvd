@@ -22,7 +22,7 @@ import br.com.ongvd.service.PedidoDoacaoService;
 @Controller
 @RequestMapping("/painel/ong/pedido-doacao")
 public class PedidoDoacaoController {
-
+	
 	@Autowired
 	private PedidoDoacaoService service;
 
@@ -62,10 +62,9 @@ public class PedidoDoacaoController {
 		return "painel/ong/pedido-doacao/listagem";
 	}
 
-	@RequestMapping(method = RequestMethod.GET, path = "/view-update/{id}")
+	@RequestMapping(method = RequestMethod.GET, path = "/edita-cadastro/{id}")
 	public String listToUpdate(@PathVariable(name = "id") Long id, Model model) {
-		PedidoDoacao pedido = service.get(id);
-		model.addAttribute("pedido", pedido);
+		model.addAttribute("pedido", service.get(id));
 		return "painel/ong/pedido-doacao/edita-cadastro";
 	}
 	
@@ -81,8 +80,8 @@ public class PedidoDoacaoController {
 		if (ong.contains(nome)) {
 			result.rejectValue("nome", null, "Este pedido de doação já está cadastrado!");
 		}
-		if (result.hasErrors()) {
-			return "redirect:/painel/ong/pedido-doacao/view-update/{id}";
+		if (result.hasErrors() && !nome.equals(pedido)) {
+			return "redirect:/painel/ong/pedido-doacao/edita-cadastro/{id}";
 		}
 		service.edita(pedido, pedidoDoacaoDTO);
 		service.save(pedido);
@@ -92,7 +91,7 @@ public class PedidoDoacaoController {
 	@RequestMapping(method = RequestMethod.GET, path = "/{id}/delete")
 	public String delete(@PathVariable("id") Long id) {
 		service.delete(id);
-		return "redirect:/painel/ong/pedido-doacao/listagem";
+		return "redirect:/painel/ong/pedido-doacao/listagem?delete";
 	}
 
 }

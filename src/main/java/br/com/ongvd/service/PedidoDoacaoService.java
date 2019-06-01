@@ -21,8 +21,8 @@ public interface PedidoDoacaoService {
 
 	List<PedidoDoacao> getAllByOng(UserDetails currentUser);
 	
-	List<PedidoDoacao> getAllByHabilitado(Boolean habilitado);
-
+	List<PedidoDoacao> getAllHabilitadoTrueAndOngAtivoTrue(List<PedidoDoacao> pedidosOld);
+	
 	PedidoDoacao get(Long id);
 
 	void delete(Long id);
