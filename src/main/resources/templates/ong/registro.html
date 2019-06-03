@@ -60,7 +60,7 @@
 							      </div>
 							      <p class="error-message" th:each="error: ${#fields.errors('cnpj')}" th:text="${error}"></p>
 							    </div>
-							    <div class="form-group col-sm-6" th:classappend="${#fields.hasErrors('fundacao')}? 'has-error':''">
+							    <div class="form-group col-sm-6">
 							      <label class="sr-only" for="fundacao">Data da Fundação da ONG</label>
 							      <div class="input-group">
 							        <div class="input-group-prepend">
@@ -68,7 +68,6 @@
 							        </div>
 							        <input type="date" th:field="*{fundacao}" class="form-control" id="fundacao">
 							      </div>
-							      <p class="error-message" th:each="error: ${#fields.errors('fundacao')}" th:text="${error}"></p>
 							    </div>
 							    <div class="form-group col-sm-6" th:classappend="${#fields.hasErrors('areaDeAtuacao')}? 'has-error':''">
 							      <label class="sr-only" for="areaDeAtuacao">Área de Atuação</label>

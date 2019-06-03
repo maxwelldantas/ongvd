@@ -72,10 +72,17 @@ $(function () {
 
 /* Pegar elementos do Serviço Voluntário */
 $(document).ready(function () {
-	var emailOng = $("#emailOngDetalhesServicoVoluntario").text();
-    $("#emailParaDetalhesServicoVoluntario").val(emailOng);
-    var nome = $("#nomeDetalhesServicoVoluntario").text();
-    $("#assuntoDetalhesServicoVoluntario").val("Serviço Voluntário: "+nome);
+	var emailServicoVoluntario = $("#emailOngDetalhesServicoVoluntario").text();
+    $("#emailParaDetalhesServicoVoluntario").val(emailServicoVoluntario);
+    var assuntoDetalhesServicoVoluntario = $("#nomeDetalhesServicoVoluntario").text();
+    $("#assuntoDetalhesServicoVoluntario")
+    	.val("Serviço Voluntário: "+assuntoDetalhesServicoVoluntario);
+    
+    var emailPedidoDoacao = $("#emailOngDetalhesPedidoDoador").text();
+    $("#emailParaDetalhesPedidoDoacao").val(emailPedidoDoacao);
+    var assuntoDetalhesPedidoDoador = $("#nomeDetalhesPedidoDoador").text();
+    $("#assuntoDetalhesPedidoDoador")
+    	.val("Pedido de Doação: "+assuntoDetalhesPedidoDoador);
 });
 
 /* Máscaras para os campos */

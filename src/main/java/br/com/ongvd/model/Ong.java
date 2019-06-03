@@ -1,7 +1,7 @@
 package br.com.ongvd.model;
 
+import java.sql.Date;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -40,7 +40,7 @@ public class Ong {
 	private String website;
 	@Column(nullable = false)
 	private String responsavel;
-	@Column(nullable = false)
+	@Column
 	private Date fundacao;
 	@Column(nullable = false)
 	private String contato;
@@ -51,15 +51,13 @@ public class Ong {
 	private String email;
 	@Column(nullable = false)
 	private String senha;
+	@Column
 	private Boolean ativo;
 	
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@Fetch(FetchMode.SUBSELECT)
 	@JoinTable(name = "users_enderecos", joinColumns = @JoinColumn(name = "ong_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "endereco_id", referencedColumnName = "id"))
 	private List<Endereco> enderecos;
-
-	@OneToMany(mappedBy = "ong", cascade = CascadeType.ALL)
-	private List<Evento> eventos;
 
 	@OneToMany(mappedBy = "ong", cascade = CascadeType.ALL)
 	private List<PedidoDoacao> doacoes;
@@ -195,14 +193,6 @@ public class Ong {
 		this.enderecos = enderecos;
 	}
 
-	public List<Evento> getEventos() {
-		return eventos;
-	}
-
-	public void setEventos(List<Evento> eventos) {
-		this.eventos = eventos;
-	}
-
 	public List<PedidoDoacao> getDoacoes() {
 		return doacoes;
 	}
@@ -258,7 +248,7 @@ public class Ong {
 				+ ", areaDeAtuacao=" + areaDeAtuacao + ", website=" + website + ", responsavel=" + responsavel
 				+ ", fundacao=" + fundacao + ", contato=" + contato + ", whatsapp=" + whatsapp + ", telefone="
 				+ telefone + ", email=" + email + ", senha=" + senha + ", ativo=" + ativo + ", enderecos=" + enderecos
-				+ ", eventos=" + eventos + ", doacoes=" + doacoes + ", servicos=" + servicos + ", roles=" + roles + "]";
+				+ ", doacoes=" + doacoes + ", servicos=" + servicos + ", roles=" + roles + "]";
 	}
 
 }

@@ -18,7 +18,7 @@ public interface OngService extends UserDetailsService {
 
 	void novo(OngDTO ongDTO, EnderecoDTO enderecoDTO);
 	
-	Ong edita(Ong ong, OngDTO ongDTO, Endereco endereco, EnderecoDTO enderecoDTO);
+	Ong edita (Ong ong, OngDTO ongDTO, Endereco endereco, EnderecoDTO enderecoDTO);
 	
 	void save(Ong ong);
 

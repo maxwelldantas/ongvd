@@ -48,7 +48,7 @@ Para sistemas operacionais baseados em Unix, execute os seguintes comandos no Te
 $ ./mvnw clean install
 $ ./mvnw spring-boot:run
 ```
-	
+
 Para o sistema operacional Windows, execute os seguintes comandos no Prompt de Comando:
 
 ```sh
@@ -57,3 +57,9 @@ $ ./mvnw.cmd spring-boot:run
 ```
 
 Por fim o link para acessar o projeto em um navegador será `http://localhost:8080`
+
+## Doações
+
+Caso queria ajudar com alguma contribuição fincanceira para continuação do ONGvd, pode-se realizar
+
+- bitcoin:33LBvec6dsvwGW4TwyRWcokDVgbwa1tSri

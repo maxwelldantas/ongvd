@@ -38,7 +38,7 @@ public class ServicoVoluntarioController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST, path = "/cadastro")
-	public String registrarServicoVoluntario(
+	public String cadastrarServicoVoluntario(
 			@ModelAttribute("servico") @Valid ServicoVoluntarioDTO servicoVoluntarioDTO, BindingResult resultServico,
 			ServicoVoluntario servico, @AuthenticationPrincipal UserDetails currentUser) {
 

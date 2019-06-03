@@ -59,7 +59,7 @@
 				<li class="nav-item dropdown"
 					th:classappend="${#httpServletRequest.getRequestURI().startsWith('/doador') ? 'active':''}">
 					<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
-					role="button" aria-haspopup="true" aria-expanded="false">Doador(ra)<span
+					role="button" aria-haspopup="true" aria-expanded="false">Doador(a)<span
 						class="sr-only">(current)</span>
 				</a>
 					<div class="dropdown-menu">
@@ -129,7 +129,6 @@
 								Voluntário</a></li>
 						<li><a th:href="@{/painel/ong/pedido-doacao/cadastro}">Pedido
 								de Doação</a></li>
-						<li><a th:href="@{/painel/ong/evento/cadastro}">Evento</a></li>
 					</ul></li>
 				<li><a href="#submenuListar" data-toggle="collapse"
 					aria-expanded="false" class="dropdown-toggle lateral">Listar</a>
@@ -138,12 +137,11 @@
 								Voluntário</a></li>
 						<li><a th:href="@{/painel/ong/pedido-doacao/listagem}">Pedido
 								de Doação</a></li>
-						<li><a th:href="@{/painel/ong/evento/listagem}">Evento</a></li>
 					</ul></li>
 				<li><a href="#submenuConfiguracoes" data-toggle="collapse"
 					aria-expanded="false" class="dropdown-toggle lateral">Configurações da ONG</a>
 					<ul class="collapse list-unstyled" id="submenuConfiguracoes">
-						<li><a th:href="@{/painel/ong/main}">Configurações</a></li>
+						<li><a th:href="@{/painel/ong/configuracoes}">Configurações</a></li>
 					</ul></li>
 			</ul>
 		</nav>

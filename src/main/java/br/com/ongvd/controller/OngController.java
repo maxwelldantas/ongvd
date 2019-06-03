@@ -1,7 +1,5 @@
 package br.com.ongvd.controller;
 
-import java.util.List;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +7,6 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -69,35 +66,39 @@ public class OngController {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, path = "/painel/ong/alterar-registro/{id}")
-	public String paginaAlterarRegistro(@PathVariable(name = "id") Long id, ModelMap model) {
-		model.put("ong", ongService.findById(id));
+	public String paginaAlterarRegistro(@PathVariable(name = "id") Long id, Model model) {
+		Ong ong = ongService.findById(id);
+		model.addAttribute("ong", ong);
+		model.addAttribute("endereco", ong.getEnderecos().get(0));
 		return "painel/ong/alterar-registro";
 	}
 	
-	@RequestMapping(method = RequestMethod.POST, path = "/painel/ong/alterar-registro/{id}")
+	@RequestMapping(method = RequestMethod.POST, path = "/painel/ong/alterar-registro")
 	public String alterarRegistro(
 			@PathVariable(name = "id") Long id,
 			@ModelAttribute("ong") @Valid OngDTO ongDTO,
 			@ModelAttribute("endereco") @Valid EnderecoDTO enderecoDTO,
-			Endereco endereco, BindingResult result, @AuthenticationPrincipal UserDetails currentUser){
-
+			BindingResult result, @AuthenticationPrincipal UserDetails currentUser){
+		
 		Ong ong = ongService.findById(id);
-		List<Ong> ongs = ongService.getAll();
-		if (ongs.contains(ong)) {
-			result.rejectValue("cnpj", null, "Este CNPJ já está cadastrado!");
-		} 
-		if (result.hasErrors()) {
-			return "redirect:/painel/ong/alterar-registro/{id}?error";
-		}
+		Endereco endereco = ong.getEnderecos().get(0);
+//		List<Ong> ongs = ongService.getAll();
+//		if (ongs.contains(ong)) {
+//			result.rejectValue("cnpj", null, "Este CNPJ já está cadastrado!");
+//		} 
+//		if (result.hasErrors()) {
+//			return "redirect:/painel/ong/alterar-registro/{id}";
+//		}
 		ongService.edita(ong, ongDTO, endereco, enderecoDTO);
-		ongService.novo(ongDTO, enderecoDTO);
-		return "redirect:/painel/ong/alterar-registro/{id}?success";
+		ongService.save(ong);
+		return "redirect:/painel/ong/configuracoes?success";
 	}
 	
-	@RequestMapping(method = RequestMethod.GET, path = "/painel/ong/main")
-	public String painelOng(Model model) {
-		model.addAttribute("ongs", ongService.getAll());
-		return "painel/ong/main";
+	@RequestMapping(method = RequestMethod.GET, path = "/painel/ong/configuracoes")
+	public String painelOng(Model model, @AuthenticationPrincipal UserDetails currentUser) {
+		Ong ong = (Ong) ongService.findByEmail(currentUser.getUsername());
+		model.addAttribute("ong", ong);
+		return "painel/ong/configuracoes";
 	}
 
 	@RequestMapping(method = RequestMethod.GET, path = "/ong/listagem")
@@ -117,7 +118,7 @@ public class OngController {
 		Ong ong = ongService.findById(id);
 		ong.setAtivo(false);
 		ongService.save(ong);
-		return "redirect:/painel/ong/main?deactive";
+		return "redirect:/painel/ong/configuracoes?desativada";
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, path = "/painel/ong/ativar-registro/{id}")
@@ -125,7 +126,7 @@ public class OngController {
 		Ong ong = ongService.findById(id);
 		ong.setAtivo(true);
 		ongService.save(ong);
-		return "redirect:/painel/ong/main?active";
+		return "redirect:/painel/ong/configuracoes?ativada";
 	}
 
 	@RequestMapping(method = RequestMethod.GET, path = "/painel/ong/deletar-registro/{id}")

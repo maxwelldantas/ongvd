@@ -1,15 +1,13 @@
 package br.com.ongvd.dto;
 
-import java.util.Date;
+import java.sql.Date;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.br.CNPJ;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import br.com.ongvd.constraint.FieldMatch;
 
@@ -29,19 +27,16 @@ public class OngDTO {
 	private String website;
 	@NotBlank(message = "Por favor preencha este campo")
 	private String responsavel;
-	@NotNull(message = "Por favor preencha este campo")
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date fundacao;
-	@NotBlank(message = "Por favor preencha este campo")
 	private String contato;
 	private String whatsapp;
 	@Pattern(regexp = "^\\([1-9]{2}\\) ([0-9]{4}|[0-9]{5})\\-[0-9]{4}$", message = "Por favor preencha este campo corretamente")
 	private String telefone;
 	@Email(message = "Não é um endereço de e-mail válido")
-	@NotBlank(message = "Por favor preencha este campo")
+	@Size(min = 1, message =  "Por favor preencha este campo")
 	private String email;
 	@Email(message = "Não é um endereço de e-mail válido")
-	@NotBlank(message = "Por favor preencha este campo")
+	@Size(min = 1, message =  "Por favor preencha este campo")
 	private String confirmarEmail;
 	@Size(min = 6, max = 20, message = "Tamanho da senha entre 6 a 20 caracteres")
 	private String senha;

@@ -76,8 +76,6 @@ public class OngServiceImpl implements OngService {
 		ong.setContato(ongDTO.getContato());
 		ong.setWhatsapp(ongDTO.getWhatsapp());
 		ong.setTelefone(ongDTO.getTelefone());
-		ong.setEmail(ongDTO.getEmail());
-		ong.setSenha(ongDTO.getSenha());
 		endereco.setCep(enderecoDTO.getCep());
 		endereco.setLogradouro(enderecoDTO.getLogradouro());
 		endereco.setNumero(enderecoDTO.getNumero());

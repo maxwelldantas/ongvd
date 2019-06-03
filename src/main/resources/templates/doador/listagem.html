@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/main}">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/main}">
 
 <head>
 <title>ONGvd - Listagem dos Pedidos de Doações disponíveis</title>
@@ -10,7 +12,8 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<h1 class="text-center">Listagem dos Pedidos de Doações disponíveis</h1>
+					<h1 class="text-center">Listagem dos Pedidos de Doações
+						disponíveis</h1>
 					<div class="table-responsive-sm" th:if="${pedidos.size() != 0}">
 						<table class="table table-sm table-bordered table-hover">
 							<thead class="thead-light">
@@ -37,7 +40,8 @@
 					</div>
 					<div class="text-center" th:unless="${pedidos.size() != 0}">
 						<div class="mt-5">
-							<span>Não existem Serviços Voluntários disponíveis no momento.</span>
+							<span>Não existem Serviços Voluntários disponíveis no
+								momento.</span>
 						</div>
 					</div>
 				</div>

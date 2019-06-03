@@ -4,7 +4,7 @@
 	layout:decorate="~{layout/main}">
 
 <head>
-<title>ONGvd - Detalhes do Serviço Voluntário</title>
+<title>ONGvd - Detalhes do Pedido de Doação</title>
 </head>
 
 <body>
@@ -13,7 +13,7 @@
 			<div class="row">
 				<div class="col-md-12">
 
-					<h1>Detalhes do Serviço Voluntário</h1>
+					<h1>Detalhes do Pedido de Doação</h1>
 
 					<div th:if="${param.success}">
 						<div class="alert alert-info d-inline-flex">E-mail enviado
@@ -25,18 +25,30 @@
 							os campos para o envio do e-mail</div>
 					</div>
 
-					<div th:object="${servico}">
+					<div th:object="${pedido}">
 
 						<div class="form-row">
 							<div class="col-sm-6">
 								<label class="cinza">Nome:</label> <span th:text="*{nome}"
-									id="nomeDetalhesServicoVoluntario"></span>
+									id="nomeDetalhesPedidoDoador"></span>
 							</div>
 						</div>
 						<div class="form-row">
 							<div class="col-sm-6">
 								<label class="cinza">Descrição:</label> <span
 									th:text="*{descricao}"></span>
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="col-sm-6">
+								<label class="cinza">Item pedido:</label> <span
+									th:text="*{itemPedido}"></span>
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="col-sm-6">
+								<label class="cinza">(R$) Valor pedido:</label> <span
+									th:text="*{valorPedido}"></span>
 							</div>
 						</div>
 
@@ -74,7 +86,7 @@
 									data-trigger="focus" title="WhatsApp da Ong"
 									data-content="Clique no número do WhatsApp, para ser direcionado para conversar com a ONG (quando disponível)."></i>:
 								</label> <a class="whatsapp" target="_blank"
-									th:href="@{https://api.whatsapp.com/send?phone={ong.whatsapp}(ong.whatsapp=${servico.ong.getWhatsapp().replaceAll('[\\\\(\\\\)\\\-+\s]','')})}"
+									th:href="@{https://api.whatsapp.com/send?phone={ong.whatsapp}(ong.whatsapp=${pedido.ong.getWhatsapp().replaceAll('[\\\\(\\\\)\\\-+\s]','')})}"
 									th:text="*{ong.whatsapp}"></a>
 							</div>
 							<div class="col-sm-6">
@@ -93,13 +105,13 @@
 							</div>
 							<div class="col-sm-6">
 								<label class="cinza">E-mail:</label> <span
-									th:text="*{ong.email}" id="emailOngDetalhesServicoVoluntario"></span>
+									th:text="*{ong.email}" id="emailOngDetalhesPedidoDoador"></span>
 							</div>
 						</div>
 
 						<h5>Informações de endereço da ONG:</h5>
 
-						<div th:each="endereco: ${servico.ong.enderecos}">
+						<div th:each="endereco: ${pedido.ong.enderecos}">
 							<div class="form-row">
 								<div class="col-sm-6">
 									<label class="cinza">CEP:</label> <span
@@ -134,10 +146,10 @@
 						</div>
 
 						<h5>Formulário de envio de e-mail para ONG, a respeito deste
-							Serviço Voluntário:</h5>
+							Pedido de Doação:</h5>
 
 						<form
-							th:action="@{/voluntario/servico-voluntario/{id}(id=${servico.getId()})}"
+							th:action="@{/doador/pedido-doacao/{id}(id=${pedido.getId()})}"
 							method="post" th:object="${email}">
 
 							<p class="error-message" th:if="${#fields.hasGlobalErrors()}"
@@ -154,7 +166,7 @@
 										</div>
 										<input type="email" th:field="*{emailDe}" class="form-control"
 											id="emailDe"
-											placeholder="Voluntário(a) digite seu endereço de e-mail">
+											placeholder="Doador(a) digite seu endereço de e-mail">
 									</div>
 									<p class="error-message"
 										th:each="error: ${#fields.errors('emailDe')}"
@@ -168,7 +180,7 @@
 											<div class="input-group-text">Assunto</div>
 										</div>
 										<input type="text" th:field="*{assunto}" class="form-control"
-											id="assuntoDetalhesServicoVoluntario" placeholder="Digite o assunto">
+											id="assuntoDetalhesPedidoDoador" placeholder="Digite o assunto">
 									</div>
 									<p class="error-message"
 										th:each="error: ${#fields.errors('assunto')}"
