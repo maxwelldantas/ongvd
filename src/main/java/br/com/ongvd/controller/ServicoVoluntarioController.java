@@ -63,25 +63,25 @@ public class ServicoVoluntarioController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET, path = "/edita-cadastro/{id}")
-	public String listToUpdate(@PathVariable(name = "id") Long id, Model model) {
+	public String mostrarFormularioParaEditar(@PathVariable(name = "id") Long id, Model model) {
 		model.addAttribute("servico", service.get(id));
 		return "painel/ong/servico-voluntario/edita-cadastro";
 	}
-	
-	@RequestMapping(method = RequestMethod.POST, path = "/edita-cadastro/{id}")
-	public String update(
-			@PathVariable(name = "id") Long id,
-			@ModelAttribute("servico") @Valid ServicoVoluntarioDTO servicoVoluntarioDTO,
-			BindingResult resultServico, @AuthenticationPrincipal UserDetails currentUser){
+
+	@RequestMapping(method = RequestMethod.POST, path = "/atualizar-cadastro/{id}")
+	public String atualizar(@PathVariable(name = "id") Long id,
+			@ModelAttribute("servico") @Valid ServicoVoluntarioDTO servicoVoluntarioDTO, BindingResult resultServico,
+			@AuthenticationPrincipal UserDetails currentUser) {
 
 		ServicoVoluntario servico = service.get(id);
 		ServicoVoluntario nome = service.getByNome(servicoVoluntarioDTO.getNome());
 		List<ServicoVoluntario> ong = service.getNomeByOng(currentUser);
-		if (ong.contains(nome)) {
+		if (ong.contains(nome) && !nome.equals(servico)) {
 			resultServico.rejectValue("nome", null, "Este serviço voluntário já está cadastrado!");
-		} 
-		if (resultServico.hasErrors() && !nome.equals(servico)) {
-			return "redirect:/painel/ong/servico-voluntario/edita-cadastro/{id}";
+		}
+		if (resultServico.hasErrors()) {
+			servicoVoluntarioDTO.setId(id);
+			return "painel/ong/servico-voluntario/edita-cadastro";
 		}
 		service.edita(servico, servicoVoluntarioDTO);
 		service.save(servico);
