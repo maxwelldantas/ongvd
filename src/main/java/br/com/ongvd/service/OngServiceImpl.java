@@ -65,7 +65,7 @@ public class OngServiceImpl implements OngService {
 		ongRepository.save(ong);
 	}
 	
-	public Ong edita(Ong ong, OngDTO ongDTO, Endereco endereco, EnderecoDTO enderecoDTO) {
+	public Ong edita(Ong ong, OngDTO ongDTO) {
 		ong.setRazaoSocial(ongDTO.getRazaoSocial());
 		ong.setNomeFantasia(ongDTO.getNomeFantasia());
 		ong.setCnpj(ongDTO.getCnpj());
@@ -76,14 +76,6 @@ public class OngServiceImpl implements OngService {
 		ong.setContato(ongDTO.getContato());
 		ong.setWhatsapp(ongDTO.getWhatsapp());
 		ong.setTelefone(ongDTO.getTelefone());
-		endereco.setCep(enderecoDTO.getCep());
-		endereco.setLogradouro(enderecoDTO.getLogradouro());
-		endereco.setNumero(enderecoDTO.getNumero());
-		endereco.setComplemento(enderecoDTO.getComplemento());
-		endereco.setBairro(enderecoDTO.getBairro());
-		endereco.setCidade(enderecoDTO.getCidade());
-		endereco.setUf(enderecoDTO.getUf());
-		ong.setEnderecos(Arrays.asList(endereco));
 		return ong;
 	}
 	

@@ -15,6 +15,11 @@
 
 			<h1>Configurações da ONG</h1>
 
+			<div th:if="${param.success}">
+				<div class="alert alert-info d-inline-flex">Dados da ONG alterados com
+					sucesso!</div>
+			</div>
+
 			<div th:if="${param.desativada}">
 				<div class="alert alert-info col-md-8">ONG desativada com
 					sucesso!</div>
@@ -26,14 +31,15 @@
 			</div>
 
 			<div class="form-group">
-				<label class="text-justify">Para alterar os dados registrados da ONG, clique no
-					botão abaixo:</label> <a class="btn btn-outline-primary col-md-4"
+				<label class="text-justify">Para alterar os dados
+					registrados da ONG, clique no botão abaixo:</label> <a
+					class="btn btn-outline-primary col-md-4"
 					th:href="@{/painel/ong/alterar-registro/{id}(id=${ong.getId()})}">Alterar
 					registro</a>
 			</div>
 			<div class="form-group">
-				<label class="text-justify">Para desativar ou ativar a ONG, clique em um dos
-					botões abaixo:</label> <label class="row col-md-6">Estado:&nbsp;<b
+				<label class="text-justify">Para desativar ou ativar a ONG,
+					clique em um dos botões abaixo:</label> <label class="row col-md-6">Estado:&nbsp;<b
 					th:text="${ong.getAtivo()} ? 'Ativa' : 'Desativada'"></b></label> <a
 					class="btn btn-outline-secondary col-md-4"
 					th:href="@{/painel/ong/desativar-registro/{id}(id=${ong.getId()})}">Desativar
@@ -42,7 +48,9 @@
 					ONG</a>
 			</div>
 			<div class="form-group">
-				<label class="text-justify">Para deletar a ONG juntamente com todos os cadastros, clique no botão abaixo:</label> <a class="btn btn-outline-danger col-md-4"
+				<label class="text-justify">Para deletar a ONG juntamente
+					com todos os cadastros, clique no botão abaixo:</label> <a
+					class="btn btn-outline-danger col-md-4"
 					th:href="@{/painel/ong/deletar-registro/{id}(id=${ong.getId()})}"
 					th:onclick="return confirm('Realmente quer deletar o registro completo da ONG? Se deletado serão perdidos todos os Pedidos de Doações e Serviços Voluntários cadastrados juntamente com o registro da ONG!');">Deletar
 					ONG</a>

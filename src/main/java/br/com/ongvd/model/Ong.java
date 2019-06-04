@@ -18,9 +18,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-
 @Entity
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = { "email", "cnpj" }))
 public class Ong {
@@ -54,8 +51,7 @@ public class Ong {
 	@Column
 	private Boolean ativo;
 	
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@Fetch(FetchMode.SUBSELECT)
+	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "users_enderecos", joinColumns = @JoinColumn(name = "ong_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "endereco_id", referencedColumnName = "id"))
 	private List<Endereco> enderecos;
 
@@ -66,7 +62,6 @@ public class Ong {
 	private List<ServicoVoluntario> servicos;
 
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@Fetch(FetchMode.SUBSELECT)
 	@JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "ong_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
 	private Collection<Role> roles;
 

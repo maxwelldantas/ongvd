@@ -38,20 +38,15 @@
 									<p class="error-message"
 										th:each="error: ${#fields.errors('nome')}" th:text="${error}"></p>
 								</div>
-								<div class="form-group col-md-6"
-									th:classappend="${#fields.hasErrors('habilitado')}? 'has-error':''">
-									<label class="control-label">Habilitado</label>
-									<div class="input-group mb-3">
-										<div class="input-group-prepend">
-											<div class="input-group-text">
-												<input type="checkbox" id="habilitado"
-													th:field="*{habilitado}" th:checked="${servico.setHabilitado(true)}">
-											</div>
-										</div>
+							</div>
+							<div class="form-row">
+								<div class="form-group col-md-6">
+									<div class="custom-control custom-checkbox">
+										<input type="checkbox" id="habilitado"
+											class="custom-control-input" th:field="*{habilitado}"
+											th:checked="${servico.setHabilitado(true)}"> <label
+											class="custom-control-label" for="habilitado">Habilitado</label>
 									</div>
-									<p class="error-message"
-										th:each="error: ${#fields.errors('habilitado')}"
-										th:text="${error}"></p>
 								</div>
 							</div>
 							<div class="form-row">

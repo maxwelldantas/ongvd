@@ -211,7 +211,12 @@ a.article, a.article:hover {
 }
 
 .error-message {
-	color: red;
+/* 	color: red; */
+width:100%;margin-top:.25rem;font-size:80%;color:#dc3545;
+}
+
+.verticalMiddle {
+	vertical-align: middle!important;
 }
 
 .dropdown-menu {

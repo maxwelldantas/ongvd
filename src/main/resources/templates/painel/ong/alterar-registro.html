@@ -24,190 +24,62 @@
                         
                         <div th:object="${ong}">
                             <div class="form-row">
-                            	<div class="form-group col-sm-6" th:classappend="${#fields.hasErrors('razaoSocial')}? 'has-error':''">
-							      <label class="sr-only" for="razaoSocial">Razão Social</label>
-							      <div class="input-group">
-							        <div class="input-group-prepend">
-							          <div class="input-group-text">Razão Social</div>
-							        </div>
-							        <input type="text" th:field="*{razaoSocial}" class="form-control" id="razaoSocial">
-							      </div>
-							      <p class="error-message" th:each="error: ${#fields.errors('razaoSocial')}" th:text="${error}"></p>
-							    </div>
-							    <div class="form-group col-sm-6" th:classappend="${#fields.hasErrors('nomeFantasia')}? 'has-error':''">
-							      <label class="sr-only" for="nomeFantasia">Nome Fantasia</label>
-							      <div class="input-group">
-							        <div class="input-group-prepend">
-							          <div class="input-group-text">Nome Fantasia</div>
-							        </div>
-							        <input type="text" th:field="*{nomeFantasia}" class="form-control" id="nomeFantasia">
-							      </div>
-							      <p class="error-message" th:each="error: ${#fields.errors('nomeFantasia')}" th:text="${error}"></p>
-							    </div>
-							    <div class="form-group col-sm-6" th:classappend="${#fields.hasErrors('cnpj')}? 'has-error':''">
-							      <label class="sr-only" for="cnpj">CNPJ</label>
-							      <div class="input-group">
-							        <div class="input-group-prepend">
-							          <div class="input-group-text">CNPJ</div>
-							        </div>
-							        <input type="text" th:field="*{cnpj}" class="form-control" id="cnpj">
-							      </div>
-							      <p class="error-message" th:each="error: ${#fields.errors('cnpj')}" th:text="${error}"></p>
-							    </div>
-							    <div class="form-group col-sm-6">
-							      <label class="sr-only" for="fundacao">Data da Fundação da ONG</label>
-							      <div class="input-group">
-							        <div class="input-group-prepend">
-							          <div class="input-group-text">Data da Fundação da ONG</div>
-							        </div>
-							        <input type="date" th:field="*{fundacao}" class="form-control" id="fundacao">
-							      </div>
-							    </div>
-							    <div class="form-group col-sm-6" th:classappend="${#fields.hasErrors('areaDeAtuacao')}? 'has-error':''">
-							      <label class="sr-only" for="areaDeAtuacao">Área de Atuação</label>
-							      <div class="input-group">
-							        <div class="input-group-prepend">
-							          <div class="input-group-text">Área de Atuação</div>
-							        </div>
-							        <input type="text" th:field="*{areaDeAtuacao}" class="form-control" id="areaDeAtuacao">
-							      </div>
-							      <p class="error-message" th:each="error: ${#fields.errors('areaDeAtuacao')}" th:text="${error}"></p>
-							    </div>
-							    <div class="form-group col-sm-6" th:classappend="${#fields.hasErrors('responsavel')}? 'has-error':''">
-							      <label class="sr-only" for="responsavel">Responsável</label>
-							      <div class="input-group">
-							        <div class="input-group-prepend">
-							          <div class="input-group-text">Responsável</div>
-							        </div>
-							        <input type="text" th:field="*{responsavel}" class="form-control" id="responsavel">
-							      </div>
-							      <p class="error-message" th:each="error: ${#fields.errors('responsavel')}" th:text="${error}"></p>
-							    </div>
-							    <div class="form-group col-sm-6" th:classappend="${#fields.hasErrors('contato')}? 'has-error':''">
-							      <label class="sr-only" for="contato">Contato</label>
-							      <div class="input-group">
-							        <div class="input-group-prepend">
-							          <div class="input-group-text">Contato</div>
-							        </div>
-							        <input type="text" th:field="*{contato}" class="form-control" id="contato">
-							      </div>
-							      <p class="error-message" th:each="error: ${#fields.errors('contato')}" th:text="${error}"></p>
-							    </div>
-							    <div class="form-group col-sm-6" th:classappend="${#fields.hasErrors('whatsapp')}? 'has-error':''">
-							      <label class="sr-only" for="whatsapp">WhatsApp</label>
-							      <div class="input-group">
-							        <div class="input-group-prepend">
-							          <div class="input-group-text">WhatsApp<i tabindex="0" 
+                            	<div class="form-group col-md-4" th:classappend="${#fields.hasErrors('razaoSocial')}? 'has-error':''">
+                                    <label for="razaoSocial" class="control-label">Razão Social</label>
+                                    <input id="razaoSocial" class="form-control" th:field="*{razaoSocial}" />
+                                    <p class="error-message" th:each="error: ${#fields.errors('razaoSocial')}" th:text="${error}"></p>
+                                </div>
+                                <div class="form-group col-md-4" th:classappend="${#fields.hasErrors('nomeFantasia')}? 'has-error':''">
+                                    <label for="nomeFantasia" class="control-label">Nome Fantasia</label>
+                                    <input id="nomeFantasia" class="form-control" th:field="*{nomeFantasia}" />
+                                    <p class="error-message" th:each="error: ${#fields.errors('nomeFantasia')}" th:text="${error}"></p>
+                                </div>
+                                <div class="form-group col-md-4" th:classappend="${#fields.hasErrors('cnpj')}? 'has-error':''">
+                                    <label for="cnpj" class="control-label">CNPJ</label>
+                                    <input id="cnpj" class="form-control" th:field="*{cnpj}" />
+                                    <p class="error-message" th:each="error: ${#fields.errors('cnpj')}" th:text="${error}"></p>
+                                </div>
+                                <div class="form-group col-md-4" th:classappend="${#fields.hasErrors('fundacao')}? 'has-error':''">
+                                    <label for="fundacao" class="control-label">Data da Fundação</label>
+                                    <input type="date" id="fundacao" class="form-control" th:field="*{fundacao}" />
+                                </div>
+                                <div class="form-group col-md-4" th:classappend="${#fields.hasErrors('areaDeAtuacao')}? 'has-error':''">
+                                    <label for="areaDeAtuacao" class="control-label">Área de Atuação</label>
+                                    <input type="date" id="areaDeAtuacao" class="form-control" th:field="*{areaDeAtuacao}" />
+                                    <p class="error-message" th:each="error: ${#fields.errors('areaDeAtuacao')}" th:text="${error}"></p>
+                                </div>
+                                <div class="form-group col-md-4" th:classappend="${#fields.hasErrors('responsavel')}? 'has-error':''">
+                                    <label for="responsavel" class="control-label">Responsável</label>
+                                    <input id="responsavel" class="form-control" th:field="*{responsavel}" />
+                                    <p class="error-message" th:each="error: ${#fields.errors('responsavel')}" th:text="${error}"></p>
+                                </div>
+                                <div class="form-group col-md-4" th:classappend="${#fields.hasErrors('contato')}? 'has-error':''">
+                                    <label for="contato" class="control-label">Contato</label>
+                                    <input id="contato" class="form-control" th:field="*{contato}" />
+                                    <p class="error-message" th:each="error : ${#fields.errors('contato')}" th:text="${error}"></p>
+                                </div>
+                                <div class="form-group col-md-4" th:classappend="${#fields.hasErrors('whatsapp')}? 'has-error':''">
+                                    <label class="control-label">WhatsApp<i tabindex="0" 
 							          class="fas fa-exclamation-circle" data-toggle="popover" data-trigger="focus" 
 							          title="WhatsApp da Ong" data-content="Digite o número de WhatsApp da ONG neste campo (exemplo: +55 (34) 9999-9999,
 							          onde +55 é o código do país (no caso +55 é o código do Brasil), (34) é o DDD sem o digito 0 e 9999-9999 é o número do chip do celular
 							          sem o nono (9) digito), para o(a) voluntário(a) e doador(a) entrar em contato com a ONG pelo WhatsApp.
 							          Caso não digite, o(a) voluntário(a) ou doador(a) não será direcionado para conversar a ONG pelo WhatsApp e terá que contatar
-							          a ONG por e-mail ou telefone cadastrados no sistema."></i>
-							          </div>
-							        </div>
-							        <input type="tel" th:field="*{whatsapp}" pattern="\+[0-9]{2} ([0-9]{2}\) [0-9]{4}-[0-9]{4}$" class="form-control" id="whatsapp">
-							      </div>
-							      <p class="error-message" th:each="error: ${#fields.errors('whatsapp')}" th:text="${error}"></p>
-							    </div>
-							    <div class="form-group col-sm-6" th:classappend="${#fields.hasErrors('telefone')}? 'has-error':''">
-							      <label class="sr-only" for="telefone">Telefone</label>
-							      <div class="input-group">
-							        <div class="input-group-prepend">
-							          <div class="input-group-text">Telefone</div>
-							        </div>
-							        <input type="tel" th:field="*{telefone}" class="form-control" id="telefone">
-							      </div>
-							      <p class="error-message" th:each="error: ${#fields.errors('telefone')}" th:text="${error}"></p>
-							    </div>
-                                <div class="form-group col-sm-6" th:classappend="${#fields.hasErrors('website')}? 'has-error':''">
-							      <label class="sr-only" for="website">Website</label>
-							      <div class="input-group">
-							        <div class="input-group-prepend">
-							          <div class="input-group-text">Website</div>
-							        </div>
-							        <input type="text" th:field="*{website}" class="form-control" id="website">
-							      </div>
-							      <p class="error-message" th:each="error: ${#fields.errors('website')}" th:text="${error}"></p>
-							    </div>
+							          a ONG por e-mail ou telefone cadastrados no sistema."></i></label>
+                                    <input id="whatsapp" class="form-control" th:field="*{whatsapp}" />
+                                    <p class="error-message" th:each="error: ${#fields.errors('whatsapp')}" th:text="${error}"></p>
+                                </div>
+                                <div class="form-group col-md-4" th:classappend="${#fields.hasErrors('telefone')}? 'has-error':''">
+                                    <label for="telefone" class="control-label">Telefone</label>
+                                    <input id="telefone" class="form-control" th:field="*{telefone}" />
+                                    <p class="error-message" th:each="error : ${#fields.errors('telefone')}" th:text="${error}"></p>
+                                </div>
+                                <div class="form-group col-md-4" th:classappend="${#fields.hasErrors('website')}? 'has-error':''">
+                                    <label for="website" class="control-label">Website</label>
+                                    <input id="website" class="form-control" th:field="*{website}" />
+                                    <p class="error-message" th:each="error: ${#fields.errors('website')}" th:text="${error}"></p>
+                                </div>
 							</div>
-                        </div>
-						
-						<h6>Preencha também a parte do formulário de endereço, com as informações de localização da ONG:</h6>
-						
-                        <div th:object="${endereco}">
-                            <div class="form-row">
-                                <div class="form-group col-sm-3" th:classappend="${#fields.hasErrors('cep')}? 'has-error':''">
-							      <label class="sr-only" for="cep">CEP</label>
-							      <div class="input-group">
-							        <div class="input-group-prepend">
-							          <div class="input-group-text">CEP</div>
-							        </div>
-							        <input type="text" th:field="*{cep}" class="form-control" id="cep">
-							      </div>
-							      <p class="error-message" th:each="error: ${#fields.errors('cep')}" th:text="${error}"></p>
-							    </div>
-                                <div class="form-group col-sm-6" th:classappend="${#fields.hasErrors('logradouro')}? 'has-error':''">
-							      <label class="sr-only" for="logradouro">Logradouro</label>
-							      <div class="input-group">
-							        <div class="input-group-prepend">
-							          <div class="input-group-text">Logradouro</div>
-							        </div>
-							        <input type="text" th:field="*{logradouro}" class="form-control" id="logradouro">
-							      </div>
-							      <p class="error-message" th:each="error: ${#fields.errors('logradouro')}" th:text="${error}"></p>
-							    </div>
-                                <div class="form-group col-sm-3" th:classappend="${#fields.hasErrors('numero')}? 'has-error':''">
-							      <label class="sr-only" for="numero">Número</label>
-							      <div class="input-group">
-							        <div class="input-group-prepend">
-							          <div class="input-group-text">Número</div>
-							        </div>
-							        <input type="number" th:field="*{numero}" class="form-control" id="numero">
-							      </div>
-							      <p class="error-message" th:each="error: ${#fields.errors('numero')}" th:text="${error}"></p>
-							    </div>
-                                <div class="form-group col-sm-4" th:classappend="${#fields.hasErrors('complemento')}? 'has-error':''">
-							      <label class="sr-only" for="complemento">Complemento</label>
-							      <div class="input-group">
-							        <div class="input-group-prepend">
-							          <div class="input-group-text">Complemento</div>
-							        </div>
-							        <input type="text" th:field="*{complemento}" class="form-control" id="complemento">
-							      </div>
-							      <p class="error-message" th:each="error: ${#fields.errors('complemento')}" th:text="${error}"></p>
-							    </div>
-                                <div class="form-group col-sm-4" th:classappend="${#fields.hasErrors('bairro')}? 'has-error':''">
-							      <label class="sr-only" for="bairro">Bairro</label>
-							      <div class="input-group">
-							        <div class="input-group-prepend">
-							          <div class="input-group-text">Bairro</div>
-							        </div>
-							        <input type="text" th:field="*{bairro}" class="form-control" id="bairro">
-							      </div>
-							      <p class="error-message" th:each="error: ${#fields.errors('bairro')}" th:text="${error}"></p>
-							    </div>
-                                <div class="form-group col-sm-4" th:classappend="${#fields.hasErrors('cidade')}? 'has-error':''">
-							      <label class="sr-only" for="cidade">Cidade</label>
-							      <div class="input-group">
-							        <div class="input-group-prepend">
-							          <div class="input-group-text">Cidade</div>
-							        </div>
-							        <input type="text" th:field="*{cidade}" class="form-control" id="cidade">
-							      </div>
-							      <p class="error-message" th:each="error: ${#fields.errors('cidade')}" th:text="${error}"></p>
-							    </div>
-                                <div class="form-group col-sm-3" th:classappend="${#fields.hasErrors('uf')}? 'has-error':''">
-							      <label class="sr-only" for="uf">UF</label>
-							      <div class="input-group">
-							        <div class="input-group-prepend">
-							          <div class="input-group-text">UF</div>
-							        </div>
-							        <input type="text" th:field="*{uf}" class="form-control" id="uf">
-							      </div>
-							      <p class="error-message" th:each="error: ${#fields.errors('uf')}" th:text="${error}"></p>
-							    </div>
-                            </div>
                         </div>
 
                         <div class="form-group">

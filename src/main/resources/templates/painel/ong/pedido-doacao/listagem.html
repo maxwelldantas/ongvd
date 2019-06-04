@@ -22,36 +22,38 @@
 					</div>
 					
 					<div class="table-responsive-sm">
-						<table class="table table-sm table-bordered table-hover">
+						<table class="table table-sm table-bordered table-hover text-center">
 							<thead class="thead-light">
 								<tr>
-									<th scope="col">Nome</th>
-									<th scope="col">Descrição</th>
-									<th scope="col">Item Pedido</th>
-									<th scope="col">(R$) Valor Pedido</th>
-									<th scope="col">Habilitado</th>
-									<th scope="col">Data/Horário Inclusão</th>
-									<th scope="col">Data/Horário Atualização</th>
-									<th scope="col">Data/Horário Desabilitado</th>
-									<th scope="col">Ações</th>
+									<th scope="col" class="verticalMiddle">Nome</th>
+									<th scope="col" class="verticalMiddle">Descrição</th>
+									<th scope="col" class="verticalMiddle">Item Pedido</th>
+									<th scope="col" class="verticalMiddle">(R$) Valor Pedido</th>
+									<th scope="col" class="verticalMiddle">Habilitado</th>
+									<th scope="col" class="verticalMiddle">Data/Horário Inclusão</th>
+									<th scope="col" class="verticalMiddle">Data/Horário Atualização</th>
+									<th scope="col" class="verticalMiddle">Data/Horário Desabilitado</th>
+									<th scope="col" class="verticalMiddle">Ações</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr th:each="pedido: ${pedidos}">
-									<td th:text="${pedido.getNome()}"></td>
-									<td th:text="${pedido.getDescricao()}"></td>
-									<td th:text="${pedido.getItemPedido()}"></td>
-									<td th:text="${pedido.getValorPedido()}"></td>
-									<td th:text="${pedido.getHabilitado()} ? 'habilitado' : 'desabilitado'"></td>
-									<td th:text="${#dates.format(pedido.getDataInclusao(),'dd/MMMM/yyyy HH:mm:ss')}"></td>
-									<td th:text="${#dates.format(pedido.getDataAtualizacao(),'dd/MMMM/yyyy HH:mm:ss')}"></td>
-									<td th:text="${#dates.format(pedido.getDataDesabilitado(),'dd/MMMM/yyyy HH:mm:ss')}"></td>
-									<td class="d-inline-flex"><a
-										class="btn btn-primary btn-group mr-2"
-										th:href="@{/painel/ong/pedido-doacao/edita-cadastro/{id}(id=${pedido.getId()})}">editar</a>
-										<a class="btn btn-danger btn-group mr-2"
-										th:href="@{/painel/ong/pedido-doacao/{id}/delete(id=${pedido.getId()})}"
-										th:onclick="return confirm('Você realmente quer deletar este Pedido de Doação?');">deletar</a>
+									<td th:text="${pedido.getNome()}" class="verticalMiddle"></td>
+									<td th:text="${pedido.getDescricao()}" class="verticalMiddle"></td>
+									<td th:text="${pedido.getItemPedido()}" class="verticalMiddle"></td>
+									<td th:text="${pedido.getValorPedido()}" class="verticalMiddle"></td>
+									<td th:text="${pedido.getHabilitado()} ? 'Sim' : 'Não'" class="verticalMiddle"></td>
+									<td th:text="${#dates.format(pedido.getDataInclusao(),'dd/MMMM/yyyy HH:mm:ss')}" class="verticalMiddle"></td>
+									<td th:text="${#dates.format(pedido.getDataAtualizacao(),'dd/MMMM/yyyy HH:mm:ss')}" class="verticalMiddle"></td>
+									<td th:text="${#dates.format(pedido.getDataDesabilitado(),'dd/MMMM/yyyy HH:mm:ss')}" class="verticalMiddle"></td>
+									<td class="verticalMiddle">
+										<div class="btn-group">
+											<a class="btn btn-primary mr-2"
+												th:href="@{/painel/ong/pedido-doacao/edita-cadastro/{id}(id=${pedido.getId()})}">editar</a>
+											<a class="btn btn-danger"
+												th:href="@{/painel/ong/pedido-doacao/{id}/delete(id=${pedido.getId()})}"
+												th:onclick="return confirm('Você realmente quer deletar este Pedido de Doação?');">deletar</a>
+										</div>
 									</td>
 								</tr>
 							</tbody>

@@ -77,11 +77,12 @@ public class PedidoDoacaoController {
 		PedidoDoacao pedido = service.get(id);
 		PedidoDoacao nome = service.getByNome(pedidoDoacaoDTO.getNome());
 		List<PedidoDoacao> ong = service.getNomeByOng(currentUser);
-		if (ong.contains(nome)) {
+		if (ong.contains(nome) && !nome.equals(pedido)) {
 			result.rejectValue("nome", null, "Este pedido de doação já está cadastrado!");
 		}
-		if (result.hasErrors() && !nome.equals(pedido)) {
-			return "redirect:/painel/ong/pedido-doacao/edita-cadastro/{id}";
+		if (result.hasErrors()) {
+			pedidoDoacaoDTO.setId(id);
+			return "painel/ong/pedido-doacao/edita-cadastro";
 		}
 		service.edita(pedido, pedidoDoacaoDTO);
 		service.save(pedido);

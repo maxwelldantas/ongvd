@@ -13,4 +13,5 @@ public interface OngRepository extends JpaRepository<Ong, Long> {
 	Ong findByRazaoSocial(String razaoSocial);
 	
 	Ong findByCnpj(String cnpj);
+
 }
