@@ -58,9 +58,9 @@ public class OngServiceImpl implements OngService {
 		ong.setEmail(ongDTO.getEmail());
 		ong.setSenha(passwordEncoder.encode(ongDTO.getSenha()));
 		ong.setAtivo(Boolean.TRUE);
-		ong.setEnderecos(Arrays.asList(new Endereco(enderecoDTO.getCep(), enderecoDTO.getLogradouro(),
+		ong.setEnderecos(Arrays.asList((new Endereco(enderecoDTO.getCep(), enderecoDTO.getLogradouro(),
 				enderecoDTO.getNumero(), enderecoDTO.getComplemento(), enderecoDTO.getBairro(), enderecoDTO.getCidade(),
-				enderecoDTO.getUf())));
+				enderecoDTO.getUf()))));
 		ong.setRoles(Arrays.asList(new Role("ROLE_USER")));
 		ongRepository.save(ong);
 	}

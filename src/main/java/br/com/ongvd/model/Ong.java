@@ -2,7 +2,7 @@ package br.com.ongvd.model;
 
 import java.sql.Date;
 import java.util.Collection;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -53,13 +53,13 @@ public class Ong {
 	
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "users_enderecos", joinColumns = @JoinColumn(name = "ong_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "endereco_id", referencedColumnName = "id"))
-	private List<Endereco> enderecos;
+	private Collection<Endereco> enderecos;
 
 	@OneToMany(mappedBy = "ong", cascade = CascadeType.ALL)
-	private List<PedidoDoacao> doacoes;
+	private Set<PedidoDoacao> doacoes;
 
 	@OneToMany(mappedBy = "ong", cascade = CascadeType.ALL)
-	private List<ServicoVoluntario> servicos;
+	private Set<ServicoVoluntario> servicos;
 
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "ong_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
@@ -180,27 +180,27 @@ public class Ong {
 		this.ativo = ativo;
 	}
 
-	public List<Endereco> getEnderecos() {
+	public Collection<Endereco> getEnderecos() {
 		return enderecos;
 	}
 
-	public void setEnderecos(List<Endereco> enderecos) {
+	public void setEnderecos(Collection<Endereco> enderecos) {
 		this.enderecos = enderecos;
 	}
 
-	public List<PedidoDoacao> getDoacoes() {
+	public Set<PedidoDoacao> getDoacoes() {
 		return doacoes;
 	}
 
-	public void setDoacoes(List<PedidoDoacao> doacoes) {
+	public void setDoacoes(Set<PedidoDoacao> doacoes) {
 		this.doacoes = doacoes;
 	}
 
-	public List<ServicoVoluntario> getServicos() {
+	public Set<ServicoVoluntario> getServicos() {
 		return servicos;
 	}
 
-	public void setServicos(List<ServicoVoluntario> servicos) {
+	public void setServicos(Set<ServicoVoluntario> servicos) {
 		this.servicos = servicos;
 	}
 
@@ -242,8 +242,7 @@ public class Ong {
 		return "Ong [id=" + id + ", razaoSocial=" + razaoSocial + ", nomeFantasia=" + nomeFantasia + ", cnpj=" + cnpj
 				+ ", areaDeAtuacao=" + areaDeAtuacao + ", website=" + website + ", responsavel=" + responsavel
 				+ ", fundacao=" + fundacao + ", contato=" + contato + ", whatsapp=" + whatsapp + ", telefone="
-				+ telefone + ", email=" + email + ", senha=" + senha + ", ativo=" + ativo + ", enderecos=" + enderecos
-				+ ", doacoes=" + doacoes + ", servicos=" + servicos + ", roles=" + roles + "]";
+				+ telefone + ", email=" + email + ", senha=" + senha + ", ativo=" + ativo + "]";
 	}
 
 }

@@ -35,10 +35,10 @@ public class OngDTO {
 	@Pattern(regexp = "^\\([1-9]{2}\\) ([0-9]{4}|[0-9]{5})\\-[0-9]{4}$", message = "Por favor preencha este campo corretamente")
 	private String telefone;
 	@Email(message = "Não é um endereço de e-mail válido")
-	@NotBlank(message = "Por favor preencha este campo")
+	@Size(min = 1, max = 50, message = "Por favor preencha este campo")
 	private String email;
 	@Email(message = "Não é um endereço de e-mail válido")
-	@NotBlank(message = "Por favor preencha este campo")
+	@Size(min = 1, max = 50, message = "Por favor preencha este campo")
 	private String confirmarEmail;
 	@Size(min = 6, max = 20, message = "Tamanho da senha entre 6 a 20 caracteres")
 	private String senha;
