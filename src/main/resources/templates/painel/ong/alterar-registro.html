@@ -15,14 +15,14 @@
                     
                     <h6>Preencha o formulário para editar os dados da ONG:</h6>
                     
-                    <form th:action="@{/painel/ong/alterar-registro/{id}(id=${ong.getId()})}" method="post">
+                    <form th:action="@{/painel/ong/alterar-registro/{id}(id=${ongEdicao.getId()})}" method="post">
 
-                        <div th:object="${ong}">
+                        <div th:object="${ongEdicao}">
                             <p class="error-message" th:if="${#fields.hasGlobalErrors()}" th:each="error : ${#fields.errors('global')}" th:text="${error}">
                             </p>
                         </div>
                         
-                        <div th:object="${ong}">
+                        <div th:object="${ongEdicao}">
                             <div class="form-row">
                                 <div class="form-group col-md-4" th:classappend="${#fields.hasErrors('razaoSocial')}? 'has-error':''">
                                     <label for="razaoSocial" class="control-label">Razão Social</label>
@@ -79,6 +79,16 @@
                                     <label for="website" class="control-label">Website</label>
                                     <input type="text" id="website" class="form-control" th:field="*{website}" />
                                     <p class="error-message" th:each="error: ${#fields.errors('website')}" th:text="${error}"></p>
+                                </div>
+                                <div class="form-group col-md-4" th:classappend="${#fields.hasErrors('email')}? 'has-error':''">
+                                    <label for="email" class="control-label">E-mail</label>
+                                    <input type="text" id="email" class="form-control" th:field="*{email}" />
+                                    <p class="error-message" th:each="error : ${#fields.errors('email')}" th:text="${error}"></p>
+                                </div>
+                                <div class="form-group col-md-4" th:classappend="${#fields.hasErrors('senha')}? 'has-error':''">
+                                    <label for="senha" class="control-label">Senha</label>
+                                    <input id="senha" class="form-control" type="password" th:field="*{senha}" />
+                                    <p class="error-message" th:each="error : ${#fields.errors('senha')}" th:text="${error}"></p>
                                 </div>
 							</div>
                         </div>

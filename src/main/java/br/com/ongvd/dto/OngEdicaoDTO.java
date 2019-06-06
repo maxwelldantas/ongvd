@@ -9,12 +9,7 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.br.CNPJ;
 
-import br.com.ongvd.constraint.FieldMatch;
-
-@FieldMatch.List({
-		@FieldMatch(first = "senha", second = "confirmarSenha", message = "Os campos de senha devem corresponder"),
-		@FieldMatch(first = "email", second = "confirmarEmail", message = "Os campos de e-mail devem corresponder") })
-public class OngDTO {
+public class OngEdicaoDTO {
 	
 	private Long id;
 	@NotBlank(message = "Por favor preencha este campo")
@@ -37,13 +32,8 @@ public class OngDTO {
 	@Email(message = "Não é um endereço de e-mail válido")
 	@NotBlank(message = "Por favor preencha este campo")
 	private String email;
-	@Email(message = "Não é um endereço de e-mail válido")
-	@NotBlank(message = "Por favor preencha este campo")
-	private String confirmarEmail;
 	@Size(min = 6, max = 20, message = "Tamanho da senha entre 6 a 20 caracteres")
 	private String senha;
-	@Size(min = 6, max = 20, message = "Tamanho da senha entre 6 a 20 caracteres")
-	private String confirmarSenha;
 
 	public Long getId() {
 		return id;
@@ -141,14 +131,6 @@ public class OngDTO {
 		this.email = email;
 	}
 
-	public String getConfirmarEmail() {
-		return confirmarEmail;
-	}
-
-	public void setConfirmarEmail(String confirmarEmail) {
-		this.confirmarEmail = confirmarEmail;
-	}
-
 	public String getSenha() {
 		return senha;
 	}
@@ -157,11 +139,4 @@ public class OngDTO {
 		this.senha = senha;
 	}
 
-	public String getConfirmarSenha() {
-		return confirmarSenha;
-	}
-
-	public void setConfirmarSenha(String confirmarSenha) {
-		this.confirmarSenha = confirmarSenha;
-	}
 }

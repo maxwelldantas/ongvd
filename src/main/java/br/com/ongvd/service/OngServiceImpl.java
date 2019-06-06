@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.ongvd.dto.EnderecoDTO;
 import br.com.ongvd.dto.OngDTO;
+import br.com.ongvd.dto.OngEdicaoDTO;
 import br.com.ongvd.model.Endereco;
 import br.com.ongvd.model.Ong;
 import br.com.ongvd.model.Role;
@@ -65,17 +66,19 @@ public class OngServiceImpl implements OngService {
 		ongRepository.save(ong);
 	}
 	
-	public Ong edita(Ong ong, OngDTO ongDTO) {
-		ong.setRazaoSocial(ongDTO.getRazaoSocial());
-		ong.setNomeFantasia(ongDTO.getNomeFantasia());
-		ong.setCnpj(ongDTO.getCnpj());
-		ong.setAreaDeAtuacao(ongDTO.getAreaDeAtuacao());
-		ong.setWebsite(ongDTO.getWebsite());
-		ong.setResponsavel(ongDTO.getResponsavel());
-		ong.setFundacao(ongDTO.getFundacao());
-		ong.setContato(ongDTO.getContato());
-		ong.setWhatsapp(ongDTO.getWhatsapp());
-		ong.setTelefone(ongDTO.getTelefone());
+	public Ong edita(Ong ong, OngEdicaoDTO ongEdicaoDTO) {
+		ong.setRazaoSocial(ongEdicaoDTO.getRazaoSocial());
+		ong.setNomeFantasia(ongEdicaoDTO.getNomeFantasia());
+		ong.setCnpj(ongEdicaoDTO.getCnpj());
+		ong.setAreaDeAtuacao(ongEdicaoDTO.getAreaDeAtuacao());
+		ong.setWebsite(ongEdicaoDTO.getWebsite());
+		ong.setResponsavel(ongEdicaoDTO.getResponsavel());
+		ong.setFundacao(ongEdicaoDTO.getFundacao());
+		ong.setContato(ongEdicaoDTO.getContato());
+		ong.setWhatsapp(ongEdicaoDTO.getWhatsapp());
+		ong.setTelefone(ongEdicaoDTO.getTelefone());
+		ong.setEmail(ongEdicaoDTO.getEmail());
+		ong.setSenha(passwordEncoder.encode(ongEdicaoDTO.getSenha()));
 		return ong;
 	}
 	

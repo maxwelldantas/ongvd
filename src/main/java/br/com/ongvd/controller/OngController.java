@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import br.com.ongvd.dto.EnderecoDTO;
 import br.com.ongvd.dto.OngDTO;
+import br.com.ongvd.dto.OngEdicaoDTO;
 import br.com.ongvd.model.Ong;
 import br.com.ongvd.service.OngService;
 
@@ -26,10 +27,15 @@ public class OngController {
 
 	@Autowired
 	private OngService ongService;
-
+	
 	@ModelAttribute("ong")
 	public OngDTO ongDTO() {
 		return new OngDTO();
+	}
+	
+	@ModelAttribute("ongEdicao")
+	public OngEdicaoDTO ongEdicaoDTO() {
+		return new OngEdicaoDTO();
 	}
 
 	@ModelAttribute("endereco")
@@ -69,25 +75,29 @@ public class OngController {
 	@RequestMapping(method = RequestMethod.GET, path = "/painel/ong/alterar-registro/{id}")
 	public String paginaAlterarRegistro(@PathVariable(name = "id") Long id, Model model) {
 		Ong ong = ongService.findById(id);
-		model.addAttribute("ong", ong);
+		model.addAttribute("ongEdicao", ong);
 		return "painel/ong/alterar-registro";
 	}
 
 	@RequestMapping(method = RequestMethod.POST, path = "/painel/ong/alterar-registro/{id}")
-	public String alterarRegistro(@PathVariable(name = "id") Long id, @ModelAttribute("ong") @Valid OngDTO ongDTO,
+	public String alterarRegistro(@PathVariable(name = "id") Long id, @ModelAttribute("ongEdicao") @Valid OngEdicaoDTO ongEdicaoDTO,
 			BindingResult result, @AuthenticationPrincipal UserDetails currentUser) {
-
+		
 		Ong ong = ongService.findById(id);
-		Ong cnpj = ongService.findByCnpj(ongDTO.getCnpj());
+		Ong email = ongService.findByEmail(ongEdicaoDTO.getEmail());
+		Ong cnpj = ongService.findByCnpj(ongEdicaoDTO.getCnpj());
 		List<Ong> ongs = ongService.getAll();
-		if (ongs.contains(ong) && !cnpj.equals(ong)) {
+		if (ongs.contains(ong) && !ong.equals(email) && email != null) {
+			result.rejectValue("email", null, "Este endereço de e-mail já está sendo usado");
+		}
+		if (ongs.contains(ong) && !ong.equals(cnpj) && cnpj != null) {
 			result.rejectValue("cnpj", null, "Este CNPJ já está cadastrado!");
 		}
 		if (result.hasErrors()) {
-			ongDTO.setId(id);
+			ongEdicaoDTO.setId(id);
 			return "painel/ong/alterar-registro";
 		}
-		ongService.edita(ong, ongDTO);
+		ongService.edita(ong, ongEdicaoDTO);
 		ongService.save(ong);
 		return "redirect:/painel/ong/configuracoes?success";
 	}
@@ -132,4 +142,5 @@ public class OngController {
 		ongService.delete(id);
 		return "redirect:/logout?delete";
 	}
+
 }

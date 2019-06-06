@@ -18,6 +18,10 @@ body {
 	background: #fafafa;
 }
 
+.img450h {
+    max-height: 450px;
+}
+
 .cinza {
 	font-family: 'Poppins', sans-serif;
 	font-size: 1.1em;
