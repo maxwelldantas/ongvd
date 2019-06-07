@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/main}">
+
+<head>
+<title>ONGvd - Listagem dos Eventos Solidários disponíveis</title>
+</head>
+
+<body>
+	<div layout:fragment="content">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h1 class="text-center">Listagem dos Eventos Solidários
+						disponíveis</h1>
+					<div class="table-responsive-sm" th:if="${eventos.size() != 0}">
+						<table class="table table-sm table-bordered table-hover text-center">
+							<thead class="thead-light">
+								<tr>
+									<th scope="col" class="verticalMiddle">Evento Solidário</th>
+									<th scope="col" class="verticalMiddle">ONG</th>
+									<th scope="col" class="verticalMiddle">Data Inclusão</th>
+									<th scope="col" class="verticalMiddle">Visualizar</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="evento: ${eventos}">
+									<td th:text="${evento.getNome()}" class="verticalMiddle"></td>
+									<td th:text="${evento.getOng().getRazaoSocial()}" class="verticalMiddle"></td>
+									<td class="verticalMiddle"
+										th:text="${#dates.format(evento.getDataInclusao(),'dd/MMMM/yyyy')}"></td>
+									<td class="verticalMiddle"><a
+										class="btn btn-primary"
+										th:href="@{/evento/evento/{id}(id=${evento.getId()})}">detalhes</a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="text-center" th:unless="${eventos.size() != 0}">
+						<div class="mt-5">
+							<span>Não existem Eventos Solidários disponíveis no
+								momento.</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
