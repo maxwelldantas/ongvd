@@ -6,7 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import br.com.ongvd.dto.PedidoDoacaoDTO;
-import br.com.ongvd.model.PedidoDoacao;
+import br.com.ongvd.entity.PedidoDoacao;
 
 @Service
 public interface PedidoDoacaoService {

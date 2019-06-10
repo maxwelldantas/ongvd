@@ -44,12 +44,12 @@
 				<li class="nav-item dropdown"
 					th:classappend="${#httpServletRequest.getRequestURI().startsWith('/voluntario') ? 'active':''}">
 					<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
-					role="button" aria-haspopup="true" aria-expanded="false">Voluntário(a)<span
+					role="button" aria-haspopup="true" aria-expanded="false">Serviços Voluntários<span
 						class="sr-only">(current)</span>
 				</a>
 					<div class="dropdown-menu">
 						<a class="dropdown-item" th:href="@{/voluntario/conceito}">O
-							que é ser um(a) Voluntário(a)</a>
+							que é ser um(a) Voluntário(a)?</a>
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item"
 							th:href="@{/voluntario/servicos-voluntarios}">Listagem de
@@ -59,15 +59,15 @@
 				<li class="nav-item dropdown"
 					th:classappend="${#httpServletRequest.getRequestURI().startsWith('/doador') ? 'active':''}">
 					<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
-					role="button" aria-haspopup="true" aria-expanded="false">Doador(a)<span
+					role="button" aria-haspopup="true" aria-expanded="false">Pedidos de Doações<span
 						class="sr-only">(current)</span>
 				</a>
 					<div class="dropdown-menu">
 						<a class="dropdown-item" th:href="@{/doador/conceito}">O que é
-							ser um(a) Doador(a)</a>
+							ser um(a) Doador(a)?</a>
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item" th:href="@{/doador/pedidos-doacoes}">Listagem
-							de Pedidos de Doação</a>
+							de Pedidos de Doações</a>
 					</div>
 				</li>
 				<li class="nav-item dropdown"
@@ -100,8 +100,8 @@
 				</li>
 				<li class="nav-item" sec:authorize="isAuthenticated()"
 					th:classappend="${#httpServletRequest.getRequestURI().startsWith('/painel') ? 'active':''}">
-					<span class="nav-link">Painel<span class="sr-only">(current)</span>
-				</span>
+					<a class="nav-link" th:href="@{/painel/ong/home}">Painel<span class="sr-only">(current)</span>
+				</a>
 				</li>
 			</ul>
 			<ul class="navbar-nav">
@@ -143,19 +143,21 @@
 								Voluntário</a></li>
 						<li><a th:href="@{/painel/ong/pedido-doacao/cadastro}">Pedido
 								de Doação</a></li>
+						<li><a th:href="@{/painel/ong/evento/cadastro}">Evento Solidário</a></li>
 					</ul></li>
 				<li><a href="#submenuListar" data-toggle="collapse"
 					aria-expanded="false" class="dropdown-toggle lateral">Listar</a>
 					<ul class="collapse list-unstyled" id="submenuListar">
-						<li><a th:href="@{/painel/ong/servico-voluntario/listagem}">Serviço
-								Voluntário</a></li>
-						<li><a th:href="@{/painel/ong/pedido-doacao/listagem}">Pedido
-								de Doação</a></li>
+						<li><a th:href="@{/painel/ong/servico-voluntario/listagem}">Serviços
+								Voluntários</a></li>
+						<li><a th:href="@{/painel/ong/pedido-doacao/listagem}">Pedidos
+								de Doações</a></li>
+						<li><a th:href="@{/painel/ong/evento/listagem}">Eventos Solidários</a></li>
 					</ul></li>
 				<li><a href="#submenuConfiguracoes" data-toggle="collapse"
-					aria-expanded="false" class="dropdown-toggle lateral">Configurações da ONG</a>
+					aria-expanded="false" class="dropdown-toggle lateral">ONG</a>
 					<ul class="collapse list-unstyled" id="submenuConfiguracoes">
-						<li><a th:href="@{/painel/ong/configuracoes}">Configurações</a></li>
+						<li><a th:href="@{/painel/ong/configuracoes/menu}">Configurações</a></li>
 					</ul></li>
 			</ul>
 		</nav>

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import br.com.ongvd.dto.EmailDTO;
-import br.com.ongvd.model.PedidoDoacao;
+import br.com.ongvd.entity.PedidoDoacao;
 import br.com.ongvd.service.EmailService;
 import br.com.ongvd.service.PedidoDoacaoService;
 

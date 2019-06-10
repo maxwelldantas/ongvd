@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import br.com.ongvd.dto.PedidoDoacaoDTO;
-import br.com.ongvd.model.PedidoDoacao;
+import br.com.ongvd.entity.PedidoDoacao;
 import br.com.ongvd.service.PedidoDoacaoService;
 
 @Controller
@@ -77,7 +77,7 @@ public class PedidoDoacaoController {
 		PedidoDoacao pedido = service.get(id);
 		PedidoDoacao nome = service.getByNome(pedidoDoacaoDTO.getNome());
 		List<PedidoDoacao> ong = service.getNomeByOng(currentUser);
-		if (ong.contains(nome) && !nome.equals(pedido)) {
+		if (ong.contains(nome) && !pedido.equals(nome)) {
 			result.rejectValue("nome", null, "Este pedido de doação já está cadastrado!");
 		}
 		if (result.hasErrors()) {

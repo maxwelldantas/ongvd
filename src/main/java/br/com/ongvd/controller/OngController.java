@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import br.com.ongvd.dto.EnderecoDTO;
 import br.com.ongvd.dto.OngDTO;
 import br.com.ongvd.dto.OngEdicaoDTO;
-import br.com.ongvd.model.Ong;
+import br.com.ongvd.entity.Ong;
 import br.com.ongvd.service.OngService;
 
 @Controller
@@ -50,7 +50,7 @@ public class OngController {
 
 	@RequestMapping(method = RequestMethod.GET, path = "/ong/registro")
 	public String showRegistrationForm(Model model) {
-		return "ong/registro";
+		return "ong/registrar";
 	}
 
 	@RequestMapping(method = RequestMethod.POST, path = "/ong/registro")
@@ -66,20 +66,41 @@ public class OngController {
 			resultOng.rejectValue("cnpj", null, "Este CNPJ já está sendo usado");
 		}
 		if (resultOng.hasErrors() || resultEndereco.hasErrors()) {
-			return "ong/registro";
+			return "ong/registrar";
 		}
 		ongService.novo(ongDTO, enderecoDTO);
-		return "redirect:/ong/registro?success";
+		return "redirect:/home?ong";
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, path = "/painel/ong/home")
+	public String painelOngHome(Model model, @AuthenticationPrincipal UserDetails currentUser) {
+		Ong ong = (Ong) ongService.findByEmail(currentUser.getUsername());
+		model.addAttribute("ong", ong);
+		return "painel/ong/home";
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, path = "/painel/ong/configuracoes/menu")
+	public String painelOng(Model model, @AuthenticationPrincipal UserDetails currentUser) {
+		Ong ong = (Ong) ongService.findByEmail(currentUser.getUsername());
+		model.addAttribute("ong", ong);
+		return "painel/ong/configuracoes/menu";
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, path = "/painel/ong/configuracoes/conta")
+	public String painelOngConta(Model model, @AuthenticationPrincipal UserDetails currentUser) {
+		Ong ong = (Ong) ongService.findByEmail(currentUser.getUsername());
+		model.addAttribute("ong", ong);
+		return "painel/ong/configuracoes/conta";
 	}
 
-	@RequestMapping(method = RequestMethod.GET, path = "/painel/ong/alterar-registro/{id}")
+	@RequestMapping(method = RequestMethod.GET, path = "/painel/ong/configuracoes/perfil/{id}")
 	public String paginaAlterarRegistro(@PathVariable(name = "id") Long id, Model model) {
 		Ong ong = ongService.findById(id);
 		model.addAttribute("ongEdicao", ong);
-		return "painel/ong/alterar-registro";
+		return "painel/ong/configuracoes/perfil";
 	}
 
-	@RequestMapping(method = RequestMethod.POST, path = "/painel/ong/alterar-registro/{id}")
+	@RequestMapping(method = RequestMethod.POST, path = "/painel/ong/configuracoes/perfil/{id}")
 	public String alterarRegistro(@PathVariable(name = "id") Long id, @ModelAttribute("ongEdicao") @Valid OngEdicaoDTO ongEdicaoDTO,
 			BindingResult result, @AuthenticationPrincipal UserDetails currentUser) {
 		
@@ -95,18 +116,11 @@ public class OngController {
 		}
 		if (result.hasErrors()) {
 			ongEdicaoDTO.setId(id);
-			return "painel/ong/alterar-registro";
+			return "painel/ong/configuracoes/perfil";
 		}
 		ongService.edita(ong, ongEdicaoDTO);
 		ongService.save(ong);
-		return "redirect:/painel/ong/configuracoes?success";
-	}
-
-	@RequestMapping(method = RequestMethod.GET, path = "/painel/ong/configuracoes")
-	public String painelOng(Model model, @AuthenticationPrincipal UserDetails currentUser) {
-		Ong ong = (Ong) ongService.findByEmail(currentUser.getUsername());
-		model.addAttribute("ong", ong);
-		return "painel/ong/configuracoes";
+		return "redirect:/painel/ong/configuracoes/menu?success";
 	}
 
 	@RequestMapping(method = RequestMethod.GET, path = "/ong/listagem")
@@ -126,7 +140,7 @@ public class OngController {
 		Ong ong = ongService.findById(id);
 		ong.setAtivo(false);
 		ongService.save(ong);
-		return "redirect:/painel/ong/configuracoes?desativada";
+		return "redirect:/painel/ong/configuracoes/conta?desativada";
 	}
 
 	@RequestMapping(method = RequestMethod.GET, path = "/painel/ong/ativar-registro/{id}")
@@ -134,7 +148,7 @@ public class OngController {
 		Ong ong = ongService.findById(id);
 		ong.setAtivo(true);
 		ongService.save(ong);
-		return "redirect:/painel/ong/configuracoes?ativada";
+		return "redirect:/painel/ong/configuracoes/conta?ativada";
 	}
 
 	@RequestMapping(method = RequestMethod.GET, path = "/painel/ong/deletar-registro/{id}")

@@ -6,7 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import br.com.ongvd.dto.ServicoVoluntarioDTO;
-import br.com.ongvd.model.ServicoVoluntario;
+import br.com.ongvd.entity.ServicoVoluntario;
 
 @Service
 public interface ServicoVoluntarioService {

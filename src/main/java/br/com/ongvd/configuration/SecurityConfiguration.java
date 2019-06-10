@@ -31,6 +31,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 						"/home",
 						"/doador/**",
 						"/voluntario/**",
+						"/evento/**",
 						"/ong/**",
 						"/h2-console/**")
 					.permitAll()
@@ -39,15 +40,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.and()
 					.formLogin()
 						.loginPage("/login")
-							.defaultSuccessUrl("/painel/ong/configuracoes", true)
+							.defaultSuccessUrl("/painel/ong/home", true)
 								.permitAll()
 				.and()
 					.logout()
 						.invalidateHttpSession(true)
 						.clearAuthentication(true)
 						.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-						.logoutUrl("/logout")
-						.logoutSuccessUrl("/login?logout")
 				.permitAll();
 		
 		http.csrf().disable();

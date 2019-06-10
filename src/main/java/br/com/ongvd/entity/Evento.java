@@ -1,4 +1,4 @@
-package br.com.ongvd.model;
+package br.com.ongvd.entity;
 
 import java.sql.Timestamp;
 
@@ -12,7 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class PedidoDoacao {
+public class Evento {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,32 +24,57 @@ public class PedidoDoacao {
 	private String descricao;
 	@Column(nullable = false)
 	private Timestamp dataInclusao;
+	@Column
 	private Timestamp dataAtualizacao;
+	@Column
 	private Timestamp dataDesabilitado;
 	@Column(nullable = false)
-	private String valorPedido;
+	private String ingresso;
 	@Column(nullable = false)
-	private String itemPedido;
+	private String horario;
+	@Column
 	private Boolean habilitado;
+	@Column(nullable = false)
+	private String cep;
+	@Column(nullable = false)
+	private String logradouro;
+	@Column
+	private Integer numero;
+	@Column
+	private String complemento;
+	@Column(nullable = false)
+	private String bairro;
+	@Column(nullable = false)
+	private String cidade;
+	@Column(nullable = false)
+	private String uf;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "ong_id")
 	private Ong ong;
-
-	public PedidoDoacao() {
+	
+	public Evento() {
 	}
 
-	public PedidoDoacao(String nome, String descricao, Timestamp dataInclusao, Timestamp dataAtualizacao,
-			Timestamp dataDesabilitado, String valorPedido, String itemPedido, Boolean habilitado, Ong ong) {
+	public Evento(String nome, String descricao, Timestamp dataInclusao, Timestamp dataAtualizacao,
+			Timestamp dataDesabilitado, String ingresso, String horario, Boolean habilitado, String cep,
+			String logradouro, Integer numero, String complemento, String bairro, String cidade, String uf, Ong ong) {
 		super();
 		this.nome = nome;
 		this.descricao = descricao;
 		this.dataInclusao = dataInclusao;
 		this.dataAtualizacao = dataAtualizacao;
 		this.dataDesabilitado = dataDesabilitado;
-		this.valorPedido = valorPedido;
-		this.itemPedido = itemPedido;
+		this.ingresso = ingresso;
+		this.horario = horario;
 		this.habilitado = habilitado;
+		this.cep = cep;
+		this.logradouro = logradouro;
+		this.numero = numero;
+		this.complemento = complemento;
+		this.bairro = bairro;
+		this.cidade = cidade;
+		this.uf = uf;
 		this.ong = ong;
 	}
 
@@ -101,20 +126,20 @@ public class PedidoDoacao {
 		this.dataDesabilitado = dataDesabilitado;
 	}
 
-	public String getValorPedido() {
-		return valorPedido;
+	public String getIngresso() {
+		return ingresso;
 	}
 
-	public void setValorPedido(String valorPedido) {
-		this.valorPedido = valorPedido;
+	public void setIngresso(String ingresso) {
+		this.ingresso = ingresso;
 	}
 
-	public String getItemPedido() {
-		return itemPedido;
+	public String getHorario() {
+		return horario;
 	}
 
-	public void setItemPedido(String itemPedido) {
-		this.itemPedido = itemPedido;
+	public void setHorario(String horario) {
+		this.horario = horario;
 	}
 
 	public Boolean getHabilitado() {
@@ -123,6 +148,62 @@ public class PedidoDoacao {
 
 	public void setHabilitado(Boolean habilitado) {
 		this.habilitado = habilitado;
+	}
+
+	public String getCep() {
+		return cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
+
+	public String getLogradouro() {
+		return logradouro;
+	}
+
+	public void setLogradouro(String logradouro) {
+		this.logradouro = logradouro;
+	}
+
+	public Integer getNumero() {
+		return numero;
+	}
+
+	public void setNumero(Integer numero) {
+		this.numero = numero;
+	}
+
+	public String getComplemento() {
+		return complemento;
+	}
+
+	public void setComplemento(String complemento) {
+		this.complemento = complemento;
+	}
+
+	public String getBairro() {
+		return bairro;
+	}
+
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
+
+	public String getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+
+	public String getUf() {
+		return uf;
+	}
+
+	public void setUf(String uf) {
+		this.uf = uf;
 	}
 
 	public Ong getOng() {
@@ -149,7 +230,7 @@ public class PedidoDoacao {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		PedidoDoacao other = (PedidoDoacao) obj;
+		Evento other = (Evento) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -160,10 +241,11 @@ public class PedidoDoacao {
 
 	@Override
 	public String toString() {
-		return "PedidoDoacao [id=" + id + ", nome=" + nome + ", descricao=" + descricao + ", dataInclusao="
-				+ dataInclusao + ", dataAtualizacao=" + dataAtualizacao + ", dataDesabilitado=" + dataDesabilitado
-				+ ", valorPedido=" + valorPedido + ", itemPedido=" + itemPedido + ", habilitado=" + habilitado
-				+ ", ong=" + ong + "]";
+		return "Evento [id=" + id + ", nome=" + nome + ", descricao=" + descricao + ", dataInclusao=" + dataInclusao
+				+ ", dataAtualizacao=" + dataAtualizacao + ", dataDesabilitado=" + dataDesabilitado + ", ingresso="
+				+ ingresso + ", horario=" + horario + ", habilitado=" + habilitado + ", cep=" + cep + ", logradouro="
+				+ logradouro + ", numero=" + numero + ", complemento=" + complemento + ", bairro=" + bairro
+				+ ", cidade=" + cidade + ", uf=" + uf + ", ong=" + ong + "]";
 	}
 
 }

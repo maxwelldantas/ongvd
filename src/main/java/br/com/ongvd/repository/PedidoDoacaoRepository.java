@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import br.com.ongvd.model.Ong;
-import br.com.ongvd.model.PedidoDoacao;
+import br.com.ongvd.entity.Ong;
+import br.com.ongvd.entity.PedidoDoacao;
 
 @Repository
 public interface PedidoDoacaoRepository extends JpaRepository<PedidoDoacao, Long> {

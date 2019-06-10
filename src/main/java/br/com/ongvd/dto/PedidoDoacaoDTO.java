@@ -11,6 +11,7 @@ public class PedidoDoacaoDTO {
 	@Size(min = 10, max = 5000, message = "Tamanho do texto entre 10 a 5000 caracteres")
 	private String descricao;
 	private String valorPedido;
+	private String quantidade;
 	@NotBlank(message = "Por favor preencha este campo")
 	private String itemPedido;
 	private Boolean habilitado;
@@ -45,6 +46,14 @@ public class PedidoDoacaoDTO {
 
 	public void setValorPedido(String valorPedido) {
 		this.valorPedido = valorPedido;
+	}
+
+	public String getQuantidade() {
+		return quantidade;
+	}
+
+	public void setQuantidade(String quantidade) {
+		this.quantidade = quantidade;
 	}
 
 	public String getItemPedido() {

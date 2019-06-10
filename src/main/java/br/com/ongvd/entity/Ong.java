@@ -1,4 +1,4 @@
-package br.com.ongvd.model;
+package br.com.ongvd.entity;
 
 import java.sql.Date;
 import java.util.Collection;
@@ -34,6 +34,7 @@ public class Ong {
 	private String cnpj;
 	@Column(nullable = false)
 	private String areaDeAtuacao;
+	@Column
 	private String website;
 	@Column(nullable = false)
 	private String responsavel;
@@ -60,6 +61,9 @@ public class Ong {
 
 	@OneToMany(mappedBy = "ong", cascade = CascadeType.ALL)
 	private Set<ServicoVoluntario> servicos;
+	
+	@OneToMany(mappedBy = "ong", cascade = CascadeType.ALL)
+	private Set<Evento> eventos;
 
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "ong_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
@@ -202,6 +206,14 @@ public class Ong {
 
 	public void setServicos(Set<ServicoVoluntario> servicos) {
 		this.servicos = servicos;
+	}
+
+	public Set<Evento> getEventos() {
+		return eventos;
+	}
+
+	public void setEventos(Set<Evento> eventos) {
+		this.eventos = eventos;
 	}
 
 	public Collection<Role> getRoles() {

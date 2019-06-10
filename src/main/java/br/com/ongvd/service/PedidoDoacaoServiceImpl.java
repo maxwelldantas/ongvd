@@ -14,8 +14,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import br.com.ongvd.dto.PedidoDoacaoDTO;
-import br.com.ongvd.model.Ong;
-import br.com.ongvd.model.PedidoDoacao;
+import br.com.ongvd.entity.Ong;
+import br.com.ongvd.entity.PedidoDoacao;
 import br.com.ongvd.repository.OngRepository;
 import br.com.ongvd.repository.PedidoDoacaoRepository;
 
@@ -48,6 +48,7 @@ public class PedidoDoacaoServiceImpl implements PedidoDoacaoService {
 		pedidoDoacao.setDescricao(pedidoDoacaoDTO.getDescricao());
 		pedidoDoacao.setHabilitado(pedidoDoacaoDTO.getHabilitado());
 		pedidoDoacao.setItemPedido(pedidoDoacaoDTO.getItemPedido());
+		pedidoDoacao.setQuantidade(pedidoDoacaoDTO.getQuantidade());
 		pedidoDoacao.setValorPedido(pedidoDoacaoDTO.getValorPedido());
 		pedidoDoacao.setDataAtualizacao(Timestamp.valueOf(LocalDateTime.now(ZoneId.of("America/Sao_Paulo"))));
 		if (pedidoDoacao.getHabilitado() == false) {

@@ -33,7 +33,7 @@
 							<div class="form-row">
 								<div class="form-group col-md-6"
 									th:classappend="${#fields.hasErrors('nome')}? 'has-error':''">
-									<label for="nome" class="control-label">Nome</label> <input
+									<label for="nome" class="control-label">Serviço Voluntário</label> <input
 										id="nome" class="form-control" th:field="*{nome}" />
 									<p class="error-message"
 										th:each="error: ${#fields.errors('nome')}" th:text="${error}"></p>
@@ -52,7 +52,7 @@
 							<div class="form-row">
 								<div class="form-group col-md-6"
 									th:classappend="${#fields.hasErrors('descricao')}? 'has-error':''">
-									<label for="descricao" class="control-label">Descrição</label>
+									<label for="descricao" class="control-label">Descrição do Serviço Voluntário</label>
 									<textarea id="descricao" class="form-control"
 										th:field="*{descricao}" rows=5 cols=50></textarea>
 									<p class="error-message"

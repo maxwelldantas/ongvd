@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import br.com.ongvd.dto.EnderecoDTO;
 import br.com.ongvd.dto.OngDTO;
 import br.com.ongvd.dto.OngEdicaoDTO;
-import br.com.ongvd.model.Ong;
+import br.com.ongvd.entity.Ong;
 
 @Service
 public interface OngService extends UserDetailsService {

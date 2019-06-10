@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import br.com.ongvd.dto.ServicoVoluntarioDTO;
-import br.com.ongvd.model.ServicoVoluntario;
+import br.com.ongvd.entity.ServicoVoluntario;
 import br.com.ongvd.service.ServicoVoluntarioService;
 
 @Controller
@@ -76,7 +76,7 @@ public class ServicoVoluntarioController {
 		ServicoVoluntario servico = service.get(id);
 		ServicoVoluntario nome = service.getByNome(servicoVoluntarioDTO.getNome());
 		List<ServicoVoluntario> ong = service.getNomeByOng(currentUser);
-		if (ong.contains(nome) && !nome.equals(servico)) {
+		if (ong.contains(nome) && !servico.equals(nome)) {
 			resultServico.rejectValue("nome", null, "Este serviço voluntário já está cadastrado!");
 		}
 		if (resultServico.hasErrors()) {

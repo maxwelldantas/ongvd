@@ -16,9 +16,9 @@ import org.springframework.stereotype.Service;
 import br.com.ongvd.dto.EnderecoDTO;
 import br.com.ongvd.dto.OngDTO;
 import br.com.ongvd.dto.OngEdicaoDTO;
-import br.com.ongvd.model.Endereco;
-import br.com.ongvd.model.Ong;
-import br.com.ongvd.model.Role;
+import br.com.ongvd.entity.Endereco;
+import br.com.ongvd.entity.Ong;
+import br.com.ongvd.entity.Role;
 import br.com.ongvd.repository.OngRepository;
 
 @Service

@@ -13,8 +13,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.ongvd.dto.ServicoVoluntarioDTO;
-import br.com.ongvd.model.Ong;
-import br.com.ongvd.model.ServicoVoluntario;
+import br.com.ongvd.entity.Ong;
+import br.com.ongvd.entity.ServicoVoluntario;
 import br.com.ongvd.repository.OngRepository;
 import br.com.ongvd.repository.ServicoVoluntarioRepository;
 

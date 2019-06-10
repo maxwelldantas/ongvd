@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import br.com.ongvd.model.Ong;
-import br.com.ongvd.model.ServicoVoluntario;
+import br.com.ongvd.entity.Ong;
+import br.com.ongvd.entity.ServicoVoluntario;
 
 @Repository
 public interface ServicoVoluntarioRepository extends JpaRepository<ServicoVoluntario, Long> {
