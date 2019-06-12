@@ -48,7 +48,7 @@ public class VoluntarioController {
 	@RequestMapping(method = RequestMethod.GET, path = "/servico-voluntario/{id}")
 	public String listToUpdate(@PathVariable(name = "id") Long id, Model model) {
 		model.addAttribute("servico", service.get(id));
-		return "voluntario/servico-voluntario";
+		return "voluntario/servico";
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, path = "/servico-voluntario/{id}")
@@ -57,10 +57,10 @@ public class VoluntarioController {
 			@ModelAttribute("email") @Valid EmailDTO emailDTO, BindingResult resultServico){
 
 		if (resultServico.hasErrors()) {
-			return "redirect:/voluntario/servico-voluntario/{id}?error";
+			return "redirect:/voluntario/servico/{id}?error";
 		}
 		emailDTO.setEmailPara(servicoVoluntario.getOng().getEmail());
 		emailService.enviarTexto(emailDTO.getEmailDe(), emailDTO.getEmailPara(), emailDTO.getAssunto(), emailDTO.getCorpo());
-		return "redirect:/voluntario/servico-voluntario/{id}?success";
+		return "redirect:/voluntario/servico/{id}?success";
 	}
 }
