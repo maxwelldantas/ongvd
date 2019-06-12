@@ -29,7 +29,7 @@ public class EventoServiceImpl implements EventoService {
 	private OngRepository ongRepository;
 	
 	public Evento novo(Evento evento, @AuthenticationPrincipal UserDetails currentUser) {
-		Ong ong = (Ong) ongRepository.findByEmail(currentUser.getUsername());
+		Ong ong = ongRepository.findByEmail(currentUser.getUsername());
 		evento.setDataInclusao(Timestamp.valueOf(LocalDateTime.now(ZoneId.of("America/Sao_Paulo"))));
 		if (evento.getHabilitado() == false) {
 			evento.setDataDesabilitado(Timestamp.valueOf(LocalDateTime.now(ZoneId.of("America/Sao_Paulo"))));
@@ -37,6 +37,7 @@ public class EventoServiceImpl implements EventoService {
 			evento.setDataDesabilitado(null);
 		}
 		evento.setOng(ong);
+		save(evento);
 		return evento;
 	}
 	
@@ -59,6 +60,7 @@ public class EventoServiceImpl implements EventoService {
 		} else {
 			evento.setDataDesabilitado(null);
 		}
+		save(evento);
 		return evento;
 	}
 
@@ -67,7 +69,7 @@ public class EventoServiceImpl implements EventoService {
 	}
 	
 	public List<Evento> getAllByOng(UserDetails currentUser) {
-		Ong ong = (Ong) ongRepository.findByEmail(currentUser.getUsername());
+		Ong ong = ongRepository.findByEmail(currentUser.getUsername());
 		return eventoRepository.findAllByOng(ong);
 	}
 
@@ -90,7 +92,7 @@ public class EventoServiceImpl implements EventoService {
 	}
 	
 	public List<Evento> getNomeByOng(UserDetails currentUser) {
-		Ong ong = (Ong) ongRepository.findByEmail(currentUser.getUsername());
+		Ong ong = ongRepository.findByEmail(currentUser.getUsername());
 		return eventoRepository.findNomeByOng(ong);
 	}
 	

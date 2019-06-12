@@ -26,20 +26,20 @@ public class EventoController {
 	@Autowired
 	private EventoService service;
 
-	@ModelAttribute("evento")
+	@ModelAttribute("eventoDTO")
 	public EventoDTO eventoDTO() {
 		return new EventoDTO();
 	}
 
 	@RequestMapping(method = RequestMethod.GET, path = "/cadastro")
 	public String mostraFormularioCadastro(Model model) {
-		model.addAttribute("evento");
+		model.addAttribute("eventoDTO");
 		return "painel/ong/evento/cadastro";
 	}
 
 	@RequestMapping(method = RequestMethod.POST, path = "/cadastro")
 	public String cadastrarEvento(
-			@ModelAttribute("evento") @Valid EventoDTO eventoDTO, BindingResult result,
+			@ModelAttribute("eventoDTO") @Valid EventoDTO eventoDTO, BindingResult result,
 			Evento evento, @AuthenticationPrincipal UserDetails currentUser) {
 
 		Evento nome = service.getByNome(eventoDTO.getNome());
@@ -51,7 +51,6 @@ public class EventoController {
 			return "painel/ong/evento/cadastro";
 		}
 		service.novo(evento,currentUser);
-		service.save(evento);
 		return "redirect:/painel/ong/evento/cadastro?success";
 	}
 
@@ -64,13 +63,13 @@ public class EventoController {
 
 	@RequestMapping(method = RequestMethod.GET, path = "/edita-cadastro/{id}")
 	public String mostrarFormularioParaEditar(@PathVariable(name = "id") Long id, Model model) {
-		model.addAttribute("evento", service.get(id));
+		model.addAttribute("eventoDTO", service.get(id));
 		return "painel/ong/evento/edita-cadastro";
 	}
 
 	@RequestMapping(method = RequestMethod.POST, path = "/atualizar-cadastro/{id}")
 	public String atualizar(@PathVariable(name = "id") Long id,
-			@ModelAttribute("evento") @Valid EventoDTO eventoDTO, BindingResult result,
+			@ModelAttribute("eventoDTO") @Valid EventoDTO eventoDTO, BindingResult result,
 			@AuthenticationPrincipal UserDetails currentUser) {
 
 		Evento evento = service.get(id);
@@ -84,7 +83,6 @@ public class EventoController {
 			return "painel/ong/evento/edita-cadastro";
 		}
 		service.edita(evento, eventoDTO);
-		service.save(evento);
 		return "redirect:/painel/ong/evento/listagem?success";
 	}
 

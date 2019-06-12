@@ -31,7 +31,7 @@ public class PedidoDoacaoServiceImpl implements PedidoDoacaoService {
 	private OngRepository ongRepository;
 	
 	public PedidoDoacao novo(PedidoDoacao pedidoDoacao, @AuthenticationPrincipal UserDetails currentUser) {
-		Ong ong = (Ong) ongRepository.findByEmail(currentUser.getUsername());
+		Ong ong = ongRepository.findByEmail(currentUser.getUsername());
 		pedidoDoacao.setDataInclusao(Timestamp.valueOf(LocalDateTime.now(ZoneId.of("America/Sao_Paulo"))));
 		if (pedidoDoacao.getHabilitado() == false) {
 			pedidoDoacao.setDataDesabilitado(Timestamp.valueOf(LocalDateTime.now(ZoneId.of("America/Sao_Paulo"))));
@@ -39,6 +39,7 @@ public class PedidoDoacaoServiceImpl implements PedidoDoacaoService {
 			pedidoDoacao.setDataDesabilitado(null);
 		}
 		pedidoDoacao.setOng(ong);
+		save(pedidoDoacao);
 		LOG.info("Pedido de Doação cadastrado com sucesso!");
 		return pedidoDoacao;
 	}
@@ -56,6 +57,7 @@ public class PedidoDoacaoServiceImpl implements PedidoDoacaoService {
 		} else {
 			pedidoDoacao.setDataDesabilitado(null);
 		}
+		save(pedidoDoacao);
 		LOG.info("Pedido de Doação atualizado com sucesso!");
 		return pedidoDoacao;
 	}
@@ -65,7 +67,7 @@ public class PedidoDoacaoServiceImpl implements PedidoDoacaoService {
 	}
 	
 	public List<PedidoDoacao> getAllByOng(UserDetails currentUser) {
-		Ong ong = (Ong) ongRepository.findByEmail(currentUser.getUsername());
+		Ong ong = ongRepository.findByEmail(currentUser.getUsername());
 		return pedidoDoacaoRepository.findAllByOng(ong);
 	}
 
@@ -88,7 +90,7 @@ public class PedidoDoacaoServiceImpl implements PedidoDoacaoService {
 	}
 	
 	public List<PedidoDoacao> getNomeByOng(UserDetails currentUser) {
-		Ong ong = (Ong) ongRepository.findByEmail(currentUser.getUsername());
+		Ong ong = ongRepository.findByEmail(currentUser.getUsername());
 		return pedidoDoacaoRepository.findNomeByOng(ong);
 	}
 	

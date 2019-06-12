@@ -74,21 +74,21 @@ public class OngController {
 	
 	@RequestMapping(method = RequestMethod.GET, path = "/painel/ong/home")
 	public String painelOngHome(Model model, @AuthenticationPrincipal UserDetails currentUser) {
-		Ong ong = (Ong) ongService.findByEmail(currentUser.getUsername());
+		Ong ong = ongService.findByEmail(currentUser.getUsername());
 		model.addAttribute("ong", ong);
 		return "painel/ong/home";
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, path = "/painel/ong/configuracoes/menu")
 	public String painelOng(Model model, @AuthenticationPrincipal UserDetails currentUser) {
-		Ong ong = (Ong) ongService.findByEmail(currentUser.getUsername());
+		Ong ong = ongService.findByEmail(currentUser.getUsername());
 		model.addAttribute("ong", ong);
 		return "painel/ong/configuracoes/menu";
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, path = "/painel/ong/configuracoes/conta")
 	public String painelOngConta(Model model, @AuthenticationPrincipal UserDetails currentUser) {
-		Ong ong = (Ong) ongService.findByEmail(currentUser.getUsername());
+		Ong ong = ongService.findByEmail(currentUser.getUsername());
 		model.addAttribute("ong", ong);
 		return "painel/ong/configuracoes/conta";
 	}
@@ -119,7 +119,6 @@ public class OngController {
 			return "painel/ong/configuracoes/perfil";
 		}
 		ongService.edita(ong, ongEdicaoDTO);
-		ongService.save(ong);
 		return "redirect:/painel/ong/configuracoes/menu?success";
 	}
 

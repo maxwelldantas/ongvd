@@ -51,7 +51,6 @@ public class ServicoVoluntarioController {
 			return "painel/ong/servico-voluntario/cadastro";
 		}
 		service.novo(servico, currentUser);
-		service.save(servico);
 		return "redirect:/painel/ong/servico-voluntario/cadastro?success";
 	}
 
@@ -84,7 +83,6 @@ public class ServicoVoluntarioController {
 			return "painel/ong/servico-voluntario/edita-cadastro";
 		}
 		service.edita(servico, servicoVoluntarioDTO);
-		service.save(servico);
 		return "redirect:/painel/ong/servico-voluntario/listagem?success";
 	}
 

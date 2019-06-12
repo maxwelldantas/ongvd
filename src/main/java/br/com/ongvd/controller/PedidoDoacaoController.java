@@ -51,7 +51,6 @@ public class PedidoDoacaoController {
 			return "painel/ong/pedido-doacao/cadastro";
 		}
 		service.novo(pedido, currentUser);
-		service.save(pedido);
 		return "redirect:/painel/ong/pedido-doacao/cadastro?success";
 	}
 
@@ -85,7 +84,6 @@ public class PedidoDoacaoController {
 			return "painel/ong/pedido-doacao/edita-cadastro";
 		}
 		service.edita(pedido, pedidoDoacaoDTO);
-		service.save(pedido);
 		return "redirect:/painel/ong/pedido-doacao/listagem?success";
 	}
 

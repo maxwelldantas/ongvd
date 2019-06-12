@@ -29,7 +29,7 @@ public class ServicoVoluntarioServiceImpl implements ServicoVoluntarioService {
 	private OngRepository ongRepository;
 	
 	public ServicoVoluntario novo(ServicoVoluntario servicoVoluntario, @AuthenticationPrincipal UserDetails currentUser) {
-		Ong ong = (Ong) ongRepository.findByEmail(currentUser.getUsername());
+		Ong ong = ongRepository.findByEmail(currentUser.getUsername());
 		servicoVoluntario.setDataInclusao(Timestamp.valueOf(LocalDateTime.now(ZoneId.of("America/Sao_Paulo"))));
 		if (servicoVoluntario.getHabilitado() == false) {
 			servicoVoluntario.setDataDesabilitado(Timestamp.valueOf(LocalDateTime.now(ZoneId.of("America/Sao_Paulo"))));
@@ -37,6 +37,7 @@ public class ServicoVoluntarioServiceImpl implements ServicoVoluntarioService {
 			servicoVoluntario.setDataDesabilitado(null);
 		}
 		servicoVoluntario.setOng(ong);
+		save(servicoVoluntario);
 		return servicoVoluntario;
 	}
 	
@@ -50,6 +51,7 @@ public class ServicoVoluntarioServiceImpl implements ServicoVoluntarioService {
 		} else {
 			servico.setDataDesabilitado(null);
 		}
+		save(servico);
 		return servico;
 	}
 
@@ -58,7 +60,7 @@ public class ServicoVoluntarioServiceImpl implements ServicoVoluntarioService {
 	}
 	
 	public List<ServicoVoluntario> getAllByOng(UserDetails currentUser) {
-		Ong ong = (Ong) ongRepository.findByEmail(currentUser.getUsername());
+		Ong ong = ongRepository.findByEmail(currentUser.getUsername());
 		return servicoVoluntarioRepository.findAllByOng(ong);
 	}
 
@@ -81,7 +83,7 @@ public class ServicoVoluntarioServiceImpl implements ServicoVoluntarioService {
 	}
 	
 	public List<ServicoVoluntario> getNomeByOng(UserDetails currentUser) {
-		Ong ong = (Ong) ongRepository.findByEmail(currentUser.getUsername());
+		Ong ong = ongRepository.findByEmail(currentUser.getUsername());
 		return servicoVoluntarioRepository.findNomeByOng(ong);
 	}
 	

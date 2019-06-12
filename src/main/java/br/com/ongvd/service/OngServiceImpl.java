@@ -79,6 +79,7 @@ public class OngServiceImpl implements OngService {
 		ong.setTelefone(ongEdicaoDTO.getTelefone());
 		ong.setEmail(ongEdicaoDTO.getEmail());
 		ong.setSenha(passwordEncoder.encode(ongEdicaoDTO.getSenha()));
+		save(ong);
 		return ong;
 	}
 	
