@@ -2,6 +2,7 @@ package br.com.ongvd.entity;
 
 import java.sql.Date;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -54,7 +55,7 @@ public class Ong {
 	
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "users_enderecos", joinColumns = @JoinColumn(name = "ong_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "endereco_id", referencedColumnName = "id"))
-	private Collection<Endereco> enderecos;
+	private List<Endereco> enderecos;
 
 	@OneToMany(mappedBy = "ong", cascade = CascadeType.ALL)
 	private Set<PedidoDoacao> doacoes;
@@ -184,11 +185,11 @@ public class Ong {
 		this.ativo = ativo;
 	}
 
-	public Collection<Endereco> getEnderecos() {
+	public List<Endereco> getEnderecos() {
 		return enderecos;
 	}
 
-	public void setEnderecos(Collection<Endereco> enderecos) {
+	public void setEnderecos(List<Endereco> enderecos) {
 		this.enderecos = enderecos;
 	}
 

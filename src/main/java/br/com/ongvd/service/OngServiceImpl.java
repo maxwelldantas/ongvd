@@ -1,5 +1,6 @@
 package br.com.ongvd.service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -7,6 +8,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -79,6 +81,19 @@ public class OngServiceImpl implements OngService {
 		ong.setTelefone(ongEdicaoDTO.getTelefone());
 		ong.setEmail(ongEdicaoDTO.getEmail());
 		ong.setSenha(passwordEncoder.encode(ongEdicaoDTO.getSenha()));
+		save(ong);
+		return ong;
+	}
+	
+	public Ong editaEndereco(Ong ong, EnderecoDTO enderecoDTO, Endereco endereco) {
+		endereco.setCep(enderecoDTO.getCep());
+		endereco.setLogradouro(enderecoDTO.getLogradouro());
+		endereco.setNumero(enderecoDTO.getNumero());
+		endereco.setComplemento(enderecoDTO.getComplemento());
+		endereco.setBairro(enderecoDTO.getBairro());
+		endereco.setCidade(enderecoDTO.getCidade());
+		endereco.setUf(enderecoDTO.getUf());
+		ong.setEnderecos(new ArrayList<>(Arrays.asList(endereco)));
 		save(ong);
 		return ong;
 	}

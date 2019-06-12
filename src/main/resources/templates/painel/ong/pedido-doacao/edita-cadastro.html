@@ -61,11 +61,11 @@
 							</div>
 						</div>
 						<div class="form-row">
-							<div class="form-group col-md-6"
+							<div class="form-group col-md-12"
 								th:classappend="${#fields.hasErrors('descricao')}? 'has-error':''">
 								<label for="descricao" class="control-label">Descrição do Pedido de Doação</label>
 								<textarea id="descricao" class="form-control"
-									th:field="*{descricao}" rows=5 cols=50></textarea>
+									th:field="*{descricao}" rows=5></textarea>
 								<p class="error-message"
 									th:each="error: ${#fields.errors('descricao')}"
 									th:text="${error}"></p>

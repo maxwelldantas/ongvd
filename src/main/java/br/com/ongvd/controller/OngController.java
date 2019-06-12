@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import br.com.ongvd.dto.EnderecoDTO;
 import br.com.ongvd.dto.OngDTO;
 import br.com.ongvd.dto.OngEdicaoDTO;
+import br.com.ongvd.entity.Endereco;
 import br.com.ongvd.entity.Ong;
 import br.com.ongvd.service.OngService;
 
@@ -102,7 +103,7 @@ public class OngController {
 
 	@RequestMapping(method = RequestMethod.POST, path = "/painel/ong/configuracoes/perfil/{id}")
 	public String alterarRegistro(@PathVariable(name = "id") Long id, @ModelAttribute("ongEdicao") @Valid OngEdicaoDTO ongEdicaoDTO,
-			BindingResult result, @AuthenticationPrincipal UserDetails currentUser) {
+			BindingResult result) {
 		
 		Ong ong = ongService.findById(id);
 		Ong email = ongService.findByEmail(ongEdicaoDTO.getEmail());
@@ -119,6 +120,27 @@ public class OngController {
 			return "painel/ong/configuracoes/perfil";
 		}
 		ongService.edita(ong, ongEdicaoDTO);
+		return "redirect:/painel/ong/configuracoes/menu?success";
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, path = "/painel/ong/configuracoes/perfil/endereco/{id}")
+	public String paginaAlterarEndereco(@PathVariable(name = "id") Long id, Model model) {
+		Ong ong = ongService.findById(id);
+		model.addAttribute("enderecoDTO", ong.getEnderecos().get(0));
+		return "painel/ong/configuracoes/endereco";
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/painel/ong/configuracoes/perfil/endereco/{id}")
+	public String alterarEndereco(@PathVariable(name = "id") Long id, @ModelAttribute("enderecoDTO") @Valid EnderecoDTO enderecoDTO,
+			BindingResult result) {
+		
+		Ong ong = ongService.findById(id);
+		Endereco endereco = ong.getEnderecos().get(0);
+		if (result.hasErrors()) {
+			ong.setId(id);
+			return "painel/ong/configuracoes/endereco";
+		}
+		ongService.editaEndereco(ong, enderecoDTO, endereco);
 		return "redirect:/painel/ong/configuracoes/menu?success";
 	}
 
