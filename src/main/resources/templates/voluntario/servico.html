@@ -137,7 +137,7 @@
 							Serviço Voluntário:</h5>
 
 						<form
-							th:action="@{/voluntario/servico-voluntario/{id}(id=${servico.getId()})}"
+							th:action="@{/s/servico-voluntario/{id}(id=${servico.getId()})}"
 							method="post" th:object="${email}">
 
 							<p class="error-message" th:if="${#fields.hasGlobalErrors()}"

@@ -30,8 +30,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 						"/img/**",
 						"/home",
 						"/doador/**",
+						"/p/**",
 						"/voluntario/**",
+						"/s/**",
 						"/evento/**",
+						"/e/**",
 						"/ong/**",
 						"/h2-console/**")
 					.permitAll()

@@ -141,7 +141,7 @@ public class OngController {
 			return "painel/ong/configuracoes/endereco";
 		}
 		ongService.editaEndereco(ong, enderecoDTO, endereco);
-		return "redirect:/painel/ong/configuracoes/menu?success";
+		return "redirect:/painel/ong/configuracoes/menu?success2";
 	}
 
 	@RequestMapping(method = RequestMethod.GET, path = "/ong/listagem")

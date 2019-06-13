@@ -33,17 +33,17 @@
 						<label class="text-justify">Para desativar ou ativar a
 							ONG, clique em um dos botões abaixo:</label> <label class="row col-md-6">Estado:&nbsp;<b
 							th:text="${ong.getAtivo()} ? 'Ativa' : 'Desativada'"></b></label> <a
-							class="btn btn-outline-secondary col-md-4"
+							class="btn btn-outline-secondary col-auto"
 							th:href="@{/painel/ong/desativar-registro/{id}(id=${ong.getId()})}"
 							th:onclick="return confirm('Realmente quer desativar o registro da ONG? Se desativada, todos os Pedidos de Doações, Serviços Voluntários e Eventos não serão listados para visualização das pessoas que acessam o sistema, mesmo que estejam todos habilitados!');">Desativar
-							ONG</a> <a class="btn btn-outline-success col-md-4"
+							ONG</a> <a class="btn btn-outline-success col-auto"
 							th:href="@{/painel/ong/ativar-registro/{id}(id=${ong.getId()})}">Ativar
 							ONG</a>
 					</div>
 					<div class="">
 						<label class="text-justify">Para deletar a ONG juntamente
 							com todos os cadastros, clique no botão abaixo:</label> <a
-							class="btn btn-outline-danger col-md-4"
+							class="btn btn-outline-danger col-auto"
 							th:href="@{/painel/ong/deletar-registro/{id}(id=${ong.getId()})}"
 							th:onclick="return confirm('Realmente quer deletar o registro completo da ONG? Se deletado, serão perdidos todos os Pedidos de Doações, Serviços Voluntários e Eventos cadastrados juntamente com o registro da ONG! Será desconetado do sistema logo após a confirmação clicando no botão OK');">Deletar
 							ONG</a>
