@@ -70,7 +70,7 @@ $(function () {
     $('[data-toggle="popover"]').popover();
 });
 
-/* Pegar elementos do Serviço Voluntário */
+/* Recupera elemento para mostrar no assunto do E-mail */
 $(document).ready(function () {
 	var emailServicoVoluntario = $("#emailOngDetalhesServicoVoluntario").text();
     $("#emailParaDetalhesServicoVoluntario").val(emailServicoVoluntario);
@@ -83,6 +83,12 @@ $(document).ready(function () {
     var assuntoDetalhesPedidoDoador = $("#nomeDetalhesPedidoDoador").text();
     $("#assuntoDetalhesPedidoDoador")
     	.val("Pedido de Doação: "+assuntoDetalhesPedidoDoador);
+    
+    var emailEvento = $("#emailOngDetalhesEvento").text();
+    $("#emailParaDetalhesEvento").val(emailEvento);
+    var assuntoDetalhesEvento = $("#nomeDetalhesEvento").text();
+    $("#assuntoDetalhesEvento")
+    	.val("Evento Solidário: "+assuntoDetalhesEvento);
 });
 
 /* Máscaras para os campos */

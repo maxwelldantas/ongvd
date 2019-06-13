@@ -29,26 +29,29 @@
 
 						<div class="form-row">
 							<div class="col-sm-6">
-								<label class="cinza">Evento Solidário:</label> <span th:text="*{evento}"
-									id="detalhesEvento"></span>
+								<label class="cinza">Evento Solidário:</label> <span th:text="*{nome}"
+									id="nomeDetalhesEvento"></span>
 							</div>
 						</div>
 						<div class="form-row">
 							<div class="col-sm-6">
-								<label class="cinza">Descrição:</label> <span
+								<label class="cinza">(R$) Valor
+                                do ingresso Evento Solidário:</label> <span
+									th:text="*{ingresso}"></span>
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="col-sm-6">
+								<label class="cinza">Horário do
+                                Evento Solidário:</label> <span
+									th:text="*{horario}"></span>
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="col-sm-6">
+								<label class="cinza">Descrição
+                                do Evento Solidário:</label> <span
 									th:text="*{descricao}"></span>
-							</div>
-						</div>
-						<div class="form-row">
-							<div class="col-sm-6">
-								<label class="cinza">Item evento:</label> <span
-									th:text="*{itemPedido}"></span>
-							</div>
-						</div>
-						<div class="form-row">
-							<div class="col-sm-6">
-								<label class="cinza">(R$) Valor evento:</label> <span
-									th:text="*{valorPedido}"></span>
 							</div>
 						</div>
 
@@ -105,7 +108,7 @@
 							</div>
 							<div class="col-sm-6">
 								<label class="cinza">E-mail:</label> <span
-									th:text="*{ong.email}" id="emailOngDetalhesPedidoDoador"></span>
+									th:text="*{ong.email}" id="emailOngDetalhesEvento"></span>
 							</div>
 						</div>
 
@@ -149,7 +152,7 @@
 							Evento Solidário:</h5>
 
 						<form
-							th:action="@{/doador/evento-doacao/{id}(id=${evento.getId()})}"
+							th:action="@{/e/evento/{id}(id=${evento.getId()})}"
 							method="post" th:object="${email}">
 
 							<p class="error-message" th:if="${#fields.hasGlobalErrors()}"
@@ -180,7 +183,7 @@
 											<div class="input-group-text">Assunto</div>
 										</div>
 										<input type="text" th:field="*{assunto}" class="form-control"
-											id="assuntoDetalhesPedidoDoador" placeholder="Digite o assunto">
+											id="assuntoDetalhesEvento" placeholder="Digite o assunto">
 									</div>
 									<p class="error-message"
 										th:each="error: ${#fields.errors('assunto')}"
