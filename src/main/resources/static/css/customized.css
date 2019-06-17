@@ -23,6 +23,10 @@ body {
     min-height: 450px;
 }
 
+.sublinhado {
+	text-decoration: underline;
+}
+
 .cinza {
 	font-family: 'Poppins', sans-serif;
 	font-size: 1.1em;

@@ -4,7 +4,7 @@
 	layout:decorate="~{layout/main}">
 
 <head>
-<title>ONGvd - Detalhes do Evento Solidário</title>
+	<title th:text="'ONGvd - Evento Solidário: ' + *{evento.nome}"></title>
 </head>
 
 <body>
@@ -24,6 +24,18 @@
 						<div class="alert alert-danger d-inline-flex">Preencha todos
 							os campos para o envio do e-mail</div>
 					</div>
+
+					<p class="text-justify">
+						Nesta página pode-se ver as informações detalhadas do Evento
+						Solidário e também as informações da ONG para poder entrar em
+						contato, além de poder enviar <span class="sublinhado">e-mail</span>
+						para ONG no final desta página preencheno um formulário, pode-se
+						também entrar em contato diretamente com a ONG através do <span
+							class="sublinhado">WhatsApp</span> (quando registrado pela ONG) e
+						também entrar no <span class="sublinhado">website</span> da ONG
+						para maiores informações sobre a mesma (quando registrado pela
+						ONG).
+					</p>
 
 					<div th:object="${evento}">
 
@@ -56,20 +68,17 @@
 
 						<div class="form-row">
 							<div class="col-sm-6">
-								<label class="cinza">CEP:</label> <span
-									th:text="*{cep}"></span>
+								<label class="cinza">CEP:</label> <span th:text="*{cep}"></span>
 							</div>
 							<div class="col-sm-6">
 								<label class="cinza">Logradouro:</label> <span
 									th:text="*{logradouro}"></span>
 							</div>
 							<div class="col-sm-6">
-								<label class="cinza">Bairro:</label> <span
-									th:text="*{bairro}"></span>
+								<label class="cinza">Bairro:</label> <span th:text="*{bairro}"></span>
 							</div>
 							<div class="col-sm-6">
-								<label class="cinza">Número:</label> <span
-									th:text="*{numero}"></span>
+								<label class="cinza">Número:</label> <span th:text="*{numero}"></span>
 							</div>
 						</div>
 						<div class="form-row">
@@ -78,20 +87,19 @@
 									th:text="*{complemento}"></span>
 							</div>
 							<div class="col-sm-6">
-								<label class="cinza">Cidade:</label> <span
-									th:text="*{cidade}"></span>
+								<label class="cinza">Cidade:</label> <span th:text="*{cidade}"></span>
 							</div>
 							<div class="col-sm-6">
 								<label class="cinza">UF:</label> <span th:text="*{uf}"></span>
 							</div>
 						</div>
-						
+
 						<iframe
-								th:attr="src='https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fongvd.herokuapp.com%2Fe%2Fevento%2F__${evento.id}__&layout=button_count&size=small&width=107&height=20&appId'"
-								width="107" height="20" style="border: none; overflow: hidden"
-								th:scrolling="no" th:frameborder="0" th:allowTransparency="true"
-								th:allow="encrypted-media"></iframe>
-						
+							th:attr="src='https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fongvd.herokuapp.com%2Fe%2Fevento%2F__${evento.id}__&layout=button_count&size=small&width=107&height=20&appId'"
+							width="107" height="20" style="border: none; overflow: hidden"
+							th:scrolling="no" th:frameborder="0" th:allowTransparency="true"
+							th:allow="encrypted-media"></iframe>
+
 						<h5>Informações da ONG que cadastrou este Evento Solidário:</h5>
 
 						<div class="form-row">
@@ -154,7 +162,8 @@
 							</div>
 						</div>
 
-						<h5>Informações de endereço da ONG que cadastrou este Evento Solidário:</h5>
+						<h5>Informações de endereço da ONG que cadastrou este Evento
+							Solidário:</h5>
 
 						<div th:each="endereco: ${evento.ong.enderecos}">
 							<div class="form-row">

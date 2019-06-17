@@ -4,7 +4,7 @@
 	layout:decorate="~{layout/main}">
 
 <head>
-<title>ONGvd - Detalhes do Pedido de Doação</title>
+	<title th:text="'ONGvd - Pedido de Doação: ' + *{pedido.nome}"></title>
 </head>
 
 <body>
@@ -24,6 +24,18 @@
 						<div class="alert alert-danger d-inline-flex">Preencha todos
 							os campos para o envio do e-mail</div>
 					</div>
+					
+					<p class="text-justify">
+						Nesta página pode-se ver as informações detalhadas do Pedido de
+						Doação e também as informações da ONG para poder entrar em
+						contato, além de poder enviar <span class="sublinhado">e-mail</span>
+						para ONG no final desta página preencheno um formulário, pode-se
+						também entrar em contato diretamente com a ONG através do <span
+							class="sublinhado">WhatsApp</span> (quando registrado pela ONG) e
+						também entrar no <span class="sublinhado">website</span> da ONG
+						para maiores informações sobre a mesma (quando registrado pela
+						ONG).
+					</p>
 
 					<div th:object="${pedido}">
 
@@ -52,11 +64,11 @@
 							</div>
 						</div>
 
-							<iframe
-								th:attr="src='https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fongvd.herokuapp.com%2Fp%2Fpedido-doacao%2F__${pedido.id}__&layout=button_count&size=small&width=107&height=20&appId'"
-								width="107" height="20" style="border: none; overflow: hidden"
-								th:scrolling="no" th:frameborder="0" th:allowTransparency="true"
-								th:allow="encrypted-media"></iframe>
+						<iframe
+							th:attr="src='https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fongvd.herokuapp.com%2Fp%2Fpedido-doacao%2F__${pedido.id}__&layout=button_count&size=small&width=107&height=20&appId'"
+							width="107" height="20" style="border: none; overflow: hidden"
+							th:scrolling="no" th:frameborder="0" th:allowTransparency="true"
+							th:allow="encrypted-media"></iframe>
 
 						<h5>Informações da ONG que cadastrou este Pedido de Doação:</h5>
 
@@ -120,7 +132,8 @@
 							</div>
 						</div>
 
-						<h5>Informações de endereço da ONG que cadastrou este Pedido de Doação:</h5>
+						<h5>Informações de endereço da ONG que cadastrou este Pedido
+							de Doação:</h5>
 
 						<div th:each="endereco: ${pedido.ong.enderecos}">
 							<div class="form-row">
