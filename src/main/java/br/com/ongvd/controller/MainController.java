@@ -28,6 +28,16 @@ public class MainController {
 		return "login";
 	}
 	
+	@GetMapping("sobre/quem-somos")
+	public String quemSomos() {
+		return "sobre/quemsomos";
+	}
+	
+	@GetMapping("sobre/fale-conosco")
+	public String contato() {
+		return "sobre/contato";
+	}
+	
 	@RequestMapping(value = {"logout"})
 	 public String clear(HttpServletRequest request,HttpServletResponse response){
 	 HttpSession session= request.getSession(false);

@@ -39,8 +39,14 @@
 									th:text="*{descricao}"></span>
 							</div>
 						</div>
+						
+						<iframe
+								th:attr="src='https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fongvd.herokuapp.com%2Fs%2Fservico-voluntario%2F__${servico.id}__&layout=button_count&size=small&width=107&height=20&appId'"
+								width="107" height="20" style="border: none; overflow: hidden"
+								th:scrolling="no" th:frameborder="0" th:allowTransparency="true"
+								th:allow="encrypted-media"></iframe>
 
-						<h5>Informações da ONG:</h5>
+						<h5>Informações da ONG que cadastrou este Serviço Voluntário:</h5>
 
 						<div class="form-row">
 							<div class="col-sm-6">
@@ -69,7 +75,7 @@
 									th:text="*{ong.responsavel}"></span>
 							</div>
 							<div class="col-sm-6">
-								<label class="cinza">WhatsAppp<i tabindex="0"
+								<label class="cinza">WhatsApp<i tabindex="0"
 									class="fas fa-exclamation-circle" data-toggle="popover"
 									data-trigger="focus" title="WhatsApp da Ong"
 									data-content="Clique no número do WhatsApp, para ser direcionado para conversar com a ONG (quando disponível)."></i>:
@@ -88,8 +94,12 @@
 									th:text="*{ong.telefone}"></span>
 							</div>
 							<div class="col-sm-6">
-								<label class="cinza">Website:</label> <span
-									th:text="*{ong.website}"></span>
+								<label class="cinza">Website<i tabindex="0"
+									class="fas fa-question-circle" data-toggle="popover"
+									data-trigger="focus" title="Website da Ong"
+									data-content="Clique no link do website da ONG, para ser direcionado para o site da ONG para maiores informações sobre a mesma (quando disponível)."></i>:</label> <a class="website" target="_blank"
+									th:href="@{http://{ong.website}(ong.website=${servico.ong.getWebsite()})}"
+									th:text="*{ong.website}"></a>
 							</div>
 							<div class="col-sm-6">
 								<label class="cinza">E-mail:</label> <span
@@ -97,7 +107,7 @@
 							</div>
 						</div>
 
-						<h5>Informações de endereço da ONG:</h5>
+						<h5>Informações de endereço da ONG que cadastrou este Serviço Voluntário:</h5>
 
 						<div th:each="endereco: ${servico.ong.enderecos}">
 							<div class="form-row">
@@ -120,7 +130,7 @@
 							</div>
 							<div class="form-row">
 								<div class="col-sm-6">
-									<label class="cinza">Complemento</label> <span
+									<label class="cinza">Complemento:</label> <span
 										th:text="${endereco.complemento}"></span>
 								</div>
 								<div class="col-sm-6">

@@ -16,7 +16,7 @@
                     <h6>Preencha o formulário para efetivação do registro da ONG:</h6>
                     
                     <form th:action="@{/ong/registro}" method="post">
-
+                    
                         <div th:object="${ong}">
                             <p class="error-message" th:if="${#fields.hasGlobalErrors()}" th:each="error : ${#fields.errors('global')}" th:text="${error}">
                             </p>

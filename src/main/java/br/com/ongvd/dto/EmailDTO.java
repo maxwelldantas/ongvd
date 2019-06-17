@@ -1,9 +1,11 @@
 package br.com.ongvd.dto;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 public class EmailDTO {
-
+	
+	@Email(message = "Não é um endereço de e-mail válido")
 	@NotBlank(message = "Por favor preencha este campo")
 	private String emailDe;
 	private String emailPara;

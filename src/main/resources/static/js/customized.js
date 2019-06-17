@@ -118,3 +118,14 @@ $(document).ready(function() {
 	});
 });
 
+$(document).ready(function() {
+	$("#response")
+		.html('<object data="https://br.news.search.yahoo.com/search;_ylt=AwrC1Cp7PgVdhAIAoRD46Qt.;_ylu=X3oDMTB2NTlxM3JnBGNvbG8DYmYxBHBvcwMyBHZ0aWQDBHNlYwNmaWx0ZXI-?p=ongs&ei=UTF-8&fr2=sortBy&context=gsmcontext%3A%3Asort%3A%3Arelevancy&fr=sfp"/>');
+	$('object').css({ 
+        'width' : '100%',
+        'height' : '100%'
+    });
+	
+	var teste = $('object[data]').contents().find("title");
+	console.log(teste);
+});
