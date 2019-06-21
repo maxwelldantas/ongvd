@@ -1,75 +1,20 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/main}">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/main}">
 
 <head>
-    <title>ONGvd - Listagem dos Eventos Solidários cadastrados</title>
+
+    <title>ONGvd - Listagem de Eventos</title>
+
 </head>
 
 <body>
-<div layout:fragment="content">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-
-                <div th:if="${param.success}">
-                    <div class="alert alert-info col-md-4">Evento Solidário editado com
-                        sucesso!
-                    </div>
-                </div>
-
-                <div th:if="${param.delete}">
-                    <div class="alert alert-info col-md-4">Evento Solidário deletado com
-                        sucesso!
-                    </div>
-                </div>
-
-                <div class="table-responsive-sm">
-                    <table class="table table-sm table-bordered table-hover text-center">
-                        <thead class="thead-light">
-                        <tr>
-                            <th scope="col" class="verticalMiddle">Evento Solidário</th>
-                            <th scope="col" class="verticalMiddle">(R$) Valor do ingresso</th>
-                            <th scope="col" class="verticalMiddle">Horário</th>
-                            <th scope="col" class="verticalMiddle">Descrição</th>
-                            <th scope="col" class="verticalMiddle">Habilitado</th>
-                            <th scope="col" class="verticalMiddle">Data/Horário Inclusão</th>
-                            <th scope="col" class="verticalMiddle">Data/Horário Atualização</th>
-                            <th scope="col" class="verticalMiddle">Data/Horário Desabilitado</th>
-                            <th scope="col" class="verticalMiddle">Ações</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="evento: ${eventos}">
-                            <td th:text="${evento.getNome()}" class="verticalMiddle"></td>
-                            <td th:text="${evento.getIngresso()}" class="verticalMiddle"></td>
-                            <td th:text="${evento.getHorario()}" class="verticalMiddle"></td>
-                            <td th:text="${evento.getDescricao()}" class="verticalMiddle"></td>
-                            <td th:text="${evento.getHabilitado() ? 'Sim' : 'Não'}" class="verticalMiddle"></td>
-                            <td th:text="${#dates.format(evento.getDataInclusao(),'dd/MMMM/yyyy HH:mm:ss')}"
-                                class="verticalMiddle"></td>
-                            <td th:text="${#dates.format(evento.getDataAtualizacao(),'dd/MMMM/yyyy HH:mm:ss')}"
-                                class="verticalMiddle"></td>
-                            <td th:text="${#dates.format(evento.getDataDesabilitado(),'dd/MMMM/yyyy HH:mm:ss')}"
-                                class="verticalMiddle"></td>
-                            <td class="verticalMiddle">
-                                <div class="btn-group">
-                                    <a class="btn btn-primary mr-2"
-                                       th:href="@{/painel/ong/evento/edita-cadastro/{id}(id=${evento.getId()})}">editar</a>
-                                    <a class="btn btn-danger"
-                                       th:href="@{/painel/ong/evento/{id}/delete(id=${evento.getId()})}"
-                                       th:onclick="return confirm('Você realmente quer deletar este Evento Solidário?');">deletar</a>
-                                </div>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
+    <div layout:fragment="content">
+        <div class="container-fluid">
+            <div class="starter-template">
+                <h1>Listagem de Eventos</h1>
             </div>
         </div>
     </div>
-</div>
 </body>
 
 </html>

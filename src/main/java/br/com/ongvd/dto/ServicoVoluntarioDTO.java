@@ -5,21 +5,13 @@ import javax.validation.constraints.Size;
 
 public class ServicoVoluntarioDTO {
 
-	private Long id;
 	@NotBlank(message = "Por favor preencha este campo")
 	private String nome;
+	@NotBlank(message = "Por favor preencha este campo")
 	@Size(min = 10, max = 5000, message = "Tamanho do texto entre 10 a 5000 caracteres")
 	private String descricao;
 	private Boolean habilitado;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
+	
 	public String getNome() {
 		return nome;
 	}

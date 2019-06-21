@@ -3,24 +3,26 @@ package br.com.ongvd.service;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import br.com.ongvd.dto.EventoDTO;
-import br.com.ongvd.entity.Evento;
-import br.com.ongvd.entity.Ong;
+import br.com.ongvd.model.Evento;
+import br.com.ongvd.model.Ong;
 import br.com.ongvd.repository.EventoRepository;
 import br.com.ongvd.repository.OngRepository;
 
 @Service
-@Transactional
 public class EventoServiceImpl implements EventoService {
+	
+	private final Logger LOG = LoggerFactory.getLogger(EventoServiceImpl.class);
 
 	@Autowired
 	private EventoRepository eventoRepository;
@@ -28,8 +30,15 @@ public class EventoServiceImpl implements EventoService {
 	@Autowired
 	private OngRepository ongRepository;
 	
-	public Evento novo(Evento evento, @AuthenticationPrincipal UserDetails currentUser) {
-		Ong ong = ongRepository.findByEmail(currentUser.getUsername());
+	public Evento novo(EventoDTO dto, @AuthenticationPrincipal UserDetails currentUser) {
+		Ong ong = (Ong) ongRepository.findByEmail(currentUser.getUsername());
+		Evento evento = new Evento();
+		evento.setNome(dto.getNome());
+		evento.setDescricao(dto.getDescricao());
+		evento.setContribuicaoParaEvento(dto.getContribuicaoParaEvento());
+		evento.setDuracaoEvento(dto.getDuracaoEvento());
+		evento.setOrcamento(dto.getOrcamento());
+		evento.setHabilitado(dto.getHabilitado());
 		evento.setDataInclusao(Timestamp.valueOf(LocalDateTime.now(ZoneId.of("America/Sao_Paulo"))));
 		if (evento.getHabilitado() == false) {
 			evento.setDataDesabilitado(Timestamp.valueOf(LocalDateTime.now(ZoneId.of("America/Sao_Paulo"))));
@@ -37,30 +46,20 @@ public class EventoServiceImpl implements EventoService {
 			evento.setDataDesabilitado(null);
 		}
 		evento.setOng(ong);
-		save(evento);
+		LOG.info("Evento novo criado com sucesso!");
 		return evento;
 	}
 	
 	public Evento edita(Evento evento, EventoDTO eventoDTO) {
 		evento.setNome(eventoDTO.getNome());
 		evento.setDescricao(eventoDTO.getDescricao());
-		evento.setIngresso(eventoDTO.getIngresso());
-		evento.setHorario(eventoDTO.getHorario());
 		evento.setHabilitado(eventoDTO.getHabilitado());
-		evento.setCep(eventoDTO.getCep());
-		evento.setLogradouro(eventoDTO.getLogradouro());
-		evento.setNumero(eventoDTO.getNumero());
-		evento.setComplemento(eventoDTO.getComplemento());
-		evento.setBairro(eventoDTO.getBairro());
-		evento.setCidade(eventoDTO.getCidade());
-		evento.setUf(eventoDTO.getUf());
-		evento.setDataAtualizacao(Timestamp.valueOf(LocalDateTime.now(ZoneId.of("America/Sao_Paulo"))));
+		evento.setDataAtualizacao(new Timestamp(new Date().getTime()));
 		if (evento.getHabilitado() == false) {
-			evento.setDataDesabilitado(Timestamp.valueOf(LocalDateTime.now(ZoneId.of("America/Sao_Paulo"))));
+			evento.setDataDesabilitado(new Timestamp(new Date().getTime()));
 		} else {
 			evento.setDataDesabilitado(null);
 		}
-		save(evento);
 		return evento;
 	}
 
@@ -69,22 +68,12 @@ public class EventoServiceImpl implements EventoService {
 	}
 	
 	public List<Evento> getAllByOng(UserDetails currentUser) {
-		Ong ong = ongRepository.findByEmail(currentUser.getUsername());
+		Ong ong = (Ong) ongRepository.findByEmail(currentUser.getUsername());
 		return eventoRepository.findAllByOng(ong);
 	}
 
 	public List<Evento> getAll() {
 		return eventoRepository.findAll();
-	}
-	
-	public List<Evento> getAllHabilitadoTrueAndOngAtivoTrue(List<Evento> eventosOld) {
-		List<Evento> eventosNew = new ArrayList<>();
-		for (Evento evento : eventosOld) {
-			if (evento.getHabilitado().equals(true) && evento.getOng().getAtivo().equals(true)) {
-				eventosNew.add(evento);
-			}
-		}
-		return eventosNew;
 	}
 
 	public Evento getByNome(String nome) {
@@ -92,8 +81,12 @@ public class EventoServiceImpl implements EventoService {
 	}
 	
 	public List<Evento> getNomeByOng(UserDetails currentUser) {
-		Ong ong = ongRepository.findByEmail(currentUser.getUsername());
+		Ong ong = (Ong) ongRepository.findByEmail(currentUser.getUsername());
 		return eventoRepository.findNomeByOng(ong);
+	}
+	
+	public List<Evento> getAllByHabilitado(Boolean habilitado){
+		return eventoRepository.findAllByHabilitado(habilitado);
 	}
 	
 	public Evento get(Long id) {

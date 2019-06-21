@@ -1,9 +1,7 @@
 package br.com.ongvd.service;
 
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -14,8 +12,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import br.com.ongvd.dto.PedidoDoacaoDTO;
-import br.com.ongvd.entity.Ong;
-import br.com.ongvd.entity.PedidoDoacao;
+import br.com.ongvd.model.Ong;
+import br.com.ongvd.model.PedidoDoacao;
 import br.com.ongvd.repository.OngRepository;
 import br.com.ongvd.repository.PedidoDoacaoRepository;
 
@@ -31,58 +29,42 @@ public class PedidoDoacaoServiceImpl implements PedidoDoacaoService {
 	private OngRepository ongRepository;
 	
 	public PedidoDoacao novo(PedidoDoacao pedidoDoacao, @AuthenticationPrincipal UserDetails currentUser) {
-		Ong ong = ongRepository.findByEmail(currentUser.getUsername());
-		pedidoDoacao.setDataInclusao(Timestamp.valueOf(LocalDateTime.now(ZoneId.of("America/Sao_Paulo"))));
+		Ong ong = (Ong) ongRepository.findByEmail(currentUser.getUsername());
+		pedidoDoacao.setDataInclusao(new Timestamp(new Date().getTime()));
 		if (pedidoDoacao.getHabilitado() == false) {
-			pedidoDoacao.setDataDesabilitado(Timestamp.valueOf(LocalDateTime.now(ZoneId.of("America/Sao_Paulo"))));
+			pedidoDoacao.setDataDesabilitado(new Timestamp(new Date().getTime()));
 		} else {
 			pedidoDoacao.setDataDesabilitado(null);
 		}
 		pedidoDoacao.setOng(ong);
-		save(pedidoDoacao);
 		LOG.info("Pedido de Doação cadastrado com sucesso!");
 		return pedidoDoacao;
 	}
 	
-	public PedidoDoacao edita(PedidoDoacao pedidoDoacao, PedidoDoacaoDTO pedidoDoacaoDTO) {
-		pedidoDoacao.setNome(pedidoDoacaoDTO.getNome());
-		pedidoDoacao.setDescricao(pedidoDoacaoDTO.getDescricao());
-		pedidoDoacao.setHabilitado(pedidoDoacaoDTO.getHabilitado());
-		pedidoDoacao.setItemPedido(pedidoDoacaoDTO.getItemPedido());
-		pedidoDoacao.setQuantidade(pedidoDoacaoDTO.getQuantidade());
-		pedidoDoacao.setValorPedido(pedidoDoacaoDTO.getValorPedido());
-		pedidoDoacao.setDataAtualizacao(Timestamp.valueOf(LocalDateTime.now(ZoneId.of("America/Sao_Paulo"))));
-		if (pedidoDoacao.getHabilitado() == false) {
-			pedidoDoacao.setDataDesabilitado(Timestamp.valueOf(LocalDateTime.now(ZoneId.of("America/Sao_Paulo"))));
+	public PedidoDoacao edita(PedidoDoacao servico, PedidoDoacaoDTO pedidoDoacaoDTO) {
+		servico.setNome(pedidoDoacaoDTO.getNome());
+		servico.setDescricao(pedidoDoacaoDTO.getDescricao());
+		servico.setHabilitado(pedidoDoacaoDTO.getHabilitado());
+		servico.setDataAtualizacao(new Timestamp(new Date().getTime()));
+		if (servico.getHabilitado() == false) {
+			servico.setDataDesabilitado(new Timestamp(new Date().getTime()));
 		} else {
-			pedidoDoacao.setDataDesabilitado(null);
+			servico.setDataDesabilitado(null);
 		}
-		save(pedidoDoacao);
-		LOG.info("Pedido de Doação atualizado com sucesso!");
-		return pedidoDoacao;
+		return servico;
 	}
 
-	public void save(PedidoDoacao pedido) {
-		pedidoDoacaoRepository.save(pedido);
+	public void save(PedidoDoacao servico) {
+		pedidoDoacaoRepository.save(servico);
 	}
 	
 	public List<PedidoDoacao> getAllByOng(UserDetails currentUser) {
-		Ong ong = ongRepository.findByEmail(currentUser.getUsername());
+		Ong ong = (Ong) ongRepository.findByEmail(currentUser.getUsername());
 		return pedidoDoacaoRepository.findAllByOng(ong);
 	}
 
 	public List<PedidoDoacao> getAll() {
 		return pedidoDoacaoRepository.findAll();
-	}
-	
-	public List<PedidoDoacao> getAllHabilitadoTrueAndOngAtivoTrue(List<PedidoDoacao> pedidosOld) {
-		List<PedidoDoacao> pedidosNew = new ArrayList<>();
-		for (PedidoDoacao pedido: pedidosOld) {
-			if (pedido.getHabilitado().equals(true) && pedido.getOng().getAtivo().equals(true)) {
-				pedidosNew.add(pedido);
-			}
-		}
-		return pedidosNew;
 	}
 
 	public PedidoDoacao getByNome(String nome) {
@@ -90,8 +72,12 @@ public class PedidoDoacaoServiceImpl implements PedidoDoacaoService {
 	}
 	
 	public List<PedidoDoacao> getNomeByOng(UserDetails currentUser) {
-		Ong ong = ongRepository.findByEmail(currentUser.getUsername());
+		Ong ong = (Ong) ongRepository.findByEmail(currentUser.getUsername());
 		return pedidoDoacaoRepository.findNomeByOng(ong);
+	}
+	
+	public List<PedidoDoacao> getAllByHabilitado(Boolean habilitado){
+		return pedidoDoacaoRepository.findAllByHabilitado(habilitado);
 	}
 	
 	public PedidoDoacao get(Long id) {

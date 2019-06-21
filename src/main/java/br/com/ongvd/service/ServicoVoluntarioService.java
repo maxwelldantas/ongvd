@@ -6,7 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import br.com.ongvd.dto.ServicoVoluntarioDTO;
-import br.com.ongvd.entity.ServicoVoluntario;
+import br.com.ongvd.model.ServicoVoluntario;
 
 @Service
 public interface ServicoVoluntarioService {
@@ -21,8 +21,8 @@ public interface ServicoVoluntarioService {
 	
 	List<ServicoVoluntario> getAllByOng(UserDetails currentUser);
 	
-	List<ServicoVoluntario> getAllHabilitadoTrueAndOngAtivoTrue(List<ServicoVoluntario> servicosOld);
-	
+	List<ServicoVoluntario> getAllByHabilitado(Boolean habilitado);
+
 	ServicoVoluntario get(Long id);
 
 	void delete(Long id);

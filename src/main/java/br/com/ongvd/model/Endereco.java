@@ -1,4 +1,4 @@
-package br.com.ongvd.entity;
+package br.com.ongvd.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,9 +17,7 @@ public class Endereco {
 	private String cep;
 	@Column(nullable = false)
 	private String logradouro;
-	@Column
 	private Integer numero;
-	@Column
 	private String complemento;
 	@Column(nullable = false)
 	private String bairro;

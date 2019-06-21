@@ -4,7 +4,7 @@
 	layout:decorate="~{layout/main}">
 
 <head>
-<title>ONGvd - Listagem dos Serviços Voluntários cadastrados</title>
+<title>ONGvd - Listagem dos Serviços Voluntários da ONG</title>
 </head>
 
 <body>
@@ -24,34 +24,32 @@
 					</div>
 					
 					<div class="table-responsive-sm">
-						<table class="table table-sm table-bordered table-hover text-center">
+						<table class="table table-sm table-bordered table-hover">
 							<thead class="thead-light">
 								<tr>
-									<th scope="col" class="verticalMiddle">Serviço Voluntário</th>
-									<th scope="col" class="verticalMiddle">Descrição do Serviço Voluntário</th>
-									<th scope="col" class="verticalMiddle">Habilitado</th>
-									<th scope="col" class="verticalMiddle">Data/Horário Inclusão</th>
-									<th scope="col" class="verticalMiddle">Data/Horário Atualização</th>
-									<th scope="col" class="verticalMiddle">Data/Horário Desabilitado</th>
-									<th scope="col" class="verticalMiddle">Ações</th>
+									<th scope="col">Nome</th>
+									<th scope="col">Descrição</th>
+									<th scope="col">Habilitado</th>
+									<th scope="col">Data/Horário Inclusão</th>
+									<th scope="col">Data/Horário Atualização</th>
+									<th scope="col">Data/Horário Desabilitado</th>
+									<th scope="col">Ações</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr th:each="servico: ${servicos}">
-									<td th:text="${servico.getNome()}" class="verticalMiddle"></td>
-									<td th:text="${servico.getDescricao()}" class="verticalMiddle"></td>
-									<td th:text="${servico.getHabilitado() ? 'Sim' : 'Não'}" class="verticalMiddle"></td>
-									<td th:text="${#dates.format(servico.getDataInclusao(),'dd/MMMM/yyyy HH:mm:ss')}" class="verticalMiddle"></td>
-									<td th:text="${#dates.format(servico.getDataAtualizacao(),'dd/MMMM/yyyy HH:mm:ss')}" class="verticalMiddle"></td>
-									<td th:text="${#dates.format(servico.getDataDesabilitado(),'dd/MMMM/yyyy HH:mm:ss')}" class="verticalMiddle"></td>
-									<td class="verticalMiddle">
-										<div class="btn-group">
-											<a class="btn btn-primary mr-2"
-												th:href="@{/painel/ong/servico-voluntario/edita-cadastro/{id}(id=${servico.getId()})}">editar</a>
-											<a class="btn btn-danger"
-												th:href="@{/painel/ong/servico-voluntario/{id}/delete(id=${servico.getId()})}"
-												th:onclick="return confirm('Você realmente quer deletar este Serviço Voluntário?');">deletar</a>
-										</div>
+									<td th:text="${servico.getNome()}"></td>
+									<td th:text="${servico.getDescricao()}"></td>
+									<td th:text="${servico.getHabilitado()}"></td>
+									<td th:text="${#dates.format(servico.getDataInclusao(),'dd/MMMM/yyyy HH:mm:ss')}"></td>
+									<td th:text="${#dates.format(servico.getDataAtualizacao(),'dd/MMMM/yyyy HH:mm:ss')}"></td>
+									<td th:text="${#dates.format(servico.getDataDesabilitado(),'dd/MMMM/yyyy HH:mm:ss')}"></td>
+									<td class="d-inline-flex"><a
+										class="btn btn-primary btn-group mr-2"
+										th:href="@{/painel/ong/servico-voluntario/edita-cadastro/{id}(id=${servico.getId()})}">editar</a>
+										<a class="btn btn-danger btn-group mr-2"
+										th:href="@{/painel/ong/servico-voluntario/{id}/delete(id=${servico.getId()})}"
+										th:onclick="return confirm('Você realmente quer deletar este Serviço Voluntário?');">deletar</a>
 									</td>
 								</tr>
 							</tbody>

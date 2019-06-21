@@ -2,69 +2,19 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/main}">
 
 <head>
-<title>ONGvd - Listagem dos Pedidos de Doações cadastrados</title>
+
+    <title>ONGvd - Listagem de Pedidos de Doações</title>
+
 </head>
 
 <body>
-	<div layout:fragment="content">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-				
-					<div th:if="${param.success}">
-						<div class="alert alert-info col-md-4">Pedido de Doação editado com
-							sucesso!</div>
-					</div>
-					
-					<div th:if="${param.delete}">
-						<div class="alert alert-info col-md-4">Pedido de Doação deletado com
-							sucesso!</div>
-					</div>
-					
-					<div class="table-responsive-sm">
-						<table class="table table-sm table-bordered table-hover text-center">
-							<thead class="thead-light">
-								<tr>
-									<th scope="col" class="verticalMiddle">Pedido de Doação</th>
-									<th scope="col" class="verticalMiddle">Descrição do Pedido de Doação</th>
-									<th scope="col" class="verticalMiddle">Item Pedido</th>
-									<th scope="col" class="verticalMiddle">Quantidade do Pedido</th>
-									<th scope="col" class="verticalMiddle">(R$) Valor do Pedido</th>
-									<th scope="col" class="verticalMiddle">Habilitado</th>
-									<th scope="col" class="verticalMiddle">Data/Horário Inclusão</th>
-									<th scope="col" class="verticalMiddle">Data/Horário Atualização</th>
-									<th scope="col" class="verticalMiddle">Data/Horário Desabilitado</th>
-									<th scope="col" class="verticalMiddle">Ações</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr th:each="pedido: ${pedidos}">
-									<td th:text="${pedido.getNome()}" class="verticalMiddle"></td>
-									<td th:text="${pedido.getDescricao()}" class="verticalMiddle"></td>
-									<td th:text="${pedido.getItemPedido()}" class="verticalMiddle"></td>
-									<td th:text="${pedido.getQuantidade()}" class="verticalMiddle"></td>
-									<td th:text="${pedido.getValorPedido()}" class="verticalMiddle"></td>
-									<td th:text="${pedido.getHabilitado()} ? 'Sim' : 'Não'" class="verticalMiddle"></td>
-									<td th:text="${#dates.format(pedido.getDataInclusao(),'dd/MMMM/yyyy HH:mm:ss')}" class="verticalMiddle"></td>
-									<td th:text="${#dates.format(pedido.getDataAtualizacao(),'dd/MMMM/yyyy HH:mm:ss')}" class="verticalMiddle"></td>
-									<td th:text="${#dates.format(pedido.getDataDesabilitado(),'dd/MMMM/yyyy HH:mm:ss')}" class="verticalMiddle"></td>
-									<td class="verticalMiddle">
-										<div class="btn-group">
-											<a class="btn btn-primary mr-2"
-												th:href="@{/painel/ong/pedido-doacao/edita-cadastro/{id}(id=${pedido.getId()})}">editar</a>
-											<a class="btn btn-danger"
-												th:href="@{/painel/ong/pedido-doacao/{id}/delete(id=${pedido.getId()})}"
-												th:onclick="return confirm('Você realmente quer deletar este Pedido de Doação?');">deletar</a>
-										</div>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div layout:fragment="content">
+        <div class="container-fluid">
+            <div class="starter-template">
+                <h1>Listagem de Pedidos de Doações</h1>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

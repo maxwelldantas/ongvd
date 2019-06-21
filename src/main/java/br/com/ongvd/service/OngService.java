@@ -7,9 +7,8 @@ import org.springframework.stereotype.Service;
 
 import br.com.ongvd.dto.EnderecoDTO;
 import br.com.ongvd.dto.OngDTO;
-import br.com.ongvd.dto.OngEdicaoDTO;
-import br.com.ongvd.entity.Endereco;
-import br.com.ongvd.entity.Ong;
+import br.com.ongvd.model.Endereco;
+import br.com.ongvd.model.Ong;
 
 @Service
 public interface OngService extends UserDetailsService {
@@ -19,9 +18,7 @@ public interface OngService extends UserDetailsService {
 
 	void novo(OngDTO ongDTO, EnderecoDTO enderecoDTO);
 	
-	Ong edita(Ong ong, OngEdicaoDTO ongEdicaoDTO);
-	
-	Ong editaEndereco(Ong ong, EnderecoDTO enderecoDTO, Endereco endereco);
+	Ong edita(Ong ong, OngDTO ongDTO, Endereco endereco, EnderecoDTO enderecoDTO);
 	
 	void save(Ong ong);
 

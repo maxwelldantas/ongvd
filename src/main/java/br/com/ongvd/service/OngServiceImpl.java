@@ -1,6 +1,8 @@
 package br.com.ongvd.service;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +15,9 @@ import org.springframework.stereotype.Service;
 
 import br.com.ongvd.dto.EnderecoDTO;
 import br.com.ongvd.dto.OngDTO;
-import br.com.ongvd.dto.OngEdicaoDTO;
-import br.com.ongvd.entity.Endereco;
-import br.com.ongvd.entity.Ong;
-import br.com.ongvd.entity.Role;
+import br.com.ongvd.model.Endereco;
+import br.com.ongvd.model.Ong;
+import br.com.ongvd.model.Role;
 import br.com.ongvd.repository.OngRepository;
 
 @Service
@@ -57,31 +58,26 @@ public class OngServiceImpl implements OngService {
 		ong.setEmail(ongDTO.getEmail());
 		ong.setSenha(passwordEncoder.encode(ongDTO.getSenha()));
 		ong.setAtivo(Boolean.TRUE);
-		ong.setEnderecos(Collections.singletonList((new Endereco(enderecoDTO.getCep(), enderecoDTO.getLogradouro(),
+		ong.setEnderecos(Arrays.asList(new Endereco(enderecoDTO.getCep(), enderecoDTO.getLogradouro(),
 				enderecoDTO.getNumero(), enderecoDTO.getComplemento(), enderecoDTO.getBairro(), enderecoDTO.getCidade(),
-				enderecoDTO.getUf()))));
-		ong.setRoles(Collections.singletonList(new Role("ROLE_USER")));
+				enderecoDTO.getUf())));
+		ong.setRoles(Arrays.asList(new Role("ROLE_USER")));
 		ongRepository.save(ong);
 	}
 	
-	public Ong edita(Ong ong, OngEdicaoDTO ongEdicaoDTO) {
-		ong.setRazaoSocial(ongEdicaoDTO.getRazaoSocial());
-		ong.setNomeFantasia(ongEdicaoDTO.getNomeFantasia());
-		ong.setCnpj(ongEdicaoDTO.getCnpj());
-		ong.setAreaDeAtuacao(ongEdicaoDTO.getAreaDeAtuacao());
-		ong.setWebsite(ongEdicaoDTO.getWebsite());
-		ong.setResponsavel(ongEdicaoDTO.getResponsavel());
-		ong.setFundacao(ongEdicaoDTO.getFundacao());
-		ong.setContato(ongEdicaoDTO.getContato());
-		ong.setWhatsapp(ongEdicaoDTO.getWhatsapp());
-		ong.setTelefone(ongEdicaoDTO.getTelefone());
-		ong.setEmail(ongEdicaoDTO.getEmail());
-		ong.setSenha(passwordEncoder.encode(ongEdicaoDTO.getSenha()));
-		save(ong);
-		return ong;
-	}
-	
-	public Ong editaEndereco(Ong ong, EnderecoDTO enderecoDTO, Endereco endereco) {
+	public Ong edita(Ong ong, OngDTO ongDTO, Endereco endereco, EnderecoDTO enderecoDTO) {
+		ong.setRazaoSocial(ongDTO.getRazaoSocial());
+		ong.setNomeFantasia(ongDTO.getNomeFantasia());
+		ong.setCnpj(ongDTO.getCnpj());
+		ong.setAreaDeAtuacao(ongDTO.getAreaDeAtuacao());
+		ong.setWebsite(ongDTO.getWebsite());
+		ong.setResponsavel(ongDTO.getResponsavel());
+		ong.setFundacao(ongDTO.getFundacao());
+		ong.setContato(ongDTO.getContato());
+		ong.setWhatsapp(ongDTO.getWhatsapp());
+		ong.setTelefone(ongDTO.getTelefone());
+		ong.setEmail(ongDTO.getEmail());
+		ong.setSenha(ongDTO.getSenha());
 		endereco.setCep(enderecoDTO.getCep());
 		endereco.setLogradouro(enderecoDTO.getLogradouro());
 		endereco.setNumero(enderecoDTO.getNumero());
@@ -89,8 +85,7 @@ public class OngServiceImpl implements OngService {
 		endereco.setBairro(enderecoDTO.getBairro());
 		endereco.setCidade(enderecoDTO.getCidade());
 		endereco.setUf(enderecoDTO.getUf());
-		ong.setEnderecos(new ArrayList<>(Collections.singletonList(endereco)));
-		save(ong);
+		ong.setEnderecos(Arrays.asList(endereco));
 		return ong;
 	}
 	

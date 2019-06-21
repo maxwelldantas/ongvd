@@ -6,7 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import br.com.ongvd.dto.PedidoDoacaoDTO;
-import br.com.ongvd.entity.PedidoDoacao;
+import br.com.ongvd.model.PedidoDoacao;
 
 @Service
 public interface PedidoDoacaoService {
@@ -21,8 +21,8 @@ public interface PedidoDoacaoService {
 
 	List<PedidoDoacao> getAllByOng(UserDetails currentUser);
 	
-	List<PedidoDoacao> getAllHabilitadoTrueAndOngAtivoTrue(List<PedidoDoacao> pedidosOld);
-	
+	List<PedidoDoacao> getAllByHabilitado(Boolean habilitado);
+
 	PedidoDoacao get(Long id);
 
 	void delete(Long id);

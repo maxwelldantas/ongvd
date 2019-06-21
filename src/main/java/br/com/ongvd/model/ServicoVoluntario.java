@@ -1,4 +1,4 @@
-package br.com.ongvd.entity;
+package br.com.ongvd.model;
 
 import java.sql.Timestamp;
 
@@ -10,52 +10,39 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.Size;
 
 @Entity
-public class PedidoDoacao {
+public class ServicoVoluntario {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
+	
 	@Column(nullable = false)
 	private String nome;
 	@Column(nullable = false, length = 5000)
 	private String descricao;
 	@Column(nullable = false)
 	private Timestamp dataInclusao;
-	@Column
 	private Timestamp dataAtualizacao;
-	@Column
 	private Timestamp dataDesabilitado;
-	@Column
-	private String valorPedido;
-	@Column
-	private String quantidade;
-	@Column(nullable = false)
-	private String itemPedido;
-	@Column
 	private Boolean habilitado;
-
+	
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "ong_id")
 	private Ong ong;
 
-	public PedidoDoacao() {
+	public ServicoVoluntario() {
 	}
 
-	public PedidoDoacao(String nome, String descricao, Timestamp dataInclusao, Timestamp dataAtualizacao,
-			Timestamp dataDesabilitado, String valorPedido, String quantidade, String itemPedido, Boolean habilitado,
-			Ong ong) {
-		super();
+	public ServicoVoluntario(String nome, @Size(min = 10, max = 5000) String descricao, Timestamp dataInclusao,
+			Timestamp dataAtualizacao, Timestamp dataDesabilitado, Boolean habilitado, Ong ong) {
 		this.nome = nome;
 		this.descricao = descricao;
 		this.dataInclusao = dataInclusao;
 		this.dataAtualizacao = dataAtualizacao;
 		this.dataDesabilitado = dataDesabilitado;
-		this.valorPedido = valorPedido;
-		this.quantidade = quantidade;
-		this.itemPedido = itemPedido;
 		this.habilitado = habilitado;
 		this.ong = ong;
 	}
@@ -108,30 +95,6 @@ public class PedidoDoacao {
 		this.dataDesabilitado = dataDesabilitado;
 	}
 
-	public String getValorPedido() {
-		return valorPedido;
-	}
-
-	public void setValorPedido(String valorPedido) {
-		this.valorPedido = valorPedido;
-	}
-
-	public String getQuantidade() {
-		return quantidade;
-	}
-
-	public void setQuantidade(String quantidade) {
-		this.quantidade = quantidade;
-	}
-
-	public String getItemPedido() {
-		return itemPedido;
-	}
-
-	public void setItemPedido(String itemPedido) {
-		this.itemPedido = itemPedido;
-	}
-
 	public Boolean getHabilitado() {
 		return habilitado;
 	}
@@ -164,7 +127,7 @@ public class PedidoDoacao {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		PedidoDoacao other = (PedidoDoacao) obj;
+		ServicoVoluntario other = (ServicoVoluntario) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -175,9 +138,8 @@ public class PedidoDoacao {
 
 	@Override
 	public String toString() {
-		return "PedidoDoacao [id=" + id + ", nome=" + nome + ", descricao=" + descricao + ", dataInclusao="
+		return "ServicoVoluntario [id=" + id + ", nome=" + nome + ", descricao=" + descricao + ", dataInclusao="
 				+ dataInclusao + ", dataAtualizacao=" + dataAtualizacao + ", dataDesabilitado=" + dataDesabilitado
-				+ ", valorPedido=" + valorPedido + ", quantidade=" + quantidade + ", itemPedido=" + itemPedido
 				+ ", habilitado=" + habilitado + ", ong=" + ong + "]";
 	}
 
