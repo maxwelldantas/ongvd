@@ -21,7 +21,7 @@
 
 					<h1>Cadastrar Serviço Voluntário</h1>
 					
-					<span class="font-small">Campos marcados com <span class="asterico-requerido" data-title="Campo de preenchimento obrigatório">*</span> são de preenchimento obrigatório.</span>
+					<span class="font-small">Campos marcados com <span class="asterico-requerido">*</span> são de preenchimento obrigatório.</span>
 					
 					<form th:action="@{/painel/ong/servico-voluntario/cadastro}"
 						method="post">
@@ -38,7 +38,7 @@
 									th:classappend="${#fields.hasErrors('nome')}? 'has-error':''">
 									<label for="nome" class="control-label">Serviço
 										Voluntário</label> 
-									<span class="asterico-requerido" data-title="Campo de preenchimento obrigatório"> *</span>
+									<span class="asterico-requerido"> *</span>
 									<input id="nome" class="form-control"
 										th:field="*{nome}" />
 									<p class="error-message"
@@ -62,7 +62,7 @@
 									th:classappend="${#fields.hasErrors('descricao')}? 'has-error':''">
 									<label for="descricao" class="control-label">Descrição
 										do Serviço Voluntário</label>
-									<span class="asterico-requerido" data-title="Campo de preenchimento obrigatório"> *</span>
+									<span class="asterico-requerido"> *</span>
 									<textarea id="descricao" class="form-control"
 										th:field="*{descricao}" rows=5></textarea>
 									<p class="error-message"
