@@ -21,7 +21,7 @@
 
 					<h1>Cadastrar Evento Solidário</h1>
 					
-					<span class="font-small">Campos marcados com <span class="asterico-requerido" data-title="Campo de preenchimento obrigatório">*</span> são de preenchimento obrigatório.</span>
+					<span class="font-small">Campos marcados com <span class="asterico-requerido">*</span> são de preenchimento obrigatório.</span>
 					
 					<form th:action="@{/painel/ong/evento/cadastro}" method="post"
 						th:object="${eventoDTO}">
@@ -34,7 +34,7 @@
 							<div class="form-group col-md-6"
 								th:classappend="${#fields.hasErrors('nome')}? 'has-error':''">
 								<label for="nome" class="control-label">Evento Solidário</label>
-								<span class="asterico-requerido" data-title="Campo de preenchimento obrigatório"> *</span>
+								<span class="asterico-requerido"> *</span>
 								<input id="nome" class="form-control" th:field="*{nome}" />
 								<p class="error-message"
 									th:each="error: ${#fields.errors('nome')}" th:text="${error}"></p>
@@ -43,7 +43,7 @@
 								th:classappend="${#fields.hasErrors('ingresso')}? 'has-error':''">
 								<label for="ingresso" class="control-label">(R$) Valor
 									do ingresso Evento Solidário</label>
-								<span class="asterico-requerido" data-title="Campo de preenchimento obrigatório"> *</span>
+								<span class="asterico-requerido"> *</span>
 								<input id="ingresso"
 									class="form-control" th:field="*{ingresso}"
 									placeholder="Valor do ingresso em reais ou se é 'Gratuito'" />
@@ -55,7 +55,7 @@
 								th:classappend="${#fields.hasErrors('horario')}? 'has-error':''">
 								<label for="horario" class="control-label">Horário do
 									Evento Solidário</label>
-								<span class="asterico-requerido" data-title="Campo de preenchimento obrigatório"> *</span>
+								<span class="asterico-requerido"> *</span>
 								<input id="horario" class="form-control"
 									th:field="*{horario}"
 									placeholder="Exemplo: 09 de dezembro de 2018, 14h-17h" />
@@ -81,7 +81,7 @@
 								th:classappend="${#fields.hasErrors('descricao')}? 'has-error':''">
 								<label for="descricao" class="control-label">Descrição
 									do Evento Solidário</label>
-								<span class="asterico-requerido" data-title="Campo de preenchimento obrigatório"> *</span>
+								<span class="asterico-requerido"> *</span>
 								<textarea id="descricao" class="form-control"
 									th:field="*{descricao}" rows=5></textarea>
 								<p class="error-message"
@@ -97,7 +97,7 @@
 							<div class="form-group col-md-2"
 								th:classappend="${#fields.hasErrors('cep')}? 'has-error':''">
 								<label for="cep" class="control-label">CEP</label>
-								<span class="asterico-requerido" data-title="Campo de preenchimento obrigatório"> *</span>
+								<span class="asterico-requerido"> *</span>
 								<input
 									type="text" id="cep" class="form-control" th:field="*{cep}" />
 								<p class="error-message"
@@ -106,7 +106,7 @@
 							<div class="form-group col-md-4"
 								th:classappend="${#fields.hasErrors('logradouro')}? 'has-error':''">
 								<label for="logradouro" class="control-label">Logradouro</label>
-								<span class="asterico-requerido" data-title="Campo de preenchimento obrigatório"> *</span>
+								<span class="asterico-requerido"> *</span>
 								<input type="text" id="logradouro" class="form-control"
 									th:field="*{logradouro}" />
 								<p class="error-message"
@@ -115,21 +115,21 @@
 							</div>
 							<div class="form-group col-md-2">
 								<label for="numero" class="control-label">Número</label>
-								<span class="asterico-requerido" data-title="Campo de preenchimento obrigatório"></span>
+								<span class="asterico-requerido"></span>
 								<input
 									id="numero" class="form-control" th:field="*{numero}"
 									type="number" />
 							</div>
 							<div class="form-group col-md-3">
 								<label for="complemento" class="control-label">Complemento</label>
-								<span class="asterico-requerido" data-title="Campo de preenchimento obrigatório"></span>
+								<span class="asterico-requerido"></span>
 								<input type="text" id="complemento" class="form-control"
 									th:field="*{complemento}" />
 							</div>
 							<div class="form-group col-md-2"
 								th:classappend="${#fields.hasErrors('bairro')}? 'has-error':''">
 								<label for="bairro" class="control-label">Bairro</label>
-								<span class="asterico-requerido" data-title="Campo de preenchimento obrigatório"> *</span>
+								<span class="asterico-requerido"> *</span>
 								<input
 									type="text" id="bairro" class="form-control"
 									th:field="*{bairro}" />
@@ -140,7 +140,7 @@
 							<div class="form-group col-md-2"
 								th:classappend="${#fields.hasErrors('cidade')}? 'has-error':''">
 								<label for="cidade" class="control-label">Cidade</label>
-								<span class="asterico-requerido" data-title="Campo de preenchimento obrigatório"> *</span>
+								<span class="asterico-requerido"> *</span>
 								<input
 									type="text" id="cidade" class="form-control"
 									th:field="*{cidade}" />
@@ -151,7 +151,7 @@
 							<div class="form-group col-md-2"
 								th:classappend="${#fields.hasErrors('uf')}? 'has-error':''">
 								<label for="uf" class="control-label">UF</label>
-								<span class="asterico-requerido" data-title="Campo de preenchimento obrigatório"> *</span>
+								<span class="asterico-requerido"> *</span>
 								<input
 									type="text" id="uf" class="form-control" th:field="*{uf}" />
 								<p class="error-message"
