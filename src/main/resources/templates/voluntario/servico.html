@@ -4,7 +4,7 @@
 	layout:decorate="~{layout/main}">
 
 <head>
-<title>ONGvd - Detalhes do Serviço Voluntário</title>
+	<title th:text="'ONGvd - Serviço Voluntário: ' + *{servico.nome}"></title>
 </head>
 
 <body>
@@ -25,12 +25,24 @@
 							os campos para o envio do e-mail</div>
 					</div>
 
+					<p class="text-justify">
+						Nesta página pode-se ver as informações detalhadas do Serviço
+						Voluntário e também as informações da ONG para poder entrar em
+						contato, além de poder enviar <span class="sublinhado">e-mail</span>
+						para ONG no final desta página preencheno um formulário, pode-se
+						também entrar em contato diretamente com a ONG através do <span
+							class="sublinhado">WhatsApp</span> (quando registrado pela ONG) e
+						também entrar no <span class="sublinhado">website</span> da ONG
+						para maiores informações sobre a mesma (quando registrado pela
+						ONG).
+					</p>
+
 					<div th:object="${servico}">
 
 						<div class="form-row">
 							<div class="col-sm-6">
-								<label class="cinza">Nome:</label> <span th:text="*{nome}"
-									id="nomeDetalhesServicoVoluntario"></span>
+								<label class="cinza">Serviço Voluntário:</label> <span
+									th:text="*{nome}" id="nomeDetalhesServicoVoluntario"></span>
 							</div>
 						</div>
 						<div class="form-row">
@@ -40,7 +52,13 @@
 							</div>
 						</div>
 
-						<h5>Informações da ONG:</h5>
+						<iframe
+							th:attr="src='https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fongvd.herokuapp.com%2Fs%2Fservico-voluntario%2F__${servico.id}__&layout=button_count&size=small&width=107&height=20&appId'"
+							width="107" height="20" style="border: none; overflow: hidden"
+							th:scrolling="no" th:frameborder="0" th:allowTransparency="true"
+							th:allow="encrypted-media"></iframe>
+
+						<h5>Informações da ONG que cadastrou este Serviço Voluntário:</h5>
 
 						<div class="form-row">
 							<div class="col-sm-6">
@@ -69,7 +87,7 @@
 									th:text="*{ong.responsavel}"></span>
 							</div>
 							<div class="col-sm-6">
-								<label class="cinza">WhatsAppp<i tabindex="0"
+								<label class="cinza">WhatsApp<i tabindex="0"
 									class="fas fa-exclamation-circle" data-toggle="popover"
 									data-trigger="focus" title="WhatsApp da Ong"
 									data-content="Clique no número do WhatsApp, para ser direcionado para conversar com a ONG (quando disponível)."></i>:
@@ -88,8 +106,13 @@
 									th:text="*{ong.telefone}"></span>
 							</div>
 							<div class="col-sm-6">
-								<label class="cinza">Website:</label> <span
-									th:text="*{ong.website}"></span>
+								<label class="cinza">Website<i tabindex="0"
+									class="fas fa-question-circle" data-toggle="popover"
+									data-trigger="focus" title="Website da Ong"
+									data-content="Clique no link do website da ONG, para ser direcionado para o site da ONG para maiores informações sobre a mesma (quando disponível)."></i>:
+								</label> <a class="website" target="_blank"
+									th:href="@{http://{ong.website}(ong.website=${servico.ong.getWebsite()})}"
+									th:text="*{ong.website}"></a>
 							</div>
 							<div class="col-sm-6">
 								<label class="cinza">E-mail:</label> <span
@@ -97,7 +120,8 @@
 							</div>
 						</div>
 
-						<h5>Informações de endereço da ONG:</h5>
+						<h5>Informações de endereço da ONG que cadastrou este Serviço
+							Voluntário:</h5>
 
 						<div th:each="endereco: ${servico.ong.enderecos}">
 							<div class="form-row">
@@ -120,7 +144,7 @@
 							</div>
 							<div class="form-row">
 								<div class="col-sm-6">
-									<label class="cinza">Complemento</label> <span
+									<label class="cinza">Complemento:</label> <span
 										th:text="${endereco.complemento}"></span>
 								</div>
 								<div class="col-sm-6">
@@ -128,7 +152,7 @@
 										th:text="${endereco.cidade}"></span>
 								</div>
 								<div class="col-sm-6">
-									<label class="cinza">Uf:</label> <span th:text="${endereco.uf}"></span>
+									<label class="cinza">UF:</label> <span th:text="${endereco.uf}"></span>
 								</div>
 							</div>
 						</div>
@@ -137,7 +161,7 @@
 							Serviço Voluntário:</h5>
 
 						<form
-							th:action="@{/voluntario/servico-voluntario/{id}(id=${servico.getId()})}"
+							th:action="@{/s/servico-voluntario/{id}(id=${servico.getId()})}"
 							method="post" th:object="${email}">
 
 							<p class="error-message" th:if="${#fields.hasGlobalErrors()}"
@@ -168,7 +192,8 @@
 											<div class="input-group-text">Assunto</div>
 										</div>
 										<input type="text" th:field="*{assunto}" class="form-control"
-											id="assuntoDetalhesServicoVoluntario" placeholder="Digite o assunto">
+											id="assuntoDetalhesServicoVoluntario"
+											placeholder="Digite o assunto">
 									</div>
 									<p class="error-message"
 										th:each="error: ${#fields.errors('assunto')}"

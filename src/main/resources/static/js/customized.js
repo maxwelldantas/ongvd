@@ -70,12 +70,25 @@ $(function () {
     $('[data-toggle="popover"]').popover();
 });
 
-/* Pegar elementos do Serviço Voluntário */
+/* Recupera elemento para mostrar no assunto do E-mail */
 $(document).ready(function () {
-	var emailOng = $("#emailOngDetalhesServicoVoluntario").text();
-    $("#emailParaDetalhesServicoVoluntario").val(emailOng);
-    var nome = $("#nomeDetalhesServicoVoluntario").text();
-    $("#assuntoDetalhesServicoVoluntario").val("Serviço Voluntário: "+nome);
+	var emailServicoVoluntario = $("#emailOngDetalhesServicoVoluntario").text();
+    $("#emailParaDetalhesServicoVoluntario").val(emailServicoVoluntario);
+    var assuntoDetalhesServicoVoluntario = $("#nomeDetalhesServicoVoluntario").text();
+    $("#assuntoDetalhesServicoVoluntario")
+    	.val("Serviço Voluntário: "+assuntoDetalhesServicoVoluntario);
+    
+    var emailPedidoDoacao = $("#emailOngDetalhesPedidoDoador").text();
+    $("#emailParaDetalhesPedidoDoacao").val(emailPedidoDoacao);
+    var assuntoDetalhesPedidoDoador = $("#nomeDetalhesPedidoDoador").text();
+    $("#assuntoDetalhesPedidoDoador")
+    	.val("Pedido de Doação: "+assuntoDetalhesPedidoDoador);
+    
+    var emailEvento = $("#emailOngDetalhesEvento").text();
+    $("#emailParaDetalhesEvento").val(emailEvento);
+    var assuntoDetalhesEvento = $("#nomeDetalhesEvento").text();
+    $("#assuntoDetalhesEvento")
+    	.val("Evento Solidário: "+assuntoDetalhesEvento);
 });
 
 /* Máscaras para os campos */
@@ -105,3 +118,14 @@ $(document).ready(function() {
 	});
 });
 
+$(document).ready(function() {
+	$("#response")
+		.html('<object data="https://br.news.search.yahoo.com/search;_ylt=AwrC1Cp7PgVdhAIAoRD46Qt.;_ylu=X3oDMTB2NTlxM3JnBGNvbG8DYmYxBHBvcwMyBHZ0aWQDBHNlYwNmaWx0ZXI-?p=ongs&ei=UTF-8&fr2=sortBy&context=gsmcontext%3A%3Asort%3A%3Arelevancy&fr=sfp"/>');
+	$('object').css({ 
+        'width' : '100%',
+        'height' : '100%'
+    });
+	
+	var teste = $('object[data]').contents().find("title");
+	console.log(teste);
+});

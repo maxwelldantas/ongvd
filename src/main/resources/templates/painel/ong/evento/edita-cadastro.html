@@ -4,8 +4,7 @@
 	layout:decorate="~{layout/main}">
 
 <head>
-<title>ONGvd - Formulário para edição de Serviço Voluntário da
-	ONG</title>
+<title>ONGvd - Formulário para edição de Evento Solidário da ONG</title>
 </head>
 
 <body>
@@ -13,9 +12,10 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<h1>Editar Serviço Voluntário</h1>
-					<form th:action="@{/painel/ong/servico-voluntario/edita-cadastro/{id}(id=${servico.getId()})}"
-						method="post" th:object="${servico}">
+					<h1>Editar Evento Solidário</h1>
+					<form
+						th:action="@{/painel/ong/evento/atualizar-cadastro/{id}(id=${eventoDTO.getId()})}"
+						method="post" th:object="${eventoDTO}">
 
 						<p class="error-message" th:if="${#fields.hasGlobalErrors()}"
 							th:each="error : ${#fields.errors('global')}" th:text="${error}">
@@ -24,42 +24,119 @@
 						<div class="form-row">
 							<div class="form-group col-md-6"
 								th:classappend="${#fields.hasErrors('nome')}? 'has-error':''">
-								<label for="nome" class="control-label">Nome</label> <input
-									id="nome" class="form-control" th:field="*{nome}" />
+								<label for="nome" class="control-label">Evento Solidário</label>
+								<input id="nome" class="form-control" th:field="*{nome}" />
 								<p class="error-message"
 									th:each="error: ${#fields.errors('nome')}" th:text="${error}"></p>
 							</div>
 							<div class="form-group col-md-6"
-								th:classappend="${#fields.hasErrors('habilitado')}? 'has-error':''">
-								<label class="control-label">Habilitado</label>
-								<div class="input-group mb-3">
-									<div class="input-group-prepend">
-										<div class="input-group-text">
-											<input type="checkbox" id="habilitado"
-												th:field="*{habilitado}" checked="checked">
-										</div>
-									</div>
-								</div>
+								th:classappend="${#fields.hasErrors('ingresso')}? 'has-error':''">
+								<label for="ingresso" class="control-label">(R$) Valor
+									do ingresso Evento Solidário</label> <input id="ingresso"
+									class="form-control" th:field="*{ingresso}"
+									placeholder="Valor do ingresso em reais ou se é 'Gratuito'" />
 								<p class="error-message"
-									th:each="error: ${#fields.errors('habilitado')}"
+									th:each="error: ${#fields.errors('ingresso')}"
+									th:text="${error}"></p>
+							</div>
+							<div class="form-group col-md-6"
+								th:classappend="${#fields.hasErrors('horario')}? 'has-error':''">
+								<label for="horario" class="control-label">Horário do
+									Evento Solidário</label> <input id="horario" class="form-control"
+									th:field="*{horario}"
+									placeholder="Exemplo: 09 de dezembro de 2018, 14h-17h" />
+								<p class="error-message"
+									th:each="error: ${#fields.errors('horario')}"
 									th:text="${error}"></p>
 							</div>
 						</div>
 						<div class="form-row">
-							<div class="form-group col-md-6"
+							<div class="form-group col-md-6">
+								<div class="custom-control custom-checkbox">
+									<input type="checkbox" id="habilitado"
+										class="custom-control-input" th:field="*{habilitado}"
+										th:checked="${eventoDTO.setHabilitado(true)}"> <label
+										class="custom-control-label" for="habilitado">Habilitado</label>
+									<i tabindex="0" class="fas fa-question-circle"
+										data-toggle="popover" data-trigger="focus"
+										data-content="Se habilitado este cadastro será mostrado na lista para as pessoas que acessarem o sistema, se desabilitado não será mostrado na lista."></i>
+								</div>
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group col-md-12"
 								th:classappend="${#fields.hasErrors('descricao')}? 'has-error':''">
-								<label for="descricao" class="control-label">Descrição</label>
+								<label for="descricao" class="control-label">Descrição
+									do Evento Solidário</label>
 								<textarea id="descricao" class="form-control"
-									th:field="*{descricao}" rows=5 cols=50></textarea>
+									th:field="*{descricao}" rows=5></textarea>
 								<p class="error-message"
 									th:each="error: ${#fields.errors('descricao')}"
 									th:text="${error}"></p>
 							</div>
 						</div>
 
+						<h6>Caso seja necessário edite também a parte do formulário
+							de endereço, com as informações de localização do Evento
+							Solidário:</h6>
+
+						<div class="form-row">
+							<div class="form-group col-md-2"
+								th:classappend="${#fields.hasErrors('cep')}? 'has-error':''">
+								<label for="cep" class="control-label">CEP</label> <input
+									type="text" id="cep" class="form-control" th:field="*{cep}" />
+								<p class="error-message"
+									th:each="error: ${#fields.errors('cep')}" th:text="${error}"></p>
+							</div>
+							<div class="form-group col-md-4"
+								th:classappend="${#fields.hasErrors('logradouro')}? 'has-error':''">
+								<label for="logradouro" class="control-label">Logradouro</label>
+								<input type="text" id="logradouro" class="form-control"
+									th:field="*{logradouro}" />
+								<p class="error-message"
+									th:each="error: ${#fields.errors('logradouro')}"
+									th:text="${error}"></p>
+							</div>
+							<div class="form-group col-md-1">
+								<label for="numero" class="control-label">Número</label> <input
+									id="numero" class="form-control" th:field="*{numero}"
+									type="number" />
+							</div>
+							<div class="form-group col-md-3">
+								<label for="complemento" class="control-label">Complemento</label>
+								<input type="text" id="complemento" class="form-control"
+									th:field="*{complemento}" />
+							</div>
+							<div class="form-group col-md-2"
+								th:classappend="${#fields.hasErrors('bairro')}? 'has-error':''">
+								<label for="bairro" class="control-label">Bairro</label> <input
+									type="text" id="bairro" class="form-control"
+									th:field="*{bairro}" />
+								<p class="error-message"
+									th:each="error : ${#fields.errors('bairro')}"
+									th:text="${error}"></p>
+							</div>
+							<div class="form-group col-md-2"
+								th:classappend="${#fields.hasErrors('cidade')}? 'has-error':''">
+								<label for="cidade" class="control-label">Cidade</label> <input
+									type="text" id="cidade" class="form-control"
+									th:field="*{cidade}" />
+								<p class="error-message"
+									th:each="error : ${#fields.errors('cidade')}"
+									th:text="${error}"></p>
+							</div>
+							<div class="form-group col-md-2"
+								th:classappend="${#fields.hasErrors('uf')}? 'has-error':''">
+								<label for="uf" class="control-label">UF</label> <input
+									type="text" id="uf" class="form-control" th:field="*{uf}" />
+								<p class="error-message"
+									th:each="error : ${#fields.errors('uf')}" th:text="${error}"></p>
+							</div>
+						</div>
+
 						<div class="form-group">
 							<button type="submit" class="btn btn-outline-success">Editar</button>
-							<button type="reset" class="btn btn-outline-primary">Limpar
+							<button type="reset" class="btn btn-outline-primary">Restabelecer
 								campos</button>
 						</div>
 

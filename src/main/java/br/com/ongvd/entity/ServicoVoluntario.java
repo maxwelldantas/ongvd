@@ -1,4 +1,4 @@
-package br.com.ongvd.model;
+package br.com.ongvd.entity;
 
 import java.sql.Timestamp;
 
@@ -10,9 +10,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.Size;
 
 @Entity
-public class Evento {
+public class ServicoVoluntario {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,35 +25,27 @@ public class Evento {
 	private String descricao;
 	@Column(nullable = false)
 	private Timestamp dataInclusao;
+	@Column
 	private Timestamp dataAtualizacao;
+	@Column
 	private Timestamp dataDesabilitado;
-	@Column(nullable = false)
-	private String orcamento;
-	@Column(nullable = false)
-	private String contribuicaoParaEvento;
-	@Column(nullable = false)
-	private String duracaoEvento;
+	@Column
 	private Boolean habilitado;
-
+	
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "ong_id")
 	private Ong ong;
 
-	public Evento() {
+	public ServicoVoluntario() {
 	}
 
-	public Evento(String nome, String descricao, Timestamp dataInclusao, Timestamp dataAtualizacao,
-			Timestamp dataDesabilitado, String orcamento, String contribuicaoParaEvento, String duracaoEvento,
-			Boolean habilitado, Ong ong) {
-		super();
+	public ServicoVoluntario(String nome, @Size(min = 10, max = 5000) String descricao, Timestamp dataInclusao,
+			Timestamp dataAtualizacao, Timestamp dataDesabilitado, Boolean habilitado, Ong ong) {
 		this.nome = nome;
 		this.descricao = descricao;
 		this.dataInclusao = dataInclusao;
 		this.dataAtualizacao = dataAtualizacao;
 		this.dataDesabilitado = dataDesabilitado;
-		this.orcamento = orcamento;
-		this.contribuicaoParaEvento = contribuicaoParaEvento;
-		this.duracaoEvento = duracaoEvento;
 		this.habilitado = habilitado;
 		this.ong = ong;
 	}
@@ -105,30 +98,6 @@ public class Evento {
 		this.dataDesabilitado = dataDesabilitado;
 	}
 
-	public String getOrcamento() {
-		return orcamento;
-	}
-
-	public void setOrcamento(String orcamento) {
-		this.orcamento = orcamento;
-	}
-
-	public String getContribuicaoParaEvento() {
-		return contribuicaoParaEvento;
-	}
-
-	public void setContribuicaoParaEvento(String contribuicaoParaEvento) {
-		this.contribuicaoParaEvento = contribuicaoParaEvento;
-	}
-
-	public String getDuracaoEvento() {
-		return duracaoEvento;
-	}
-
-	public void setDuracaoEvento(String duracaoEvento) {
-		this.duracaoEvento = duracaoEvento;
-	}
-
 	public Boolean getHabilitado() {
 		return habilitado;
 	}
@@ -161,7 +130,7 @@ public class Evento {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Evento other = (Evento) obj;
+		ServicoVoluntario other = (ServicoVoluntario) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -172,9 +141,8 @@ public class Evento {
 
 	@Override
 	public String toString() {
-		return "Evento [id=" + id + ", nome=" + nome + ", descricao=" + descricao + ", dataInclusao=" + dataInclusao
-				+ ", dataAtualizacao=" + dataAtualizacao + ", dataDesabilitado=" + dataDesabilitado + ", orcamento="
-				+ orcamento + ", contribuicaoParaEvento=" + contribuicaoParaEvento + ", duracaoEvento=" + duracaoEvento
+		return "ServicoVoluntario [id=" + id + ", nome=" + nome + ", descricao=" + descricao + ", dataInclusao="
+				+ dataInclusao + ", dataAtualizacao=" + dataAtualizacao + ", dataDesabilitado=" + dataDesabilitado
 				+ ", habilitado=" + habilitado + ", ong=" + ong + "]";
 	}
 

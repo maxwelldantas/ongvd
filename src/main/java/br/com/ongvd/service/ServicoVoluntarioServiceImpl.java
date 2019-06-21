@@ -3,6 +3,7 @@ package br.com.ongvd.service;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +13,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.ongvd.dto.ServicoVoluntarioDTO;
-import br.com.ongvd.model.Ong;
-import br.com.ongvd.model.ServicoVoluntario;
+import br.com.ongvd.entity.Ong;
+import br.com.ongvd.entity.ServicoVoluntario;
 import br.com.ongvd.repository.OngRepository;
 import br.com.ongvd.repository.ServicoVoluntarioRepository;
 
@@ -28,7 +29,7 @@ public class ServicoVoluntarioServiceImpl implements ServicoVoluntarioService {
 	private OngRepository ongRepository;
 	
 	public ServicoVoluntario novo(ServicoVoluntario servicoVoluntario, @AuthenticationPrincipal UserDetails currentUser) {
-		Ong ong = (Ong) ongRepository.findByEmail(currentUser.getUsername());
+		Ong ong = ongRepository.findByEmail(currentUser.getUsername());
 		servicoVoluntario.setDataInclusao(Timestamp.valueOf(LocalDateTime.now(ZoneId.of("America/Sao_Paulo"))));
 		if (servicoVoluntario.getHabilitado() == false) {
 			servicoVoluntario.setDataDesabilitado(Timestamp.valueOf(LocalDateTime.now(ZoneId.of("America/Sao_Paulo"))));
@@ -36,6 +37,7 @@ public class ServicoVoluntarioServiceImpl implements ServicoVoluntarioService {
 			servicoVoluntario.setDataDesabilitado(null);
 		}
 		servicoVoluntario.setOng(ong);
+		save(servicoVoluntario);
 		return servicoVoluntario;
 	}
 	
@@ -49,6 +51,7 @@ public class ServicoVoluntarioServiceImpl implements ServicoVoluntarioService {
 		} else {
 			servico.setDataDesabilitado(null);
 		}
+		save(servico);
 		return servico;
 	}
 
@@ -57,12 +60,22 @@ public class ServicoVoluntarioServiceImpl implements ServicoVoluntarioService {
 	}
 	
 	public List<ServicoVoluntario> getAllByOng(UserDetails currentUser) {
-		Ong ong = (Ong) ongRepository.findByEmail(currentUser.getUsername());
+		Ong ong = ongRepository.findByEmail(currentUser.getUsername());
 		return servicoVoluntarioRepository.findAllByOng(ong);
 	}
 
 	public List<ServicoVoluntario> getAll() {
 		return servicoVoluntarioRepository.findAll();
+	}
+	
+	public List<ServicoVoluntario> getAllHabilitadoTrueAndOngAtivoTrue(List<ServicoVoluntario> servicosOld) {
+		List<ServicoVoluntario> servicosNew = new ArrayList<>();
+		for (ServicoVoluntario servico : servicosOld) {
+			if (servico.getHabilitado().equals(true) && servico.getOng().getAtivo().equals(true)) {
+				servicosNew.add(servico);
+			}
+		}
+		return servicosNew;
 	}
 
 	public ServicoVoluntario getByNome(String nome) {
@@ -70,12 +83,8 @@ public class ServicoVoluntarioServiceImpl implements ServicoVoluntarioService {
 	}
 	
 	public List<ServicoVoluntario> getNomeByOng(UserDetails currentUser) {
-		Ong ong = (Ong) ongRepository.findByEmail(currentUser.getUsername());
+		Ong ong = ongRepository.findByEmail(currentUser.getUsername());
 		return servicoVoluntarioRepository.findNomeByOng(ong);
-	}
-	
-	public List<ServicoVoluntario> getAllByHabilitado(Boolean habilitado){
-		return servicoVoluntarioRepository.findAllByHabilitado(habilitado);
 	}
 	
 	public ServicoVoluntario get(Long id) {

@@ -1,21 +1,28 @@
 package br.com.ongvd.dto;
 
-import java.sql.Date;
-
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 public class PedidoDoacaoDTO {
 
-	@NotEmpty
+	private Long id;
+	@NotBlank(message = "Por favor preencha este campo")
 	private String nome;
-	@NotEmpty
+	@Size(min = 10, max = 5000, message = "Tamanho do texto entre 10 a 5000 caracteres")
 	private String descricao;
-	private Date dataInclusao;
-	@NotEmpty
 	private String valorPedido;
-	@NotEmpty
+	private String quantidade;
+	@NotBlank(message = "Por favor preencha este campo")
 	private String itemPedido;
 	private Boolean habilitado;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getNome() {
 		return nome;
@@ -33,20 +40,20 @@ public class PedidoDoacaoDTO {
 		this.descricao = descricao;
 	}
 
-	public Date getDataInclusao() {
-		return dataInclusao;
-	}
-
-	public void setDataInclusao(Date dataInclusao) {
-		this.dataInclusao = dataInclusao;
-	}
-
 	public String getValorPedido() {
 		return valorPedido;
 	}
 
 	public void setValorPedido(String valorPedido) {
 		this.valorPedido = valorPedido;
+	}
+
+	public String getQuantidade() {
+		return quantidade;
+	}
+
+	public void setQuantidade(String quantidade) {
+		this.quantidade = quantidade;
 	}
 
 	public String getItemPedido() {

@@ -5,8 +5,15 @@
 
 <head>
 
-<meta charset="utf-8" />
+<meta charset="UTF-8" />
+<meta name="author" content="Maxwell Dantas" />
+<meta name="reply-to" content="ongvd2019@gmail.com" />
+<meta name="description" content="Sistema ONGvd - Ajude as pessoas que mais precisam." />
+<meta name="keywords" content="ong, ongs, ongvd, integracão, pedidos, doações, serviços, voluntários, eventos solidários, ajuda, pessoa, pessoas" />
+<meta name="robots" content="index, follow" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="content-language" content="pt-br" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 <!-- Bootstrap 4.3.1 -->
@@ -19,13 +26,16 @@
 <link rel="stylesheet" href="/fonts/font-awesome-all.5.8.1.css" />
 <!-- Customized CSS -->
 <link rel="stylesheet" href="/css/customized.css" />
+<!-- Favicon -->
+<link rel="icon" type="image/png" sizes="32x32"
+	href="/img/favicon-32x32.png">
 
 </head>
 
 <body>
 
 	<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-		<a class="navbar-brand" href="#">ONGvd</a>
+		<a class="navbar-brand" th:href="@{/home}">ONGvd</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarsExampleDefault"
 			aria-controls="navbarsExampleDefault" aria-expanded="false"
@@ -37,43 +47,70 @@
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item"
 					th:classappend="${#httpServletRequest.getRequestURI().startsWith('/home') ? 'active':''}">
-					<a class="nav-link" th:href="@{/home}">Página Inicial <span
-						class="sr-only">(current)</span>
+					<a class="nav-link" th:href="@{/home}"><i class="fas fa-home"
+						title="Página Inicial"></i><span class="sr-only">(current)</span>
 				</a>
 				</li>
 				<li class="nav-item dropdown"
+					th:classappend="${#httpServletRequest.getRequestURI().startsWith('/sobre') ? 'active':''}">
+					<a class="nav-link dropdown-toggle" data-toggle="dropdown"
+					href="Serviços Voluntários" role="button" aria-haspopup="true"
+					aria-expanded="false">Sobre<span class="sr-only">(current)</span>
+				</a>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" th:href="@{/sobre/quem-somos}">Quem
+							Somos</a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" th:href="@{/sobre/fale-conosco}">Fale
+							Conosco</a>
+					</div>
+				</li>
+				<li class="nav-item dropdown"
 					th:classappend="${#httpServletRequest.getRequestURI().startsWith('/voluntario') ? 'active':''}">
-					<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
-					role="button" aria-haspopup="true" aria-expanded="false">Voluntário(a)<span
-						class="sr-only">(current)</span>
+					<a class="nav-link dropdown-toggle" data-toggle="dropdown"
+					href="Serviços Voluntários" role="button" aria-haspopup="true"
+					aria-expanded="false">Serviços Voluntários<span class="sr-only">(current)</span>
 				</a>
 					<div class="dropdown-menu">
 						<a class="dropdown-item" th:href="@{/voluntario/conceito}">O
-							que é ser um(a) Voluntário(a)</a>
+							que é ser um(a) Voluntário(a)?</a>
 						<div class="dropdown-divider"></div>
-						<a class="dropdown-item"
-							th:href="@{/voluntario/servicos-voluntarios}">Listagem de
-							Serviços Voluntários</a>
+						<a class="dropdown-item" th:href="@{/s/servicos-voluntarios}">Lista
+							de Serviços Voluntários</a>
 					</div>
 				</li>
 				<li class="nav-item dropdown"
 					th:classappend="${#httpServletRequest.getRequestURI().startsWith('/doador') ? 'active':''}">
-					<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
-					role="button" aria-haspopup="true" aria-expanded="false">Doador(ra)<span
-						class="sr-only">(current)</span>
+					<a class="nav-link dropdown-toggle" data-toggle="dropdown"
+					href="Pedidos de Doações" role="button" aria-haspopup="true"
+					aria-expanded="false">Pedidos de Doações<span class="sr-only">(current)</span>
 				</a>
 					<div class="dropdown-menu">
 						<a class="dropdown-item" th:href="@{/doador/conceito}">O que é
-							ser um(a) Doador(a)</a>
+							ser um(a) Doador(a)?</a>
 						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" th:href="@{/ong/pedidos-doacao}">Listagem
-							de Pedidos de Doação</a>
+						<a class="dropdown-item" th:href="@{/p/pedidos-doacoes}">Lista
+							de Pedidos de Doações</a>
+					</div>
+				</li>
+				<li class="nav-item dropdown"
+					th:classappend="${#httpServletRequest.getRequestURI().startsWith('/evento') ? 'active':''}">
+					<a class="nav-link dropdown-toggle" data-toggle="dropdown"
+					href="Eventos Solidários" role="button" aria-haspopup="true"
+					aria-expanded="false">Eventos Solidários<span class="sr-only">(current)</span>
+				</a>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" th:href="@{/evento/conceito}">O que é
+							um Evento Solidário?</a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" th:href="@{/e/eventos}">Lista de
+							Eventos Solidários</a>
 					</div>
 				</li>
 				<li class="nav-item dropdown"
 					th:classappend="${#httpServletRequest.getRequestURI().startsWith('/ong') ? 'active':''}">
-					<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
-					role="button" aria-haspopup="true" aria-expanded="false">ONG<span
+					<a class="nav-link dropdown-toggle" data-toggle="dropdown"
+					href="ONG" role="button" aria-haspopup="true" aria-expanded="false">ONG<span
 						class="sr-only">(current)</span>
 				</a>
 					<div class="dropdown-menu">
@@ -86,8 +123,9 @@
 				</li>
 				<li class="nav-item" sec:authorize="isAuthenticated()"
 					th:classappend="${#httpServletRequest.getRequestURI().startsWith('/painel') ? 'active':''}">
-					<span class="nav-link">Painel<span class="sr-only">(current)</span>
-				</span>
+					<a class="nav-link" th:href="@{/painel/ong/home}">Painel<span
+						class="sr-only">(current)</span>
+				</a>
 				</li>
 			</ul>
 			<ul class="navbar-nav">
@@ -98,7 +136,7 @@
 						class="fas fa-sign-in-alt"></i><span class="sr-only">(current)</span></a>
 				</li>
 				<li class="nav-item" sec:authorize="isAuthenticated()"
-					th:classappend="${#httpServletRequest.getRequestURI().startsWith('/login') ? 'active':''}">
+					th:classappend="${#httpServletRequest.getRequestURI().startsWith('/painel') ? 'active':''}">
 					<span class="nav-link" th:href="@{/login}"
 					sec:authentication="name"><span class="sr-only">(current)</span></span>
 				</li>
@@ -129,21 +167,23 @@
 								Voluntário</a></li>
 						<li><a th:href="@{/painel/ong/pedido-doacao/cadastro}">Pedido
 								de Doação</a></li>
-						<li><a th:href="@{/painel/ong/evento/cadastro}">Evento</a></li>
+						<li><a th:href="@{/painel/ong/evento/cadastro}">Evento
+								Solidário</a></li>
 					</ul></li>
 				<li><a href="#submenuListar" data-toggle="collapse"
 					aria-expanded="false" class="dropdown-toggle lateral">Listar</a>
 					<ul class="collapse list-unstyled" id="submenuListar">
-						<li><a th:href="@{/painel/ong/servico-voluntario/listagem}">Serviço
-								Voluntário</a></li>
-						<li><a th:href="@{/painel/ong/pedido-doacao/listagem}">Pedido
-								de Doação</a></li>
-						<li><a th:href="@{/painel/ong/evento/listagem}">Evento</a></li>
+						<li><a th:href="@{/painel/ong/servico-voluntario/listagem}">Serviços
+								Voluntários</a></li>
+						<li><a th:href="@{/painel/ong/pedido-doacao/listagem}">Pedidos
+								de Doações</a></li>
+						<li><a th:href="@{/painel/ong/evento/listagem}">Eventos
+								Solidários</a></li>
 					</ul></li>
 				<li><a href="#submenuConfiguracoes" data-toggle="collapse"
-					aria-expanded="false" class="dropdown-toggle lateral">Configurações da ONG</a>
+					aria-expanded="false" class="dropdown-toggle lateral">ONG</a>
 					<ul class="collapse list-unstyled" id="submenuConfiguracoes">
-						<li><a th:href="@{/painel/ong/main}">Configurações</a></li>
+						<li><a th:href="@{/painel/ong/configuracoes/menu}">Configurações</a></li>
 					</ul></li>
 			</ul>
 		</nav>
@@ -153,7 +193,7 @@
 
 			<nav class="navbar navbar-expand-lg navbar-light bg-light noshadow">
 				<div class="container-fluid">
-					<button type="button" id="sidebarCollapse" class="btn btn-info">
+					<button type="button" id="sidebarCollapse" class="btn btn-dark">
 						<i class="fas fa-align-left"></i> <span>Mostrar/Esconder
 							Painel</span>
 					</button>
@@ -179,6 +219,15 @@
 
 	<div layout:fragment="content" sec:authorize="isAnonymous()"></div>
 
+	<!-- 	<footer class="footer mt-auto py-3 text-center"> -->
+	<!-- 		<div class="container"> -->
+	<!-- 			<div class="border-top text-muted"> -->
+	<!-- 				Copyright © 2019<a href="https://ongvd.herokuapp.com" -->
+	<!-- 					class="whatsapp"> ONGvd</a>. Todos os direitos reservados. <br />Email: -->
+	<!-- 				ongvd2019@gmail.com -->
+	<!-- 			</div> -->
+	<!-- 		</div> -->
+	<!-- 	</footer> -->
 </body>
 
 </html>

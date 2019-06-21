@@ -1,8 +1,9 @@
-package br.com.ongvd.model;
+package br.com.ongvd.entity;
 
+import java.sql.Date;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -17,9 +18,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
 @Entity
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = { "email", "cnpj" }))
@@ -37,10 +35,11 @@ public class Ong {
 	private String cnpj;
 	@Column(nullable = false)
 	private String areaDeAtuacao;
+	@Column
 	private String website;
 	@Column(nullable = false)
 	private String responsavel;
-	@Column(nullable = false)
+	@Column
 	private Date fundacao;
 	@Column(nullable = false)
 	private String contato;
@@ -51,24 +50,23 @@ public class Ong {
 	private String email;
 	@Column(nullable = false)
 	private String senha;
+	@Column
 	private Boolean ativo;
 	
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@Fetch(FetchMode.SUBSELECT)
+	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "users_enderecos", joinColumns = @JoinColumn(name = "ong_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "endereco_id", referencedColumnName = "id"))
 	private List<Endereco> enderecos;
 
 	@OneToMany(mappedBy = "ong", cascade = CascadeType.ALL)
-	private List<Evento> eventos;
+	private Set<PedidoDoacao> doacoes;
 
 	@OneToMany(mappedBy = "ong", cascade = CascadeType.ALL)
-	private List<PedidoDoacao> doacoes;
-
+	private Set<ServicoVoluntario> servicos;
+	
 	@OneToMany(mappedBy = "ong", cascade = CascadeType.ALL)
-	private List<ServicoVoluntario> servicos;
+	private Set<Evento> eventos;
 
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@Fetch(FetchMode.SUBSELECT)
 	@JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "ong_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
 	private Collection<Role> roles;
 
@@ -195,28 +193,28 @@ public class Ong {
 		this.enderecos = enderecos;
 	}
 
-	public List<Evento> getEventos() {
-		return eventos;
-	}
-
-	public void setEventos(List<Evento> eventos) {
-		this.eventos = eventos;
-	}
-
-	public List<PedidoDoacao> getDoacoes() {
+	public Set<PedidoDoacao> getDoacoes() {
 		return doacoes;
 	}
 
-	public void setDoacoes(List<PedidoDoacao> doacoes) {
+	public void setDoacoes(Set<PedidoDoacao> doacoes) {
 		this.doacoes = doacoes;
 	}
 
-	public List<ServicoVoluntario> getServicos() {
+	public Set<ServicoVoluntario> getServicos() {
 		return servicos;
 	}
 
-	public void setServicos(List<ServicoVoluntario> servicos) {
+	public void setServicos(Set<ServicoVoluntario> servicos) {
 		this.servicos = servicos;
+	}
+
+	public Set<Evento> getEventos() {
+		return eventos;
+	}
+
+	public void setEventos(Set<Evento> eventos) {
+		this.eventos = eventos;
 	}
 
 	public Collection<Role> getRoles() {
@@ -257,8 +255,7 @@ public class Ong {
 		return "Ong [id=" + id + ", razaoSocial=" + razaoSocial + ", nomeFantasia=" + nomeFantasia + ", cnpj=" + cnpj
 				+ ", areaDeAtuacao=" + areaDeAtuacao + ", website=" + website + ", responsavel=" + responsavel
 				+ ", fundacao=" + fundacao + ", contato=" + contato + ", whatsapp=" + whatsapp + ", telefone="
-				+ telefone + ", email=" + email + ", senha=" + senha + ", ativo=" + ativo + ", enderecos=" + enderecos
-				+ ", eventos=" + eventos + ", doacoes=" + doacoes + ", servicos=" + servicos + ", roles=" + roles + "]";
+				+ telefone + ", email=" + email + ", senha=" + senha + ", ativo=" + ativo + "]";
 	}
 
 }

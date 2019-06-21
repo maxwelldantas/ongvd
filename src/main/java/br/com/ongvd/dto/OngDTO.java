@@ -1,15 +1,13 @@
 package br.com.ongvd.dto;
 
-import java.util.Date;
+import java.sql.Date;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.br.CNPJ;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import br.com.ongvd.constraint.FieldMatch;
 
@@ -17,7 +15,8 @@ import br.com.ongvd.constraint.FieldMatch;
 		@FieldMatch(first = "senha", second = "confirmarSenha", message = "Os campos de senha devem corresponder"),
 		@FieldMatch(first = "email", second = "confirmarEmail", message = "Os campos de e-mail devem corresponder") })
 public class OngDTO {
-
+	
+	private Long id;
 	@NotBlank(message = "Por favor preencha este campo")
 	private String razaoSocial;
 	@NotBlank(message = "Por favor preencha este campo")
@@ -29,8 +28,6 @@ public class OngDTO {
 	private String website;
 	@NotBlank(message = "Por favor preencha este campo")
 	private String responsavel;
-	@NotNull(message = "Por favor preencha este campo")
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date fundacao;
 	@NotBlank(message = "Por favor preencha este campo")
 	private String contato;
@@ -47,6 +44,14 @@ public class OngDTO {
 	private String senha;
 	@Size(min = 6, max = 20, message = "Tamanho da senha entre 6 a 20 caracteres")
 	private String confirmarSenha;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getRazaoSocial() {
 		return razaoSocial;

@@ -4,8 +4,7 @@
 	layout:decorate="~{layout/main}">
 
 <head>
-<title>ONGvd - Formulário para edição de Serviço Voluntário da
-	ONG</title>
+<title>ONGvd - Formulário para edição de Pedido de Doação</title>
 </head>
 
 <body>
@@ -13,44 +12,72 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<h1>Editar Serviço Voluntário</h1>
-					<form th:action="@{/painel/ong/servico-voluntario/edita-cadastro/{id}(id=${servico.getId()})}"
-						method="post" th:object="${servico}">
+					<h1>Editar Pedido de Doação</h1>
+					<form
+						th:action="@{/painel/ong/pedido-doacao/edita-cadastro/{id}(id=${pedido.getId()})}"
+						method="post" th:object="${pedido}">
 
 						<p class="error-message" th:if="${#fields.hasGlobalErrors()}"
 							th:each="error : ${#fields.errors('global')}" th:text="${error}">
 						</p>
 
-						<div class="form-row">
-							<div class="form-group col-md-6"
-								th:classappend="${#fields.hasErrors('nome')}? 'has-error':''">
-								<label for="nome" class="control-label">Nome</label> <input
-									id="nome" class="form-control" th:field="*{nome}" />
-								<p class="error-message"
-									th:each="error: ${#fields.errors('nome')}" th:text="${error}"></p>
-							</div>
-							<div class="form-group col-md-6"
-								th:classappend="${#fields.hasErrors('habilitado')}? 'has-error':''">
-								<label class="control-label">Habilitado</label>
-								<div class="input-group mb-3">
-									<div class="input-group-prepend">
-										<div class="input-group-text">
-											<input type="checkbox" id="habilitado"
-												th:field="*{habilitado}" checked="checked">
-										</div>
+						<div th:object="${pedido}">
+							<div class="form-row">
+								<div class="form-group col-md-6"
+									th:classappend="${#fields.hasErrors('nome')}? 'has-error':''">
+									<label for="nome" class="control-label">Pedido de
+										Doação</label> <input id="nome" class="form-control"
+										th:field="*{nome}" />
+									<p class="error-message"
+										th:each="error: ${#fields.errors('nome')}" th:text="${error}"></p>
+								</div>
+								<div class="form-group col-md-6"
+									th:classappend="${#fields.hasErrors('itemPedido')}? 'has-error':''">
+									<label for="itemPedido" class="control-label">Item
+										Pedido</label> <input id="itemPedido" class="form-control"
+										th:field="*{itemPedido}" />
+									<p class="error-message"
+										th:each="error: ${#fields.errors('itemPedido')}"
+										th:text="${error}"></p>
+								</div>
+								<div class="form-group col-md-6"
+									th:classappend="${#fields.hasErrors('quantidade')}? 'has-error':''">
+									<label for="quantidade" class="control-label">Quantidade
+										do Pedido</label> <input id="quantidade" class="form-control"
+										th:field="*{quantidade}" />
+									<p class="error-message"
+										th:each="error: ${#fields.errors('quantidade')}"
+										th:text="${error}"></p>
+								</div>
+								<div class="form-group col-md-6"
+									th:classappend="${#fields.hasErrors('valorPedido')}? 'has-error':''">
+									<label for="valorPedido" class="control-label">(R$)
+										Valor do Pedido</label> <input id="valorPedido" class="form-control"
+										th:field="*{valorPedido}" />
+									<p class="error-message"
+										th:each="error: ${#fields.errors('valorPedido')}"
+										th:text="${error}"></p>
+								</div>
+								<div class="form-group col-md-6">
+									<div class="custom-control custom-checkbox">
+										<input type="checkbox" id="habilitado"
+											class="custom-control-input" th:field="*{habilitado}"
+											th:checked="${pedido.setHabilitado(true)}"> <label
+											class="custom-control-label" for="habilitado">Habilitado</label>
+										<i tabindex="0" class="fas fa-question-circle"
+											data-toggle="popover" data-trigger="focus"
+											data-content="Se habilitado este cadastro será mostrado na lista para as pessoas que acessarem o sistema, se desabilitado não será mostrado na lista."></i>
 									</div>
 								</div>
-								<p class="error-message"
-									th:each="error: ${#fields.errors('habilitado')}"
-									th:text="${error}"></p>
 							</div>
 						</div>
 						<div class="form-row">
-							<div class="form-group col-md-6"
+							<div class="form-group col-md-12"
 								th:classappend="${#fields.hasErrors('descricao')}? 'has-error':''">
-								<label for="descricao" class="control-label">Descrição</label>
+								<label for="descricao" class="control-label">Descrição
+									do Pedido de Doação</label>
 								<textarea id="descricao" class="form-control"
-									th:field="*{descricao}" rows=5 cols=50></textarea>
+									th:field="*{descricao}" rows=5></textarea>
 								<p class="error-message"
 									th:each="error: ${#fields.errors('descricao')}"
 									th:text="${error}"></p>
@@ -59,7 +86,7 @@
 
 						<div class="form-group">
 							<button type="submit" class="btn btn-outline-success">Editar</button>
-							<button type="reset" class="btn btn-outline-primary">Limpar
+							<button type="reset" class="btn btn-outline-primary">Reestabelecer
 								campos</button>
 						</div>
 

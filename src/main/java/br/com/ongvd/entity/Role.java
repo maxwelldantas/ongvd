@@ -1,4 +1,4 @@
-package br.com.ongvd.model;
+package br.com.ongvd.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
