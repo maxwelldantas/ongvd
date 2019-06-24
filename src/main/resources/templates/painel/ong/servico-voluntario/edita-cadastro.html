@@ -14,6 +14,9 @@
 			<div class="row">
 				<div class="col-md-12">
 					<h1>Editar Serviço Voluntário</h1>
+					
+					<span class="font-small">Campos marcados com <span class="asterico-requerido">*</span> são de preenchimento obrigatório.</span>
+					
 					<form
 						th:action="@{/painel/ong/servico-voluntario/atualizar-cadastro/{id}(id=${servico.getId()})}"
 						method="post" th:object="${servico}">
@@ -26,7 +29,9 @@
 							<div class="form-group col-md-6"
 								th:classappend="${#fields.hasErrors('nome')}? 'has-error':''">
 								<label for="nome" class="control-label">Serviço
-									Voluntário</label> <input id="nome" class="form-control"
+									Voluntário</label>
+								<span class="asterico-requerido"> *</span>	
+								<input id="nome" class="form-control"
 									th:field="*{nome}" />
 								<p class="error-message"
 									th:each="error: ${#fields.errors('nome')}" th:text="${error}"></p>
@@ -38,10 +43,9 @@
 									<input type="checkbox" id="habilitado"
 										class="custom-control-input" th:field="*{habilitado}"
 										th:checked="${servico.setHabilitado(true)}"> <label
-										class="custom-control-label" for="habilitado">Habilitado</label>
-									<i tabindex="0" class="fas fa-question-circle"
+										class="custom-control-label" for="habilitado">Habilitado<i tabindex="0" class="fas fa-question-circle"
 										data-toggle="popover" data-trigger="focus"
-										data-content="Se habilitado este cadastro será mostrado na lista para as pessoas que acessarem o sistema, se desabilitado não será mostrado na lista."></i>
+										data-content="Se habilitado este cadastro será mostrado na lista para as pessoas que acessarem o sistema, se desabilitado não será mostrado na lista."></i></label>
 								</div>
 							</div>
 						</div>
@@ -50,6 +54,7 @@
 								th:classappend="${#fields.hasErrors('descricao')}? 'has-error':''">
 								<label for="descricao" class="control-label">Descrição
 									do Serviço Voluntário</label>
+								<span class="asterico-requerido"> *</span>
 								<textarea id="descricao" class="form-control"
 									th:field="*{descricao}" rows=5></textarea>
 								<p class="error-message"

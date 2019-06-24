@@ -41,25 +41,25 @@
 
 						<div class="form-row">
 							<div class="col-sm-6">
-								<label class="cinza">Pedido de Doação:</label> <span
+								<span class="cinza">Pedido de Doação:</span> <span
 									th:text="*{nome}" id="nomeDetalhesPedidoDoador"></span>
 							</div>
 						</div>
 						<div class="form-row">
 							<div class="col-sm-6">
-								<label class="cinza">Descrição:</label> <span
+								<span class="cinza">Descrição:</span> <span
 									th:text="*{descricao}"></span>
 							</div>
 						</div>
 						<div class="form-row">
 							<div class="col-sm-6">
-								<label class="cinza">Item pedido:</label> <span
+								<span class="cinza">Item pedido:</span> <span
 									th:text="*{itemPedido}"></span>
 							</div>
 						</div>
 						<div class="form-row">
 							<div class="col-sm-6">
-								<label class="cinza">(R$) Valor pedido:</label> <span
+								<span class="cinza">(R$) Valor pedido:</span> <span
 									th:text="*{valorPedido}"></span>
 							</div>
 						</div>
@@ -70,107 +70,112 @@
 							th:scrolling="no" th:frameborder="0" th:allowTransparency="true"
 							th:allow="encrypted-media"></iframe>
 
+						<h5></h5>
 						<h5>Informações da ONG que cadastrou este Pedido de Doação:</h5>
 
 						<div class="form-row">
 							<div class="col-sm-6">
-								<label class="cinza">Razão Social:</label> <span
+								<span class="cinza">Razão Social:</span> <span
 									th:text="*{ong.razaoSocial}"></span>
 							</div>
 							<div class="col-sm-6">
-								<label class="cinza">Nome Fantasia:</label> <span
+								<span class="cinza">Nome Fantasia:</span> <span
 									th:text="*{ong.nomeFantasia}"></span>
 							</div>
 							<div class="col-sm-6">
-								<label class="cinza">CNPJ:</label> <span th:text="*{ong.cnpj}"></span>
+								<span class="cinza">CNPJ:</span> <span th:text="*{ong.cnpj}"></span>
 							</div>
 							<div class="col-sm-6">
-								<label class="cinza">Área de Atuação:</label> <span
+								<span class="cinza">Área de Atuação:</span> <span
 									th:text="*{ong.areaDeAtuacao}"></span>
 							</div>
 						</div>
 						<div class="form-row">
 							<div class="col-sm-6">
-								<label class="cinza">Fundação:</label> <span
+								<span class="cinza">Fundação:</span> <span
 									th:text="*{#dates.format(ong.fundacao,'dd/MMMM/yyyy')}"></span>
 							</div>
 							<div class="col-sm-6">
-								<label class="cinza">Responsável:</label> <span
+								<span class="cinza">Responsável:</span> <span
 									th:text="*{ong.responsavel}"></span>
 							</div>
 							<div class="col-sm-6">
-								<label class="cinza">WhatsApp<i tabindex="0"
+								<span class="cinza">WhatsApp<i tabindex="0"
 									class="fas fa-exclamation-circle" data-toggle="popover"
 									data-trigger="focus" title="WhatsApp da Ong"
 									data-content="Clique no número do WhatsApp, para ser direcionado para conversar com a ONG (quando disponível)."></i>:
-								</label> <a class="whatsapp" target="_blank"
+								</span> <a class="whatsapp" target="_blank"
 									th:href="@{https://api.whatsapp.com/send?phone={ong.whatsapp}(ong.whatsapp=${pedido.ong.getWhatsapp().replaceAll('[\\\\(\\\\)\\\-+\s]','')})}"
 									th:text="*{ong.whatsapp}"></a>
 							</div>
 							<div class="col-sm-6">
-								<label class="cinza">Contato:</label> <span
+								<span class="cinza">Contato:</span> <span
 									th:text="*{ong.contato}"></span>
 							</div>
 						</div>
 						<div class="form-row">
 							<div class="col-sm-6">
-								<label class="cinza">Telefone:</label> <span
+								<span class="cinza">Telefone:</span> <span
 									th:text="*{ong.telefone}"></span>
 							</div>
 							<div class="col-sm-6">
-								<label class="cinza">Website<i tabindex="0"
+								<span class="cinza">Website<i tabindex="0"
 									class="fas fa-question-circle" data-toggle="popover"
 									data-trigger="focus" title="Website da Ong"
 									data-content="Clique no link do website da ONG, para ser direcionado para o site da ONG para maiores informações sobre a mesma (quando disponível)."></i>:
-								</label> <a class="website" target="_blank"
+								</span> <a class="website" target="_blank"
 									th:href="@{http://{ong.website}(ong.website=${pedido.ong.getWebsite()})}"
 									th:text="*{ong.website}"></a>
 							</div>
 							<div class="col-sm-6">
-								<label class="cinza">E-mail:</label> <span
+								<span class="cinza">E-mail:</span> <span
 									th:text="*{ong.email}" id="emailOngDetalhesPedidoDoador"></span>
 							</div>
 						</div>
 
+						<h5></h5>
 						<h5>Informações de endereço da ONG que cadastrou este Pedido
 							de Doação:</h5>
 
 						<div th:each="endereco: ${pedido.ong.enderecos}">
 							<div class="form-row">
 								<div class="col-sm-6">
-									<label class="cinza">CEP:</label> <span
+									<span class="cinza">CEP:</span> <span
 										th:text="${endereco.cep}"></span>
 								</div>
 								<div class="col-sm-6">
-									<label class="cinza">Logradouro:</label> <span
+									<span class="cinza">Logradouro:</span> <span
 										th:text="${endereco.logradouro}"></span>
 								</div>
 								<div class="col-sm-6">
-									<label class="cinza">Bairro:</label> <span
+									<span class="cinza">Bairro:</span> <span
 										th:text="${endereco.bairro}"></span>
 								</div>
 								<div class="col-sm-6">
-									<label class="cinza">Número:</label> <span
+									<span class="cinza">Número:</span> <span
 										th:text="${endereco.numero}"></span>
 								</div>
 							</div>
 							<div class="form-row">
 								<div class="col-sm-6">
-									<label class="cinza">Complemento:</label> <span
+									<span class="cinza">Complemento:</span> <span
 										th:text="${endereco.complemento}"></span>
 								</div>
 								<div class="col-sm-6">
-									<label class="cinza">Cidade:</label> <span
+									<span class="cinza">Cidade:</span> <span
 										th:text="${endereco.cidade}"></span>
 								</div>
 								<div class="col-sm-6">
-									<label class="cinza">UF:</label> <span th:text="${endereco.uf}"></span>
+									<span class="cinza">UF:</span> <span th:text="${endereco.uf}"></span>
 								</div>
 							</div>
 						</div>
 
+						<h5></h5>
 						<h5>Formulário de envio de e-mail para ONG, a respeito deste
 							Pedido de Doação:</h5>
+							
+						<span class="font-small">Campos marcados com <span class="asterico-requerido">*</span> são de preenchimento obrigatório.</span>
 
 						<form th:action="@{/p/pedido-doacao/{id}(id=${pedido.getId()})}"
 							method="post" th:object="${email}">
@@ -182,7 +187,7 @@
 							<div class="form-row">
 								<div class="form-group col-sm-12"
 									th:classappend="${#fields.hasErrors('emailDe')}? 'has-error':''">
-									<label class="sr-only" for="emailDe">De</label>
+									<span class="sr-only" for="emailDe">De</span>
 									<div class="input-group">
 										<div class="input-group-prepend">
 											<div class="input-group-text">De</div>
@@ -197,7 +202,7 @@
 								</div>
 								<div class="form-group col-sm-12"
 									th:classappend="${#fields.hasErrors('assunto')}? 'has-error':''">
-									<label class="sr-only" for="assunto">Assunto</label>
+									<span class="sr-only" for="assunto">Assunto</span>
 									<div class="input-group">
 										<div class="input-group-prepend">
 											<div class="input-group-text">Assunto</div>
@@ -212,10 +217,10 @@
 								</div>
 								<div class="form-group col-sm-12"
 									th:classappend="${#fields.hasErrors('corpo')}? 'has-error':''">
-									<label class="sr-only" for="corpo">Corpo</label>
+									<span class="sr-only" for="corpo">Mensagem</span>
 									<div class="input-group">
 										<div class="input-group-prepend">
-											<div class="input-group-text">Corpo</div>
+											<div class="input-group-text">Mensagem</div>
 										</div>
 										<textarea id="corpo" class="form-control" th:field="*{corpo}"
 											rows=5 cols=50

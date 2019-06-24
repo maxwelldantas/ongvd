@@ -15,6 +15,8 @@
                     
                     <h6>Preencha o formulário para efetivação do registro da ONG:</h6>
                     
+                    <span class="font-small">Campos marcados com <span class="asterico-requerido">*</span> são de preenchimento obrigatório.</span>
+                    
                     <form th:action="@{/ong/registro}" method="post">
                     
                         <div th:object="${ong}">
@@ -26,36 +28,43 @@
                             <div class="form-row">
                                 <div class="form-group col-md-4" th:classappend="${#fields.hasErrors('razaoSocial')}? 'has-error':''">
                                     <label for="razaoSocial" class="control-label">Razão Social da ONG</label>
+                                    <span class="asterico-requerido"> *</span>
                                     <input type="text" id="razaoSocial" class="form-control" th:field="*{razaoSocial}" />
                                     <p class="error-message" th:each="error: ${#fields.errors('razaoSocial')}" th:text="${error}"></p>
                                 </div>
                                 <div class="form-group col-md-4" th:classappend="${#fields.hasErrors('nomeFantasia')}? 'has-error':''">
                                     <label for="nomeFantasia" class="control-label">Nome Fantasia da ONG</label>
+                                    <span class="asterico-requerido"> *</span>
                                     <input type="text" id="nomeFantasia" class="form-control" th:field="*{nomeFantasia}" />
                                     <p class="error-message" th:each="error: ${#fields.errors('nomeFantasia')}" th:text="${error}"></p>
                                 </div>
                                 <div class="form-group col-md-4" th:classappend="${#fields.hasErrors('cnpj')}? 'has-error':''">
                                     <label for="cnpj" class="control-label">CNPJ da ONG</label>
+                                    <span class="asterico-requerido"> *</span>
                                     <input type="text" id="cnpj" class="form-control" th:field="*{cnpj}" />
                                     <p class="error-message" th:each="error: ${#fields.errors('cnpj')}" th:text="${error}"></p>
                                 </div>
                                 <div class="form-group col-md-4 needs-validation">
                                     <label for="fundacao" class="control-label">Data da Fundação da ONG</label>
+                                    <span class="asterico-requerido"></span>
                                     <input type="date" id="fundacao" class="form-control" th:field="*{fundacao}"/>
                                     <div class="invalid-feedback">Por favor, informe uma cidade válida.</div>
                                 </div>
                                 <div class="form-group col-md-4" th:classappend="${#fields.hasErrors('areaDeAtuacao')}? 'has-error':''">
                                     <label for="areaDeAtuacao" class="control-label">Área de Atuação da ONG</label>
+                                    <span class="asterico-requerido"> *</span>
                                     <input type="text" id="areaDeAtuacao" class="form-control" th:field="*{areaDeAtuacao}" />
                                     <p class="error-message" th:each="error: ${#fields.errors('areaDeAtuacao')}" th:text="${error}"></p>
                                 </div>
                                 <div class="form-group col-md-4" th:classappend="${#fields.hasErrors('responsavel')}? 'has-error':''">
                                     <label for="responsavel" class="control-label">Nome da pessoa responsável pela ONG</label>
+                                    <span class="asterico-requerido"> *</span>
                                     <input type="text" id="responsavel" class="form-control" th:field="*{responsavel}" />
                                     <p class="error-message" th:each="error: ${#fields.errors('responsavel')}" th:text="${error}"></p>
                                 </div>
                                 <div class="form-group col-md-4" th:classappend="${#fields.hasErrors('contato')}? 'has-error':''">
                                     <label for="contato" class="control-label">Nome da pessoa de contato da ONG</label>
+                                    <span class="asterico-requerido"> *</span>
                                     <input type="text" id="contato" class="form-control" th:field="*{contato}" />
                                     <p class="error-message" th:each="error : ${#fields.errors('contato')}" th:text="${error}"></p>
                                 </div>
@@ -67,36 +76,43 @@
 							          sem o nono (9) digito), para o(a) voluntário(a) e doador(a) entrar em contato com a ONG pelo WhatsApp.
 							          Caso não digite, o(a) voluntário(a) ou doador(a) não será direcionado para conversar a ONG pelo WhatsApp e terá que contatar
 							          a ONG por e-mail ou telefone cadastrados no sistema."></i></label>
+                                    <span class="asterico-requerido"></span>
                                     <input type="tel" id="whatsapp" class="form-control" th:field="*{whatsapp}" />
                                     <p class="error-message" th:each="error: ${#fields.errors('whatsapp')}" th:text="${error}"></p>
                                 </div>
                                 <div class="form-group col-md-4" th:classappend="${#fields.hasErrors('telefone')}? 'has-error':''">
                                     <label for="telefone" class="control-label">Telefone da ONG</label>
+                                    <span class="asterico-requerido"> *</span>
                                     <input type="tel" id="telefone" class="form-control" th:field="*{telefone}" />
                                     <p class="error-message" th:each="error : ${#fields.errors('telefone')}" th:text="${error}"></p>
                                 </div>
                                 <div class="form-group col-md-4" th:classappend="${#fields.hasErrors('website')}? 'has-error':''">
                                     <label for="website" class="control-label">Site da ONG</label>
+                                    <span class="asterico-requerido"></span>
                                     <input type="text" id="website" class="form-control" th:field="*{website}" placeholder="Exemplo: exemplo.com.br"/>
                                     <p class="error-message" th:each="error: ${#fields.errors('website')}" th:text="${error}"></p>
                                 </div>
                                 <div class="form-group col-md-4" th:classappend="${#fields.hasErrors('email')}? 'has-error':''">
                                     <label for="email" class="control-label">E-mail da ONG</label>
+                                    <span class="asterico-requerido"> *</span>
                                     <input type="text" id="email" class="form-control" th:field="*{email}" />
                                     <p class="error-message" th:each="error : ${#fields.errors('email')}" th:text="${error}"></p>
                                 </div>
                                 <div class="form-group col-md-4" th:classappend="${#fields.hasErrors('confirmarEmail')}? 'has-error':''">
                                     <label for="confirmarEmail" class="control-label">Confirmar e-mail da ONG</label>
+                                    <span class="asterico-requerido"> *</span>
                                     <input type="text" id="confirmarEmail" class="form-control" th:field="*{confirmarEmail}" />
                                     <p class="error-message" th:each="error : ${#fields.errors('confirmarEmail')}" th:text="${error}"></p>
                                 </div>
                                 <div class="form-group col-md-4" th:classappend="${#fields.hasErrors('senha')}? 'has-error':''">
                                     <label for="senha" class="control-label">Senha da ONG</label>
+                                    <span class="asterico-requerido"> *</span>
                                     <input id="senha" class="form-control" type="password" th:field="*{senha}" />
                                     <p class="error-message" th:each="error : ${#fields.errors('senha')}" th:text="${error}"></p>
                                 </div>
                                 <div class="form-group col-md-4" th:classappend="${#fields.hasErrors('confirmarSenha')}? 'has-error':''">
                                     <label for="confirmarSenha" class="control-label">Confirmar senha da ONG</label>
+                                    <span class="asterico-requerido"> *</span>
                                     <input id="confirmarSenha" class="form-control" type="password" th:field="*{confirmarSenha}" />
                                     <p class="error-message" th:each="error : ${#fields.errors('confirmarSenha')}" th:text="${error}"></p>
                                 </div>
@@ -109,36 +125,43 @@
                             <div class="form-row">
                                 <div class="form-group col-md-2" th:classappend="${#fields.hasErrors('cep')}? 'has-error':''">
                                     <label for="cep" class="control-label">CEP</label>
+                                    <span class="asterico-requerido"> *</span>
                                     <input type="text" id="cep" class="form-control" th:field="*{cep}" />
                                     <p class="error-message" th:each="error: ${#fields.errors('cep')}" th:text="${error}"></p>
                                 </div>
                                 <div class="form-group col-md-4" th:classappend="${#fields.hasErrors('logradouro')}? 'has-error':''">
                                     <label for="logradouro" class="control-label">Logradouro</label>
+                                    <span class="asterico-requerido"> *</span>
                                     <input type="text" id="logradouro" class="form-control" th:field="*{logradouro}" />
                                     <p class="error-message" th:each="error: ${#fields.errors('logradouro')}" th:text="${error}"></p>
                                 </div>
-                                <div class="form-group col-md-1" th:classappend="${#fields.hasErrors('numero')}? 'has-error':''">
+                                <div class="form-group col-md-2" th:classappend="${#fields.hasErrors('numero')}? 'has-error':''">
                                     <label for="numero" class="control-label">Número</label>
+                                    <span class="asterico-requerido"></span>
                                     <input id="numero" class="form-control" th:field="*{numero}" type="number" />
                                     <p class="error-message" th:each="error: ${#fields.errors('numero')}" th:text="${error}"></p>
                                 </div>
                                 <div class="form-group col-md-3" th:classappend="${#fields.hasErrors('complemento')}? 'has-error':''">
                                     <label for="complemento" class="control-label">Complemento</label>
+                                    <span class="asterico-requerido"></span>
                                     <input type="text" id="complemento" class="form-control" th:field="*{complemento}" />
                                     <p class="error-message" th:each="error: ${#fields.errors('complemento')}" th:text="${error}"></p>
                                 </div>
                                 <div class="form-group col-md-2" th:classappend="${#fields.hasErrors('bairro')}? 'has-error':''">
                                     <label for="bairro" class="control-label">Bairro</label>
+                                    <span class="asterico-requerido"> *</span>
                                     <input type="text" id="bairro" class="form-control" th:field="*{bairro}" />
                                     <p class="error-message" th:each="error : ${#fields.errors('bairro')}" th:text="${error}"></p>
                                 </div>
                                 <div class="form-group col-md-2" th:classappend="${#fields.hasErrors('cidade')}? 'has-error':''">
                                     <label for="cidade" class="control-label">Cidade</label>
+                                    <span class="asterico-requerido"> *</span>
                                     <input type="text" id="cidade" class="form-control" th:field="*{cidade}" />
                                     <p class="error-message" th:each="error : ${#fields.errors('cidade')}" th:text="${error}"></p>
                                 </div>
                                 <div class="form-group col-md-2" th:classappend="${#fields.hasErrors('uf')}? 'has-error':''">
                                     <label for="uf" class="control-label">UF</label>
+                                    <span class="asterico-requerido"> *</span>
                                     <input type="text" id="uf" class="form-control" th:field="*{uf}" />
                                     <p class="error-message" th:each="error : ${#fields.errors('uf')}" th:text="${error}"></p>
                                 </div>
