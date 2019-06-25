@@ -141,15 +141,4 @@
 		</plugins>
 	</build>
 
-	<repositories>
-		<repository>
-			<id>ongvd-sendgrid-mvn-repo</id>
-			<url>https://raw.githubusercontent.com/maxdsouza/ongvd-sendgrid/mvn-repo/</url>
-			<snapshots>
-				<enabled>true</enabled>
-				<updatePolicy>always</updatePolicy>
-			</snapshots>
-		</repository>
-	</repositories>
-
 </project>
