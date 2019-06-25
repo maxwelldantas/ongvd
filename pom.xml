@@ -24,13 +24,6 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
 
-	<repositories>
-		<repository>
-			<id>jitpack.io</id>
-			<url>https://jitpack.io</url>
-		</repository>
-	</repositories>
-
 	<dependencies>
 		<!-- Spring Boot -->
 		<dependency>
@@ -61,11 +54,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>com.github.maxdsouza</groupId>
-			<artifactId>ongvd-sendgrid</artifactId>
-			<version>master-97ef2ad14e-1</version>
 		</dependency>
 
 		<dependency>
@@ -152,5 +140,16 @@
 			</plugin>
 		</plugins>
 	</build>
+
+	<repositories>
+		<repository>
+			<id>ongvd-sendgrid-mvn-repo</id>
+			<url>https://raw.githubusercontent.com/maxdsouza/ongvd-sendgrid/mvn-repo/</url>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+			</snapshots>
+		</repository>
+	</repositories>
 
 </project>
