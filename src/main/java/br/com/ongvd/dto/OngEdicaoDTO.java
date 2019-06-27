@@ -8,6 +8,7 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.br.CNPJ;
+import org.springframework.format.annotation.DateTimeFormat;
 
 public class OngEdicaoDTO {
 	
@@ -23,6 +24,7 @@ public class OngEdicaoDTO {
 	private String website;
 	@NotBlank(message = "Por favor preencha este campo")
 	private String responsavel;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date fundacao;
 	@NotBlank(message = "Por favor preencha este campo")
 	private String contato;
