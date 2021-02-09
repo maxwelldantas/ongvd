@@ -6,14 +6,14 @@ ONGvd é um Projeto de Trabalho de Conclusão de Curso (TCC) realizado no Centro
 
 Tecnologias utilizadas no desenvolvimento:
 
-	1. Java SE Development Kit 8 (Java JDK 8)
-    2. Spring Boot 2.1.4
-    3. Thymeleaf
-    4. Bootstrap
-    5. PostgreSQL
-    6. H2
-    7. Flyway
-    8. Apache Maven
+- Java SE Development Kit 8 (Java JDK 8)
+- Spring Boot 2.1.4
+- Thymeleaf
+- Bootstrap
+- PostgreSQL
+- H2
+- Flyway
+- Apache Maven
 
 O projeto utiliza o banco de dados PostgreSQL para produção e o banco de dados H2 para testes.
 
@@ -63,4 +63,4 @@ Por fim o link para acessar o projeto em um navegador será `http://localhost:80
 Caso queria ajudar com alguma contribuição fincanceira para continuação do sistema web ONGvd,
 realizei sua doação de qualquer valor para a carteira de Bitcoin que segue logo abaixo:
 
-- Bitcoin wallet: 33LBvec6dsvwGW4TwyRWcokDVgbwa1tSri
+- [Doação PagSeguro](https://pag.ae/7U-ExjKg6)
