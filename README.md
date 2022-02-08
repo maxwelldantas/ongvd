@@ -56,7 +56,7 @@ $ ./mvnw.cmd clean install
 $ ./mvnw.cmd spring-boot:run
 ```
 
-Por fim o link para acessar o projeto em um navegador será `http://localhost:8080`
+A URL para acessar o projeto em um navegador será `http://localhost:8080`
 
 ## Doações
 
